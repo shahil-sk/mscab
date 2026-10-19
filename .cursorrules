@@ -1,7 +1,0 @@
-# Cursor Rules — MsCabs
-
-1. Ponytail mode default: shortest diff, YAGNI, standard DOM/CSS before libraries.
-2. Knowledge graph first: use codebase-memory-mcp (project: mnt-5893accc-4b16-4de7-b2a7-6333530b2614-PROJECTS-22_Archive-mscabs) and code-review-graph.
-3. Code first, then maximum 3 short lines of explanation.
-4. Conventional git commits mandatory: `<type>(<scope>): <summary>`.
-5. Use `rg` instead of `grep`.
