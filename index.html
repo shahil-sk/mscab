@@ -3,23 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="MS Cabs – Book reliable outstation, local, and airport taxi services in Mysore & Bangalore. 24/7 cab booking with sedan, SUV, and hatchback. Call +91 63618 06210.">
-    <meta name="keywords" content="MS Cabs, cab booking Mysore, taxi service Mysore, outstation cab Mysore, airport taxi Mysore, Bangalore cab, local taxi, car rental Mysore, sedan taxi, SUV taxi, mscabs">
+    <meta name="description" content="MS Cabs – Reliable outstation, airport, and local taxi services across Mysore and Bangalore. 24/7 transparent pricing with sedans, SUVs, and hatchbacks. Call +91 63618 06210.">
+    <meta name="keywords" content="MS Cabs, cab booking Mysore, taxi service Mysore, outstation cab Mysore, airport taxi Bangalore, Bangalore cab, local taxi Mysore, sedan taxi, SUV taxi, Innova Mysore">
     <meta name="author" content="MS Cabs">
     <meta name="robots" content="index, follow">
-    <meta name="theme-color" content="#FDB913">
+    <meta name="theme-color" content="#121316">
     <meta name="geo.region" content="IN-KA">
     <meta name="geo.placename" content="Mysore, Karnataka, India">
-    <meta property="og:title" content="MS Cabs – Outstation, Local & Airport Taxi | Mysore & Bangalore">
-    <meta property="og:description" content="Book your ride now! Reliable cab services for outstation, local & airport transfers. Call +91 63618 06210.">
+    <meta property="og:title" content="MS Cabs – Outstation, Airport & Local Taxi | Mysore & Bangalore">
+    <meta property="og:description" content="24/7 cab service across Mysore and Bangalore. Transparent rates, airport transfers, and live fare estimates. Call +91 63618 06210.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://shahil-sk.github.io/mscabs/">
     <meta property="og:locale" content="en_IN">
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="MS Cabs – Taxi Service Mysore & Bangalore">
-    <meta name="twitter:description" content="Book reliable cab for outstation, local & airport transfers. 24/7 service. Call +91 63618 06210.">
+    <meta name="twitter:title" content="MS Cabs – Outstation & Airport Taxi">
+    <meta name="twitter:description" content="24/7 cab service across Mysore and Bangalore. Call +91 63618 06210.">
     <link rel="canonical" href="https://shahil-sk.github.io/mscabs/">
-    <title>MS Cabs – Outstation, Local & Airport Taxi | Mysore & Bangalore</title>
+    <title>MS Cabs – Outstation, Airport & Local Taxi | Mysore & Bangalore</title>
+
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -27,11 +28,11 @@
       "name": "MS Cabs",
       "url": "https://shahil-sk.github.io/mscabs/",
       "telephone": "+916361806210",
-      "description": "Reliable cab service for outstation, local and airport transfers in Mysore and Bangalore.",
+      "description": "Reliable cab service for outstation, local, and airport transfers across Mysore and Bangalore.",
       "areaServed": ["Mysore", "Bangalore", "Karnataka"],
       "availableLanguage": ["English", "Kannada", "Hindi"],
       "openingHours": "Mo-Su 00:00-24:00",
-      "priceRange": "$$",
+      "priceRange": "₹₹",
       "address": {
         "@type": "PostalAddress",
         "addressLocality": "Mysore",
@@ -45,380 +46,695 @@
       }
     }
     </script>
+
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
     <link rel="stylesheet" href="styles.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer">
 </head>
 <body>
     <a href="#booking" class="skip-link">Skip to booking</a>
 
-    <!-- Header -->
+    <!-- Top Navigation Bar -->
     <header class="header" role="banner">
-        <div class="container">
-            <nav class="navbar" role="navigation" aria-label="Main navigation">
-                <a href="#" class="logo" aria-label="MS Cabs Home">
-                    <i class="fa-solid fa-taxi logo-icon" aria-hidden="true"></i>
-                    <span class="logo-text">MS Cabs</span>
-                </a>
-                <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation" aria-expanded="false">
-                    <i class="fa-solid fa-bars" aria-hidden="true"></i>
-                </button>
-                <ul class="nav-links" id="navLinks" role="list">
-                    <li><a href="#services"><i class="fa-solid fa-car-side" aria-hidden="true"></i> Services</a></li>
-                    <li><a href="#booking"><i class="fa-solid fa-calendar-check" aria-hidden="true"></i> Book Now</a></li>
-                    <li><a href="#contact"><i class="fa-solid fa-phone" aria-hidden="true"></i> Contact</a></li>
+        <div class="container header-inner">
+            <a href="#" class="brand" aria-label="MS Cabs Home">
+                <span class="brand-badge">MS</span>
+                <span class="brand-name">MS Cabs</span>
+            </a>
+
+            <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation menu" aria-expanded="false">
+                <i class="fa-solid fa-bars" aria-hidden="true"></i>
+            </button>
+
+            <nav class="nav" id="navLinks" aria-label="Primary navigation">
+                <ul class="nav-menu" role="list">
+                    <li><a href="#corridors" class="nav-link">Corridors</a></li>
+                    <li><a href="#fleet" class="nav-link">Fleet &amp; Rates</a></li>
+                    <li><a href="#booking" class="nav-link">Fare Calculator</a></li>
+                    <li><a href="#commitments" class="nav-link">Standards</a></li>
+                    <li><a href="#contact" class="nav-link">Contact</a></li>
                 </ul>
+                <div class="nav-actions">
+                    <a href="tel:+916361806210" class="btn btn-nav">
+                        <i class="fa-solid fa-phone" aria-hidden="true"></i>
+                        <span>+91 63618 06210</span>
+                    </a>
+                </div>
             </nav>
         </div>
     </header>
 
-    <!-- Hero -->
-    <section class="hero" role="main">
-        <div class="container">
-            <div class="hero-content">
-                <h1 class="hero-title">Your Trusted Cab, Anytime, Anywhere</h1>
-                <p class="hero-subtitle">Outstation &nbsp;|&nbsp; Local &nbsp;|&nbsp; Airport Transfers</p>
-                <p class="hero-location"><i class="fa-solid fa-location-dot" aria-hidden="true"></i> Mysore &amp; Bangalore</p>
-                <div class="cta-buttons">
-                    <a href="#booking" class="btn btn-primary">
-                        <i class="fa-solid fa-calendar-plus" aria-hidden="true"></i> Book Your Cab
-                    </a>
-                    <a href="tel:+916361806210" class="btn btn-secondary">
-                        <i class="fa-solid fa-phone" aria-hidden="true"></i> Call Now
-                    </a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Trust Bar -->
-    <section class="trust-bar" aria-label="Why choose MS Cabs">
-        <div class="container">
-            <div class="trust-grid">
-                <div class="trust-item"><i class="fa-solid fa-shield-halved"></i><span>Safe &amp; Verified Drivers</span></div>
-                <div class="trust-item"><i class="fa-solid fa-clock"></i><span>24/7 Availability</span></div>
-                <div class="trust-item"><i class="fa-solid fa-indian-rupee-sign"></i><span>Transparent Pricing</span></div>
-                <div class="trust-item"><i class="fa-solid fa-location-crosshairs"></i><span>GPS Tracked Rides</span></div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Services -->
-    <section id="services" class="services" aria-labelledby="services-heading">
-        <div class="container">
-            <h2 class="section-title" id="services-heading">Our Services</h2>
-            <div class="services-grid">
-                <div class="service-card">
-                    <div class="service-icon"><i class="fa-solid fa-road"></i></div>
-                    <h3>Outstation Cab</h3>
-                    <p>Comfortable long-distance travel with experienced drivers and well-maintained vehicles.</p>
-                </div>
-                <div class="service-card">
-                    <div class="service-icon"><i class="fa-solid fa-city"></i></div>
-                    <h3>Local Taxi</h3>
-                    <p>Quick and affordable rides within the city for all your daily commute needs.</p>
-                </div>
-                <div class="service-card">
-                    <div class="service-icon"><i class="fa-solid fa-plane-departure"></i></div>
-                    <h3>Airport Transfer</h3>
-                    <p>Hassle-free airport pickups and drops with punctual and professional service.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Fleet -->
-    <section class="fleet" aria-labelledby="fleet-heading">
-        <div class="container">
-            <h2 class="section-title" id="fleet-heading">Choose Your Ride</h2>
-            <div class="fleet-grid">
-                <div class="fleet-card">
-                    <div class="fleet-image"><i class="fa-solid fa-car"></i></div>
-                    <h3>Sedan</h3>
-                    <p>Comfortable 4-seater for business and leisure travel</p>
-                    <span class="capacity"><i class="fa-solid fa-users"></i> 4 Passengers &nbsp;|&nbsp; <i class="fa-solid fa-suitcase"></i> 2 Bags</span>
-                </div>
-                <div class="fleet-card">
-                    <div class="fleet-image"><i class="fa-solid fa-truck-pickup"></i></div>
-                    <h3>SUV</h3>
-                    <p>Spacious 6-7 seater for family trips and group travel</p>
-                    <span class="capacity"><i class="fa-solid fa-users"></i> 6-7 Passengers &nbsp;|&nbsp; <i class="fa-solid fa-suitcase"></i> 4 Bags</span>
-                </div>
-                <div class="fleet-card">
-                    <div class="fleet-image"><i class="fa-solid fa-car-side"></i></div>
-                    <h3>Hatchback</h3>
-                    <p>Economic 4-seater for short trips and city rides</p>
-                    <span class="capacity"><i class="fa-solid fa-users"></i> 4 Passengers &nbsp;|&nbsp; <i class="fa-solid fa-suitcase"></i> 1 Bag</span>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Booking -->
-    <section id="booking" class="booking" aria-labelledby="booking-heading">
-        <div class="container">
-            <h2 class="section-title" id="booking-heading">Book Your Cab</h2>
-            <div class="booking-container">
-                <form id="bookingForm" class="booking-form" novalidate>
-
-                    <div class="form-group">
-                        <label for="name"><i class="fa-solid fa-user"></i> Full Name *</label>
-                        <input type="text" id="name" name="name" required placeholder="Enter your name" autocomplete="name">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="phone"><i class="fa-solid fa-phone"></i> Phone Number *</label>
-                        <input type="tel" id="phone" name="phone" required placeholder="Enter 10-digit number" pattern="[0-9]{10}" autocomplete="tel">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="serviceType"><i class="fa-solid fa-list"></i> Service Type *</label>
-                        <select id="serviceType" name="serviceType" required>
-                            <option value="">Select service type</option>
-                            <option value="Outstation">Outstation Cab</option>
-                            <option value="Local">Local Taxi</option>
-                            <option value="Airport">Airport Transfer</option>
-                        </select>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="vehicleType"><i class="fa-solid fa-car"></i> Vehicle Type *</label>
-                        <select id="vehicleType" name="vehicleType" required>
-                            <option value="">Select vehicle type</option>
-                            <option value="Sedan">Sedan (4 Seater)</option>
-                            <option value="SUV">SUV (6-7 Seater)</option>
-                            <option value="Hatchback">Hatchback (4 Seater)</option>
-                        </select>
-                    </div>
-
-                    <!-- PICKUP location -->
-                    <div class="form-group full-width">
-                        <label for="pickupAddress"><i class="fa-solid fa-map-marker-alt"></i> Pickup Location *</label>
-                        <div class="location-input-row">
-                            <div class="autocomplete-wrap" id="pickupWrap">
-                                <input type="text" id="pickupAddress" name="pickupAddress" required
-                                    placeholder="Type to search pickup address…"
-                                    autocomplete="off" spellcheck="false">
-                                <ul class="suggestions-list" id="pickupSuggestions" hidden></ul>
-                            </div>
-                            <div class="location-btn-group">
-                                <button type="button" class="loc-btn loc-gps" id="useMyLocation" title="Use my current location">
-                                    <i class="fa-solid fa-crosshairs"></i> My Location
-                                </button>
-                            </div>
-                        </div>
-                        <div class="coord-badge" id="pickupCoordBadge" hidden>
-                            <i class="fa-solid fa-circle-check"></i>
-                            <span id="pickupCoordText"></span>
-                            <a id="pickupMapLink" href="#" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-map"></i> View</a>
-                        </div>
-                    </div>
-
-                    <!-- DROP location -->
-                    <div class="form-group full-width">
-                        <label for="destination"><i class="fa-solid fa-flag-checkered"></i> Drop Location *</label>
-                        <div class="location-input-row">
-                            <div class="autocomplete-wrap" id="dropWrap">
-                                <input type="text" id="destination" name="destination" required
-                                    placeholder="Type to search drop address…"
-                                    autocomplete="off" spellcheck="false">
-                                <ul class="suggestions-list" id="dropSuggestions" hidden></ul>
-                            </div>
-                        </div>
-                        <div class="coord-badge" id="dropCoordBadge" hidden>
-                            <i class="fa-solid fa-circle-check"></i>
-                            <span id="dropCoordText"></span>
-                            <a id="dropMapLink" href="#" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-map"></i> View</a>
-                        </div>
-                    </div>
-
-                    <!-- MAP PANEL -->
-                    <div class="form-group full-width">
-                        <div class="map-panel">
-                            <div class="map-panel-header">
-                                <i class="fa-solid fa-map-location-dot"></i>
-                                <span>Pin locations on map</span>
-                                <div class="map-mode-toggle">
-                                    <button type="button" class="map-mode-btn active" id="modePickup">
-                                        <i class="fa-solid fa-circle" style="color:#22c55e"></i> Set Pickup
-                                    </button>
-                                    <button type="button" class="map-mode-btn" id="modeDrop">
-                                        <i class="fa-solid fa-circle" style="color:#ef4444"></i> Set Drop
-                                    </button>
-                                </div>
-                            </div>
-                            <div id="map"></div>
-                            <div class="map-hint" id="mapHint">Click on the map to set <strong>Pickup</strong> location</div>
-                        </div>
-                    </div>
-
-                    <!-- Route link row -->
-                    <div class="form-group full-width" id="routeLinkRow" hidden>
-                        <a id="routeLink" href="#" target="_blank" rel="noopener noreferrer" class="route-link-btn">
-                            <i class="fa-solid fa-route"></i> View Full Route on OpenStreetMap
+    <main>
+        <!-- Hero Section -->
+        <section class="hero" aria-label="Introduction">
+            <div class="container hero-grid">
+                <div class="hero-main">
+                    <h1 class="hero-heading">Reliable cabs across Mysore, Bangalore, and airport corridors.</h1>
+                    <p class="hero-summary">
+                        Doorstep pickups, transparent highway rates, and verified local drivers available around the clock. Calculate your fare live with OpenStreetMap routing or confirm directly via phone.
+                    </p>
+                    <div class="hero-actions">
+                        <a href="#booking" class="btn btn-primary">
+                            <span>Calculate Fare &amp; Book</span>
+                            <i class="fa-solid fa-arrow-down" aria-hidden="true"></i>
+                        </a>
+                        <a href="tel:+916361806210" class="btn btn-secondary">
+                            <i class="fa-solid fa-phone" aria-hidden="true"></i>
+                            <span>Call Dispatch</span>
+                        </a>
+                        <a href="https://wa.me/916361806210?text=Hi,%20I%20would%20like%20to%20book%20a%20cab" target="_blank" rel="noopener noreferrer" class="btn btn-outline">
+                            <i class="fa-brands fa-whatsapp" aria-hidden="true"></i>
+                            <span>WhatsApp</span>
                         </a>
                     </div>
-
-                    <!-- PRICE ESTIMATE CARD -->
-                    <div class="form-group full-width" id="priceEstimateCard" hidden>
-                        <div class="price-card">
-                            <div class="price-card-header">
-                                <i class="fa-solid fa-indian-rupee-sign"></i>
-                                <span>Estimated Fare</span>
-                                <span class="price-disclaimer">Approximate only &bull; Final fare confirmed at booking</span>
-                            </div>
-                            <div class="price-card-body">
-                                <div class="price-main">
-                                    <span class="price-range" id="priceLow"></span>
-                                    <span class="price-dash">–</span>
-                                    <span class="price-range" id="priceHigh"></span>
-                                </div>
-                                <div class="price-meta">
-                                    <span><i class="fa-solid fa-road"></i> ~<span id="priceDistance"></span> km</span>
-                                    <span><i class="fa-solid fa-car"></i> <span id="priceVehicle"></span></span>
-                                    <span><i class="fa-solid fa-list"></i> <span id="priceService"></span></span>
-                                    <span><i class="fa-solid fa-tag"></i> <span id="priceRate"></span></span>
-                                </div>
-                            </div>
+                    <div class="hero-stats">
+                        <div class="stat-cell">
+                            <span class="stat-figure">140 km</span>
+                            <span class="stat-label">Mysore–BLR Expressway (NH 275)</span>
+                        </div>
+                        <div class="stat-cell">
+                            <span class="stat-figure">185 km</span>
+                            <span class="stat-label">Direct Kempegowda Airport route</span>
+                        </div>
+                        <div class="stat-cell">
+                            <span class="stat-figure">24/7</span>
+                            <span class="stat-label">Verified drivers &amp; night dispatch</span>
                         </div>
                     </div>
+                </div>
 
-                    <div class="form-group">
-                        <label for="date"><i class="fa-solid fa-calendar"></i> Pickup Date *</label>
-                        <input type="date" id="date" name="date" required autocomplete="off">
+                <div class="hero-aside">
+                    <div class="corridor-board">
+                        <div class="board-header">
+                            <span class="board-title">Active Corridors &amp; Typical Rates</span>
+                            <span class="board-tag">Transparent</span>
+                        </div>
+                        <div class="board-list">
+                            <div class="board-row">
+                                <div class="board-meta">
+                                    <strong>Mysore &harr; Bangalore City</strong>
+                                    <span>Expressway &bull; ~2.5 to 3.0 hrs</span>
+                                </div>
+                                <span class="board-price">From ₹3,500</span>
+                            </div>
+                            <div class="board-row">
+                                <div class="board-meta">
+                                    <strong>Mysore &harr; BLR Airport (KIA)</strong>
+                                    <span>Terminal drop &bull; ~3.5 hrs</span>
+                                </div>
+                                <span class="board-price">From ₹4,200</span>
+                            </div>
+                            <div class="board-row">
+                                <div class="board-meta">
+                                    <strong>Mysore Local Heritage</strong>
+                                    <span>Palace, Chamundi, Zoo &bull; 8h / 80km</span>
+                                </div>
+                                <span class="board-price">From ₹2,400</span>
+                            </div>
+                            <div class="board-row">
+                                <div class="board-meta">
+                                    <strong>Mysore &harr; Coorg / Ooty</strong>
+                                    <span>Scenic ghat transit &bull; Custom packages</span>
+                                </div>
+                                <span class="board-price">From ₹35/km</span>
+                            </div>
+                        </div>
+                        <div class="board-footer">
+                            <span>GPS-enabled vehicles &bull; Toll &amp; parking support available</span>
+                        </div>
                     </div>
+                </div>
+            </div>
+        </section>
 
-                    <div class="form-group">
-                        <label for="time"><i class="fa-solid fa-clock"></i> Pickup Time *</label>
-                        <input type="time" id="time" name="time" required autocomplete="off">
-                    </div>
+        <!-- Primary Corridors & Services -->
+        <section id="corridors" class="section section-bordered" aria-labelledby="corridors-heading">
+            <div class="container">
+                <div class="section-intro">
+                    <h2 class="section-heading" id="corridors-heading">Travel Corridors</h2>
+                    <p class="section-sub">Scheduled highway routes and local transfers tailored for comfort and punctuality.</p>
+                </div>
 
-                    <div class="form-group full-width">
-                        <label for="comments"><i class="fa-solid fa-comment"></i> Additional Comments</label>
-                        <textarea id="comments" name="comments" placeholder="Any special requirements or instructions" rows="3"></textarea>
-                    </div>
+                <div class="corridors-grid">
+                    <article class="corridor-card">
+                        <div class="card-indicator"></div>
+                        <div class="card-content">
+                            <span class="corridor-route">NH 275 Corridor</span>
+                            <h3 class="corridor-name">Mysore &harr; Bangalore Expressway</h3>
+                            <p class="corridor-desc">
+                                Seamless connection between Mysore and Bangalore via the 10-lane expressway. Doorstep pickup anywhere in Mysore with drop across any Bangalore tech corridor, railway station, or residential area.
+                            </p>
+                            <ul class="corridor-specs">
+                                <li><strong>Average Distance:</strong> ~140–150 km</li>
+                                <li><strong>Estimated Travel:</strong> 2.5 to 3 hours</li>
+                                <li><strong>Recommended:</strong> Dzire or Etios Sedan</li>
+                            </ul>
+                        </div>
+                    </article>
 
-                    <!-- Hidden coordinate fields -->
-                    <input type="hidden" id="pickupLat" name="pickupLat">
-                    <input type="hidden" id="pickupLng" name="pickupLng">
-                    <input type="hidden" id="dropLat" name="dropLat">
-                    <input type="hidden" id="dropLng" name="dropLng">
-                    <input type="hidden" id="pickupMapUrl" name="pickupMapUrl">
-                    <input type="hidden" id="dropMapUrl" name="dropMapUrl">
-                    <input type="hidden" id="routeMapUrl" name="routeMapUrl">
+                    <article class="corridor-card">
+                        <div class="card-indicator"></div>
+                        <div class="card-content">
+                            <span class="corridor-route">Airport Special</span>
+                            <h3 class="corridor-name">Kempegowda Airport (BLR) Transfers</h3>
+                            <p class="corridor-desc">
+                                Guaranteed 24/7 on-time transfers to Kempegowda International Airport. Early morning departures and late-night flight pickups with flight tracking and clean, comfortable luggage capacity.
+                            </p>
+                            <ul class="corridor-specs">
+                                <li><strong>Average Distance:</strong> ~185–195 km</li>
+                                <li><strong>Estimated Travel:</strong> 3.5 to 4 hours</li>
+                                <li><strong>Recommended:</strong> Innova SUV for families</li>
+                            </ul>
+                        </div>
+                    </article>
 
-                    <button type="submit" class="btn btn-primary btn-submit">
-                        <i class="fa-solid fa-paper-plane"></i> Submit Booking Request
-                    </button>
-                </form>
+                    <article class="corridor-card">
+                        <div class="card-indicator"></div>
+                        <div class="card-content">
+                            <span class="corridor-route">City Sightseeing</span>
+                            <h3 class="corridor-name">Mysore Local &amp; Heritage Tours</h3>
+                            <p class="corridor-desc">
+                                Dedicated city cabs for business meetings or family sightseeing across Chamundi Hills, Mysore Palace, St. Philomena's Church, Zoo, and Brindavan Gardens with courteous local drivers.
+                            </p>
+                            <ul class="corridor-specs">
+                                <li><strong>Package Options:</strong> 4h/40km or 8h/80km</li>
+                                <li><strong>Driver Expertise:</strong> Local Kannada &amp; English</li>
+                                <li><strong>Recommended:</strong> Hatchback or Sedan</li>
+                            </ul>
+                        </div>
+                    </article>
 
-                <div class="contact-sidebar">
-                    <div class="contact-card">
-                        <h3><i class="fa-solid fa-headset"></i> Need Immediate Assistance?</h3>
-                        <p>Our team is available 24/7 to help you</p>
-                        <a href="tel:+916361806210" class="contact-btn">
-                            <i class="fa-solid fa-phone"></i>
+                    <article class="corridor-card">
+                        <div class="card-indicator"></div>
+                        <div class="card-content">
+                            <span class="corridor-route">Hill Stations</span>
+                            <h3 class="corridor-name">Coorg, Ooty, Wayanad &amp; Bandipur</h3>
+                            <p class="corridor-desc">
+                                Safe outstation journeys across the Western Ghats. Experienced mountain drivers familiar with hairpin curves, wildlife sanctuary transit guidelines, and scenic viewpoints.
+                            </p>
+                            <ul class="corridor-specs">
+                                <li><strong>Terrain:</strong> Mountain passes &amp; ghat roads</li>
+                                <li><strong>Duration:</strong> Single-day or multi-day</li>
+                                <li><strong>Recommended:</strong> Innova Crysta SUV</li>
+                            </ul>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- Fleet Specifications -->
+        <section id="fleet" class="section section-ground" aria-labelledby="fleet-heading">
+            <div class="container">
+                <div class="section-intro">
+                    <h2 class="section-heading" id="fleet-heading">Fleet &amp; Specifications</h2>
+                    <p class="section-sub">Well-maintained commercial vehicles with verified registrations and all-inclusive maintenance.</p>
+                </div>
+
+                <div class="fleet-matrix">
+                    <!-- Sedan -->
+                    <div class="fleet-spec-card">
+                        <div class="fleet-header">
                             <div>
-                                <span class="contact-label">Call Us</span>
-                                <span class="contact-value">+91 63618 06210</span>
+                                <h3 class="fleet-title">Executive Sedan</h3>
+                                <span class="fleet-models">Maruti Dzire &bull; Toyota Etios</span>
                             </div>
-                        </a>
-                        <a href="https://wa.me/916361806210?text=Hi,%20I%20would%20like%20to%20book%20a%20cab" target="_blank" rel="noopener noreferrer" class="contact-btn">
-                            <i class="fa-brands fa-whatsapp"></i>
+                            <div class="fleet-rate">
+                                <span class="rate-val">₹35</span>
+                                <span class="rate-unit">/km</span>
+                            </div>
+                        </div>
+                        <div class="fleet-details">
+                            <div class="detail-row">
+                                <span class="detail-label">Seating:</span>
+                                <span class="detail-val">4 Passengers + Driver</span>
+                            </div>
+                            <div class="detail-row">
+                                <span class="detail-label">Luggage:</span>
+                                <span class="detail-val">2 Large Trolleys + 2 Hand Bags</span>
+                            </div>
+                            <div class="detail-row">
+                                <span class="detail-label">Air Conditioning:</span>
+                                <span class="detail-val">Standard Powerful AC</span>
+                            </div>
+                            <div class="detail-row">
+                                <span class="detail-label">Best Suited For:</span>
+                                <span class="detail-val">Couples, solo executives, expressway travel</span>
+                            </div>
+                            <div class="detail-row">
+                                <span class="detail-label">Minimum Fare:</span>
+                                <span class="detail-val">₹300</span>
+                            </div>
+                        </div>
+                        <a href="#booking" class="btn btn-block btn-secondary">Select Sedan</a>
+                    </div>
+
+                    <!-- SUV -->
+                    <div class="fleet-spec-card fleet-featured">
+                        <div class="fleet-header">
                             <div>
-                                <span class="contact-label">WhatsApp</span>
-                                <span class="contact-value">Chat with us</span>
+                                <h3 class="fleet-title">Spacious SUV</h3>
+                                <span class="fleet-models">Toyota Innova &bull; Maruti Ertiga</span>
                             </div>
-                        </a>
+                            <div class="fleet-rate">
+                                <span class="rate-val">₹40</span>
+                                <span class="rate-unit">/km</span>
+                            </div>
+                        </div>
+                        <div class="fleet-details">
+                            <div class="detail-row">
+                                <span class="detail-label">Seating:</span>
+                                <span class="detail-val">6 to 7 Passengers + Driver</span>
+                            </div>
+                            <div class="detail-row">
+                                <span class="detail-label">Luggage:</span>
+                                <span class="detail-val">4 Large Trolleys + Hand Bags</span>
+                            </div>
+                            <div class="detail-row">
+                                <span class="detail-label">Air Conditioning:</span>
+                                <span class="detail-val">Dual AC Front &amp; Rear</span>
+                            </div>
+                            <div class="detail-row">
+                                <span class="detail-label">Best Suited For:</span>
+                                <span class="detail-val">Family trips, airport transfers, ghat sections</span>
+                            </div>
+                            <div class="detail-row">
+                                <span class="detail-label">Minimum Fare:</span>
+                                <span class="detail-val">₹500</span>
+                            </div>
+                        </div>
+                        <a href="#booking" class="btn btn-block btn-primary">Select SUV</a>
                     </div>
-                    <div class="info-card">
-                        <h4><i class="fa-solid fa-star"></i> Why Choose Us?</h4>
-                        <ul>
-                            <li><i class="fa-solid fa-check"></i> Professional drivers</li>
-                            <li><i class="fa-solid fa-check"></i> Clean &amp; sanitized vehicles</li>
-                            <li><i class="fa-solid fa-check"></i> Transparent pricing</li>
-                            <li><i class="fa-solid fa-check"></i> 24/7 availability</li>
-                            <li><i class="fa-solid fa-check"></i> GPS tracked rides</li>
-                        </ul>
+
+                    <!-- Hatchback -->
+                    <div class="fleet-spec-card">
+                        <div class="fleet-header">
+                            <div>
+                                <h3 class="fleet-title">Economy Hatchback</h3>
+                                <span class="fleet-models">Maruti WagonR &bull; Swift</span>
+                            </div>
+                            <div class="fleet-rate">
+                                <span class="rate-val">₹30</span>
+                                <span class="rate-unit">/km</span>
+                            </div>
+                        </div>
+                        <div class="fleet-details">
+                            <div class="detail-row">
+                                <span class="detail-label">Seating:</span>
+                                <span class="detail-val">4 Passengers + Driver</span>
+                            </div>
+                            <div class="detail-row">
+                                <span class="detail-label">Luggage:</span>
+                                <span class="detail-val">1 Large Trolley + 1 Hand Bag</span>
+                            </div>
+                            <div class="detail-row">
+                                <span class="detail-label">Air Conditioning:</span>
+                                <span class="detail-val">Standard AC</span>
+                            </div>
+                            <div class="detail-row">
+                                <span class="detail-label">Best Suited For:</span>
+                                <span class="detail-val">Budget city hops, Mysore station drops</span>
+                            </div>
+                            <div class="detail-row">
+                                <span class="detail-label">Minimum Fare:</span>
+                                <span class="detail-val">₹250</span>
+                            </div>
+                        </div>
+                        <a href="#booking" class="btn btn-block btn-secondary">Select Hatchback</a>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- Contact -->
-    <section id="contact" class="contact" aria-labelledby="contact-heading">
-        <div class="container">
-            <h2 class="section-title" id="contact-heading">Get In Touch</h2>
-            <div class="contact-grid">
-                <div class="contact-info">
-                    <h3>Contact Information</h3>
-                    <p>We're here to help you 24/7. Reach out to us through any of these channels.</p>
-                    <div class="info-items">
-                        <div class="info-item">
-                            <i class="fa-solid fa-phone"></i>
-                            <div><strong>Phone:</strong><a href="tel:+916361806210">+91 63618 06210</a></div>
+        <!-- Booking Engine & Interactive Map -->
+        <section id="booking" class="section section-bordered" aria-labelledby="booking-heading">
+            <div class="container">
+                <div class="section-intro">
+                    <h2 class="section-heading" id="booking-heading">Live Fare Estimator &amp; Booking</h2>
+                    <p class="section-sub">Pin your route on OpenStreetMap to compute road distance and transparent fare brackets.</p>
+                </div>
+
+                <div class="booking-layout">
+                    <!-- Main Booking Form -->
+                    <div class="booking-form-pane">
+                        <form id="bookingForm" class="booking-form" novalidate>
+                            <div class="form-grid-two">
+                                <div class="form-field">
+                                    <label for="name">Full Name *</label>
+                                    <input type="text" id="name" name="name" required placeholder="Your name" autocomplete="name">
+                                </div>
+
+                                <div class="form-field">
+                                    <label for="phone">Phone Number *</label>
+                                    <input type="tel" id="phone" name="phone" required placeholder="10-digit mobile number" pattern="[0-9]{10}" autocomplete="tel">
+                                </div>
+                            </div>
+
+                            <div class="form-grid-two">
+                                <div class="form-field">
+                                    <label for="serviceType">Service Type *</label>
+                                    <select id="serviceType" name="serviceType" required>
+                                        <option value="">Select Service</option>
+                                        <option value="Outstation">Outstation Highway Cab</option>
+                                        <option value="Local">Local City Taxi</option>
+                                        <option value="Airport">Airport Transfer</option>
+                                    </select>
+                                </div>
+
+                                <div class="form-field">
+                                    <label for="vehicleType">Vehicle Type *</label>
+                                    <select id="vehicleType" name="vehicleType" required>
+                                        <option value="">Select Vehicle</option>
+                                        <option value="Sedan">Sedan (Dzire / Etios &bull; 4 Seater)</option>
+                                        <option value="SUV">SUV (Innova / Ertiga &bull; 6–7 Seater)</option>
+                                        <option value="Hatchback">Hatchback (WagonR &bull; 4 Seater)</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <!-- PICKUP location -->
+                            <div class="form-field full-span">
+                                <label for="pickupAddress">Pickup Address &amp; Landmark *</label>
+                                <div class="input-with-action">
+                                    <div class="autocomplete-wrap" id="pickupWrap">
+                                        <input type="text" id="pickupAddress" name="pickupAddress" required
+                                            placeholder="Type to search or pin pickup point below..."
+                                            autocomplete="off" spellcheck="false">
+                                        <ul class="suggestions-list" id="pickupSuggestions" hidden></ul>
+                                    </div>
+                                    <button type="button" class="btn btn-compact" id="useMyLocation" title="Detect device location">
+                                        <i class="fa-solid fa-location-crosshairs" aria-hidden="true"></i>
+                                        <span>Current GPS</span>
+                                    </button>
+                                </div>
+                                <div class="coord-badge" id="pickupCoordBadge" hidden>
+                                    <span class="badge-status-dot dot-pickup"></span>
+                                    <span id="pickupCoordText"></span>
+                                    <a id="pickupMapLink" href="#" target="_blank" rel="noopener noreferrer" class="badge-link">View Point</a>
+                                </div>
+                            </div>
+
+                            <!-- DROP location -->
+                            <div class="form-field full-span">
+                                <label for="destination">Drop Address &amp; Destination *</label>
+                                <div class="autocomplete-wrap" id="dropWrap">
+                                    <input type="text" id="destination" name="destination" required
+                                        placeholder="Type to search or pin drop destination below..."
+                                        autocomplete="off" spellcheck="false">
+                                    <ul class="suggestions-list" id="dropSuggestions" hidden></ul>
+                                </div>
+                                <div class="coord-badge" id="dropCoordBadge" hidden>
+                                    <span class="badge-status-dot dot-drop"></span>
+                                    <span id="dropCoordText"></span>
+                                    <a id="dropMapLink" href="#" target="_blank" rel="noopener noreferrer" class="badge-link">View Point</a>
+                                </div>
+                            </div>
+
+                            <!-- Interactive Map Workspace -->
+                            <div class="form-field full-span">
+                                <div class="map-workspace">
+                                    <div class="map-workspace-toolbar">
+                                        <div class="map-toolbar-label">
+                                            <i class="fa-solid fa-map-pin" aria-hidden="true"></i>
+                                            <span>Map Mode:</span>
+                                        </div>
+                                        <div class="map-mode-toggle" role="group" aria-label="Pin mode selection">
+                                            <button type="button" class="map-toggle-btn active" id="modePickup">
+                                                <span class="dot-pickup"></span> Set Pickup
+                                            </button>
+                                            <button type="button" class="map-toggle-btn" id="modeDrop">
+                                                <span class="dot-drop"></span> Set Drop
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div id="map" class="map-canvas" role="region" aria-label="Interactive Leaflet Map"></div>
+                                    <div class="map-workspace-status" id="mapHint">
+                                        Click map to position <strong>Pickup</strong> point.
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Route Link Button -->
+                            <div class="form-field full-span" id="routeLinkRow" hidden>
+                                <a id="routeLink" href="#" target="_blank" rel="noopener noreferrer" class="btn btn-outline btn-block">
+                                    <i class="fa-solid fa-route" aria-hidden="true"></i>
+                                    <span>Inspect Driving Route on OpenStreetMap</span>
+                                </a>
+                            </div>
+
+                            <!-- Price Estimate Card -->
+                            <div class="form-field full-span" id="priceEstimateCard" hidden>
+                                <div class="estimate-panel">
+                                    <div class="estimate-header">
+                                        <span class="estimate-tag">Dynamic Road Estimate</span>
+                                        <span class="estimate-disclaimer">Includes state road factor &bull; Excludes toll/parking</span>
+                                    </div>
+                                    <div class="estimate-pricing">
+                                        <div class="fare-bracket">
+                                            <span class="fare-figure" id="priceLow"></span>
+                                            <span class="fare-dash">&ndash;</span>
+                                            <span class="fare-figure" id="priceHigh"></span>
+                                        </div>
+                                        <div class="fare-meta-grid">
+                                            <div class="meta-item">
+                                                <span class="meta-title">Est. Distance</span>
+                                                <span class="meta-value">~<span id="priceDistance"></span> km</span>
+                                            </div>
+                                            <div class="meta-item">
+                                                <span class="meta-title">Vehicle</span>
+                                                <span class="meta-value" id="priceVehicle"></span>
+                                            </div>
+                                            <div class="meta-item">
+                                                <span class="meta-title">Service Class</span>
+                                                <span class="meta-value" id="priceService"></span>
+                                            </div>
+                                            <div class="meta-item">
+                                                <span class="meta-title">Base Rate</span>
+                                                <span class="meta-value" id="priceRate"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-grid-two">
+                                <div class="form-field">
+                                    <label for="date">Pickup Date *</label>
+                                    <input type="date" id="date" name="date" required autocomplete="off">
+                                </div>
+
+                                <div class="form-field">
+                                    <label for="time">Pickup Time *</label>
+                                    <input type="time" id="time" name="time" required autocomplete="off">
+                                </div>
+                            </div>
+
+                            <div class="form-field full-span">
+                                <label for="comments">Specific Instructions or Flight Numbers</label>
+                                <textarea id="comments" name="comments" placeholder="e.g. Flight 6E 432 arriving at 2:30 PM, child seat needed, extra luggage details..." rows="3"></textarea>
+                            </div>
+
+                            <!-- Hidden coordinate storage fields -->
+                            <input type="hidden" id="pickupLat" name="pickupLat">
+                            <input type="hidden" id="pickupLng" name="pickupLng">
+                            <input type="hidden" id="dropLat" name="dropLat">
+                            <input type="hidden" id="dropLng" name="dropLng">
+                            <input type="hidden" id="pickupMapUrl" name="pickupMapUrl">
+                            <input type="hidden" id="dropMapUrl" name="dropMapUrl">
+                            <input type="hidden" id="routeMapUrl" name="routeMapUrl">
+
+                            <button type="submit" class="btn btn-primary btn-block btn-submit">
+                                <span>Submit Booking Request</span>
+                                <i class="fa-solid fa-paper-plane" aria-hidden="true"></i>
+                            </button>
+                        </form>
+                    </div>
+
+                    <!-- Dispatch Contact Sidebar -->
+                    <aside class="booking-sidebar">
+                        <div class="dispatch-card">
+                            <h3 class="sidebar-heading">Immediate Dispatch</h3>
+                            <p class="sidebar-text">Need a cab urgently or planning an immediate airport transfer? Speak directly with our Mysore dispatch controller.</p>
+                            
+                            <div class="action-stack">
+                                <a href="tel:+916361806210" class="btn btn-primary btn-block">
+                                    <i class="fa-solid fa-phone" aria-hidden="true"></i>
+                                    <span>Call +91 63618 06210</span>
+                                </a>
+                                <a href="https://wa.me/916361806210?text=Hi,%20I%20would%20like%20to%20book%20a%20cab%20urgently" target="_blank" rel="noopener noreferrer" class="btn btn-outline btn-block">
+                                    <i class="fa-brands fa-whatsapp" aria-hidden="true"></i>
+                                    <span>WhatsApp Direct</span>
+                                </a>
+                            </div>
+
+                            <div class="dispatch-specs">
+                                <div class="spec-row">
+                                    <span class="spec-label">Operating Hours:</span>
+                                    <span class="spec-value">24 Hours / 7 Days</span>
+                                </div>
+                                <div class="spec-row">
+                                    <span class="spec-label">Fleet Coverage:</span>
+                                    <span class="spec-value">Mysore, Mandya, Bangalore, KIA</span>
+                                </div>
+                                <div class="spec-row">
+                                    <span class="spec-label">Night Charges:</span>
+                                    <span class="spec-value">Transparent flat rate</span>
+                                </div>
+                            </div>
                         </div>
-                        <div class="info-item">
-                            <i class="fa-solid fa-envelope"></i>
-                            <div><strong>Email:</strong><a href="mailto:bookings@mscabs.in">bookings@mscabs.in</a></div>
+
+                        <div class="standards-card">
+                            <h4 class="standards-title">Service Commitments</h4>
+                            <ul class="standards-list">
+                                <li>Clean commercial vehicles with verified fitness certificate.</li>
+                                <li>Background-checked drivers with verified state licenses.</li>
+                                <li>No sudden surge pricing during heavy rains or peak hours.</li>
+                                <li>Flight delay monitoring on Kempegowda Airport arrivals.</li>
+                                <li>Digital GST billing available on request for corporate accounts.</li>
+                            </ul>
                         </div>
-                        <div class="info-item">
-                            <i class="fa-brands fa-whatsapp"></i>
-                            <div><strong>WhatsApp:</strong><a href="https://wa.me/916361806210" target="_blank" rel="noopener noreferrer">+91 63618 06210</a></div>
+                    </aside>
+                </div>
+            </div>
+        </section>
+
+        <!-- Service Commitments (Standards) -->
+        <section id="commitments" class="section section-ground" aria-labelledby="standards-heading">
+            <div class="container">
+                <div class="section-intro">
+                    <h2 class="section-heading" id="standards-heading">Our Service Standards</h2>
+                    <p class="section-sub">Built around passenger safety, transparent pricing, and dependable highway transit.</p>
+                </div>
+
+                <div class="commitments-grid">
+                    <div class="commitment-item">
+                        <span class="commitment-index">01</span>
+                        <h3 class="commitment-title">Zero Surge Multipliers</h3>
+                        <p class="commitment-body">Unlike algorithmic aggregator apps, our rates are calculated strictly on standard kilometer metrics and agreed highway parameters.</p>
+                    </div>
+                    <div class="commitment-item">
+                        <span class="commitment-index">02</span>
+                        <h3 class="commitment-title">Punctual Airport Drops</h3>
+                        <p class="commitment-body">Airport pickups and drops are scheduled with mandatory buffer margins calibrated for expressway traffic so you never risk missing flights.</p>
+                    </div>
+                    <div class="commitment-item">
+                        <span class="commitment-index">03</span>
+                        <h3 class="commitment-title">Polite, Verified Drivers</h3>
+                        <p class="commitment-body">All drivers are locally based, experienced on interstate highways, and fluent in Kannada, English, or Hindi for effortless communication.</p>
+                    </div>
+                    <div class="commitment-item">
+                        <span class="commitment-index">04</span>
+                        <h3 class="commitment-title">Well-Maintained AC Fleet</h3>
+                        <p class="commitment-body">Every vehicle undergoes periodic mechanical servicing, brake checks, and sanitization prior to long-distance highway departures.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="section section-bordered" aria-labelledby="contact-heading">
+            <div class="container">
+                <div class="contact-box">
+                    <div class="contact-box-left">
+                        <h2 class="section-heading" id="contact-heading">Direct Contact &amp; Dispatch</h2>
+                        <p class="contact-box-text">
+                            Reach out for corporate travel agreements, customized outstation itineraries across South India, or immediate cab dispatch.
+                        </p>
+                        <div class="contact-details-list">
+                            <div class="contact-detail-row">
+                                <span class="detail-name">Dispatch Telephone:</span>
+                                <a href="tel:+916361806210" class="detail-link">+91 63618 06210</a>
+                            </div>
+                            <div class="contact-detail-row">
+                                <span class="detail-name">WhatsApp Direct:</span>
+                                <a href="https://wa.me/916361806210" target="_blank" rel="noopener noreferrer" class="detail-link">+91 63618 06210</a>
+                            </div>
+                            <div class="contact-detail-row">
+                                <span class="detail-name">Email Bookings:</span>
+                                <a href="mailto:bookings@mscabs.in" class="detail-link">bookings@mscabs.in</a>
+                            </div>
+                            <div class="contact-detail-row">
+                                <span class="detail-name">Headquarters:</span>
+                                <span class="detail-text">Mysore, Karnataka 570001, India</span>
+                            </div>
                         </div>
-                        <div class="info-item">
-                            <i class="fa-solid fa-map-location-dot"></i>
-                            <div><strong>Based In:</strong><span>Mysore, Karnataka, India</span></div>
+                    </div>
+                    <div class="contact-box-right">
+                        <div class="quick-callout">
+                            <span class="callout-label">Need a cab right now?</span>
+                            <span class="callout-main">Dispatch controllers are online 24 hours a day.</span>
+                            <a href="tel:+916361806210" class="btn btn-primary btn-block">
+                                <i class="fa-solid fa-phone" aria-hidden="true"></i>
+                                <span>Call +91 63618 06210</span>
+                            </a>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
+    </main>
 
-    <!-- Footer -->
+    <!-- Structural Footer -->
     <footer class="footer" role="contentinfo">
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-section">
-                    <a href="#" class="logo"><i class="fa-solid fa-taxi logo-icon"></i><span class="logo-text">MS Cabs</span></a>
-                    <p>Your trusted partner for safe and comfortable rides across Mysore, Bangalore and beyond.</p>
-                    <div class="social-links">
-                        <a href="https://wa.me/916361806210" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
-                        <a href="tel:+916361806210" aria-label="Call"><i class="fa-solid fa-phone"></i></a>
-                    </div>
-                </div>
-                <div class="footer-section">
-                    <h4>Quick Links</h4>
-                    <ul>
-                        <li><a href="#services"><i class="fa-solid fa-chevron-right"></i> Services</a></li>
-                        <li><a href="#booking"><i class="fa-solid fa-chevron-right"></i> Book Now</a></li>
-                        <li><a href="#contact"><i class="fa-solid fa-chevron-right"></i> Contact</a></li>
-                    </ul>
-                </div>
-                <div class="footer-section">
-                    <h4>Our Services</h4>
-                    <ul>
-                        <li><i class="fa-solid fa-road"></i> Outstation Cab</li>
-                        <li><i class="fa-solid fa-city"></i> Local Taxi</li>
-                        <li><i class="fa-solid fa-plane-departure"></i> Airport Transfer</li>
-                    </ul>
+        <div class="container footer-grid">
+            <div class="footer-col brand-col">
+                <a href="#" class="brand brand-inverted">
+                    <span class="brand-badge">MS</span>
+                    <span class="brand-name">MS Cabs</span>
+                </a>
+                <p class="footer-summary">
+                    Professional, safe, and transparent cab services across Mysore, Bangalore, Kempegowda Airport, and Karnataka outstation routes.
+                </p>
+                <div class="footer-quick-contacts">
+                    <a href="tel:+916361806210" class="footer-contact-link"><i class="fa-solid fa-phone"></i> +91 63618 06210</a>
+                    <a href="https://wa.me/916361806210" target="_blank" rel="noopener noreferrer" class="footer-contact-link"><i class="fa-brands fa-whatsapp"></i> WhatsApp Dispatch</a>
                 </div>
             </div>
-            <div class="footer-bottom">
-                <p>&copy; 2026 MS Cabs. All rights reserved. | Mysore &amp; Bangalore Cab Service</p>
+
+            <div class="footer-col">
+                <h4 class="footer-title">Navigation</h4>
+                <ul class="footer-links">
+                    <li><a href="#corridors">Travel Corridors</a></li>
+                    <li><a href="#fleet">Fleet &amp; Rates</a></li>
+                    <li><a href="#booking">Live Fare Estimator</a></li>
+                    <li><a href="#commitments">Service Standards</a></li>
+                    <li><a href="#contact">Contact &amp; Support</a></li>
+                </ul>
             </div>
+
+            <div class="footer-col">
+                <h4 class="footer-title">Primary Corridors</h4>
+                <ul class="footer-links">
+                    <li><a href="#booking">Mysore to Bangalore Expressway</a></li>
+                    <li><a href="#booking">Mysore to Kempegowda Airport (BLR)</a></li>
+                    <li><a href="#booking">Bangalore to Mysore Cabs</a></li>
+                    <li><a href="#booking">Mysore Local Heritage Sightseeing</a></li>
+                    <li><a href="#booking">Coorg, Ooty &amp; Wayanad Packages</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h4 class="footer-title">Operating Policy</h4>
+                <p class="footer-note">
+                    All fares calculated on the website represent standard commercial vehicle estimates. Final quotation may include interstate permits, toll booth charges, and parking fees as applicable per actual route.
+                </p>
+            </div>
+        </div>
+
+        <div class="container footer-bottom">
+            <p>&copy; 2026 MS Cabs. All rights reserved. Registered commercial taxi service in Karnataka, India.</p>
         </div>
     </footer>
 
-    <a href="https://wa.me/916361806210?text=Hi,%20I%20would%20like%20to%20book%20a%20cab" class="whatsapp-float" target="_blank" rel="noopener noreferrer" aria-label="Chat on WhatsApp">
-        <i class="fa-brands fa-whatsapp"></i>
+    <!-- Floating Quick WhatsApp Button -->
+    <a href="https://wa.me/916361806210?text=Hi,%20I%20would%20like%20to%20book%20a%20cab" class="whatsapp-float" target="_blank" rel="noopener noreferrer" aria-label="Chat with dispatch on WhatsApp">
+        <i class="fa-brands fa-whatsapp" aria-hidden="true"></i>
     </a>
 
+    <!-- Leaflet & App JS -->
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <script src="script.js"></script>
 </body>

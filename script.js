@@ -36,9 +36,9 @@ function debounce(fn, ms) {
 
 // ── Pricing config ────────────────────────────────────────────────────────────
 const PRICE_CONFIG = {
-    Sedan:     { perKm: 12,  minFare: 300  },
-    SUV:       { perKm: 16,  minFare: 500  },
-    Hatchback: { perKm: 10,  minFare: 250  }
+    Sedan:     { perKm: 35,  minFare: 300  },
+    SUV:       { perKm: 40,  minFare: 500  },
+    Hatchback: { perKm: 30,  minFare: 250  }
 };
 
 const SERVICE_MULTIPLIER = {
