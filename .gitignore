@@ -1,0 +1,19 @@
+# Environment & OS
+.DS_Store
+*~
+*.log
+
+# Code Review Graph knowledge base
+.code-review-graph/
+**/.code-review-graph/
+
+# Local agent metadata & caches
+.gemini/
+.claude/
+.qoder/
+.codebuddy/
+.cursor/
+.windsurf/
+.agents
+/.agents
+
