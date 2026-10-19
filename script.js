@@ -658,6 +658,31 @@ document.addEventListener('DOMContentLoaded', async () => {
             return false;
         });
     }
+
+    // Google Analytics event tracking on direct contact links
+    document.querySelectorAll('a[href^="tel:"]').forEach(link => {
+        link.addEventListener('click', () => {
+            if (typeof gtag === 'function') {
+                gtag('event', 'contact', {
+                    method: 'Phone',
+                    event_category: 'Engagement',
+                    event_label: 'Direct Call'
+                });
+            }
+        });
+    });
+
+    document.querySelectorAll('a[href*="wa.me"]').forEach(link => {
+        link.addEventListener('click', () => {
+            if (typeof gtag === 'function') {
+                gtag('event', 'contact', {
+                    method: 'WhatsApp',
+                    event_category: 'Engagement',
+                    event_label: 'Direct WhatsApp Click'
+                });
+            }
+        });
+    });
 });
 
 // ── WhatsApp submission ─────────────────────────────────────────────────────────
@@ -705,6 +730,17 @@ function submitToWhatsApp(data) {
 
     const text = lines.join('\n');
     const waUrl = `https://wa.me/916361806210?text=${encodeURIComponent(text)}`;
+
+    // Track Google Analytics conversion event
+    if (typeof gtag === 'function') {
+        gtag('event', 'generate_lead', {
+            event_category: 'Booking',
+            event_label: data.serviceType || 'Outstation',
+            service_type: data.serviceType,
+            vehicle_type: data.vehicleType,
+            destination: data.destination
+        });
+    }
 
     let popupBlocked = false;
     try {
