@@ -431,11 +431,15 @@ p {
     color: var(--ink-muted);
 }
 
-.board-price {
-    font-size: 0.95rem;
+.board-tag-sm {
+    font-size: 0.85rem;
     font-weight: 700;
     color: var(--ink);
     white-space: nowrap;
+    background-color: var(--surface-subtle);
+    padding: 3px 8px;
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--border);
 }
 
 .board-footer {
@@ -560,31 +564,6 @@ p {
     text-align: right;
 }
 
-.package-pricing {
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
-    background-color: var(--ground);
-    border: 1px solid var(--border);
-    border-radius: var(--radius-sm);
-    padding: 10px 14px;
-}
-
-.pkg-rate {
-    display: flex;
-    justify-content: space-between;
-    font-size: 0.82rem;
-}
-
-.pkg-type {
-    color: var(--ink-muted);
-}
-
-.pkg-cost {
-    font-weight: 700;
-    color: var(--ink);
-}
-
 /* ── 9. CORRIDORS (SERVICES) GRID ────────────────────────────────────────── */
 .corridors-grid {
     display: grid;
@@ -698,21 +677,6 @@ p {
 
 .fleet-models {
     font-size: 0.84rem;
-    color: var(--ink-muted);
-}
-
-.fleet-rate {
-    text-align: right;
-}
-
-.rate-val {
-    font-size: 1.5rem;
-    font-weight: 800;
-    color: var(--ink);
-}
-
-.rate-unit {
-    font-size: 0.85rem;
     color: var(--ink-muted);
 }
 
@@ -1045,87 +1009,7 @@ p {
     border-top: 1px solid var(--border);
 }
 
-/* ── Dynamic Price Estimate Panel ────────────────────────────────────────── */
-.estimate-panel {
-    background-color: var(--surface-contrast);
-    color: var(--ink-inverted);
-    border-radius: var(--radius);
-    padding: 24px;
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-}
 
-.estimate-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    gap: 8px;
-    padding-bottom: 12px;
-    border-bottom: 1px solid var(--border-dark);
-}
-
-.estimate-tag {
-    background-color: var(--accent);
-    color: var(--accent-contrast);
-    font-size: 0.72rem;
-    font-weight: 800;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    padding: 3px 8px;
-    border-radius: var(--radius-sm);
-}
-
-.estimate-disclaimer {
-    font-size: 0.78rem;
-    color: var(--ink-inverted-muted);
-}
-
-.fare-bracket {
-    display: flex;
-    align-items: baseline;
-    gap: 12px;
-}
-
-.fare-figure {
-    font-size: 2.2rem;
-    font-weight: 800;
-    color: var(--accent);
-    letter-spacing: -0.02em;
-}
-
-.fare-dash {
-    font-size: 1.8rem;
-    color: var(--ink-inverted-muted);
-}
-
-.fare-meta-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 16px;
-    padding-top: 16px;
-    border-top: 1px solid var(--border-dark);
-}
-
-.meta-item {
-    display: flex;
-    flex-direction: column;
-    gap: 2px;
-}
-
-.meta-title {
-    font-size: 0.75rem;
-    color: var(--ink-inverted-muted);
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-}
-
-.meta-value {
-    font-size: 0.95rem;
-    font-weight: 600;
-    color: var(--ink-inverted);
-}
 
 /* Form success message */
 .success-message {
@@ -1549,9 +1433,6 @@ p {
     }
     .booking-form-pane {
         padding: 20px;
-    }
-    .fare-meta-grid {
-        grid-template-columns: repeat(2, 1fr);
     }
     .commitments-grid {
         grid-template-columns: 1fr;

@@ -1,6 +1,6 @@
 /* =============================================
    MS Cabs – script.js
-   Leaflet map + Nominatim autocomplete + Price estimator
+   Leaflet map + Nominatim autocomplete + WhatsApp booking
 ============================================= */
 
 // ── Nominatim helpers ──────────────────────────────────────────────────────────
@@ -34,23 +34,9 @@ function debounce(fn, ms) {
     return (...args) => { clearTimeout(t); t = setTimeout(() => fn(...args), ms); };
 }
 
-// ── Pricing config ────────────────────────────────────────────────────────────
-const PRICE_CONFIG = {
-    Sedan:     { perKm: 35,  minFare: 300  },
-    SUV:       { perKm: 40,  minFare: 500  },
-    Hatchback: { perKm: 30,  minFare: 250  }
-};
-
-const SERVICE_MULTIPLIER = {
-    Outstation: 1.15,
-    Local:      1.00,
-    Airport:    1.10,
-    '':         1.00
-};
-
+// ── Road factor & Haversine distance (km) ──────────────────────────────────
 const ROAD_FACTOR = 1.3;
 
-// ── Haversine distance (km) ───────────────────────────────────────────────────
 function haversineKm(lat1, lng1, lat2, lng2) {
     const R  = 6371;
     const dL = (lat2 - lat1) * Math.PI / 180;
@@ -59,36 +45,6 @@ function haversineKm(lat1, lng1, lat2, lng2) {
                Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) *
                Math.sin(dG / 2) ** 2;
     return R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-}
-
-// ── Compute & render price estimate ──────────────────────────────────────────
-function updatePriceEstimate() {
-    const card = document.getElementById('priceEstimateCard');
-    if (!state.pickupCoords || !state.dropCoords) { card.hidden = true; return; }
-
-    const vehicleType  = document.getElementById('vehicleType').value  || 'Sedan';
-    const serviceType  = document.getElementById('serviceType').value  || '';
-    const cfg          = PRICE_CONFIG[vehicleType] || PRICE_CONFIG.Sedan;
-    const multiplier   = SERVICE_MULTIPLIER[serviceType] || 1.00;
-
-    const straightKm   = haversineKm(
-        state.pickupCoords.lat, state.pickupCoords.lng,
-        state.dropCoords.lat,   state.dropCoords.lng
-    );
-    const roadKm       = straightKm * ROAD_FACTOR;
-    const rawFare      = roadKm * cfg.perKm * multiplier;
-    const fare         = Math.max(rawFare, cfg.minFare);
-
-    const low  = Math.round(fare * 0.9  / 10) * 10;
-    const high = Math.round(fare * 1.1  / 10) * 10;
-
-    document.getElementById('priceDistance').textContent  = roadKm.toFixed(1);
-    document.getElementById('priceVehicle').textContent   = vehicleType;
-    document.getElementById('priceService').textContent   = serviceType || 'Not selected';
-    document.getElementById('priceRate').textContent      = `₹${cfg.perKm}/km`;
-    document.getElementById('priceLow').textContent       = `₹${low.toLocaleString('en-IN')}`;
-    document.getElementById('priceHigh').textContent      = `₹${high.toLocaleString('en-IN')}`;
-    card.hidden = false;
 }
 
 // ── App state ───────────────────────────────────────────────────────────────────
@@ -194,7 +150,6 @@ async function setPickupCoords(lat, lng, doReverse) {
     }
     updateHiddenFields();
     updateRouteLink();
-    updatePriceEstimate();
     map.panTo([lat, lng]);
     if (window.setMode && !state.dropCoords) {
         window.setMode('drop');
@@ -226,7 +181,6 @@ async function setDropCoords(lat, lng, doReverse) {
     }
     updateHiddenFields();
     updateRouteLink();
-    updatePriceEstimate();
     map.panTo([lat, lng]);
 }
 
@@ -310,8 +264,6 @@ function clearMapPins() {
     if (dBadge) dBadge.hidden = true;
     const rRow = document.getElementById('routeLinkRow');
     if (rRow) rRow.hidden = true;
-    const pCard = document.getElementById('priceEstimateCard');
-    if (pCard) pCard.hidden = true;
     document.getElementById('pickupAddress').value = '';
     document.getElementById('destination').value = '';
     document.getElementById('pickupLat').value = '';
@@ -385,7 +337,6 @@ async function selectSuggestion(type, item) {
         setCoordBadge('drop', lat, lng, addr.split(',').slice(0, 3).join(','));
     }
     updateHiddenFields();
-    updatePriceEstimate();
 }
 
 function setupAutocomplete(type, inputId) {
@@ -439,8 +390,16 @@ document.addEventListener('DOMContentLoaded', () => {
     setupAutocomplete('pickup', 'pickupAddress');
     setupAutocomplete('drop',   'destination');
 
-    document.getElementById('vehicleType').addEventListener('change', updatePriceEstimate);
-    document.getElementById('serviceType').addEventListener('change', updatePriceEstimate);
+    // Select vehicle type from fleet cards
+    document.querySelectorAll('.fleet-spec-card a[href="#booking"]').forEach(btn => {
+        btn.addEventListener('click', () => {
+            const txt = btn.textContent.toLowerCase();
+            const sel = document.getElementById('vehicleType');
+            if (txt.includes('suv')) sel.value = 'SUV';
+            else if (txt.includes('hatchback')) sel.value = 'Hatchback';
+            else if (txt.includes('sedan')) sel.value = 'Sedan';
+        });
+    });
 
     // Map mode toggle
     const modePickupBtn = document.getElementById('modePickup');
@@ -591,11 +550,11 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // Form submit
+    // Form submit – WhatsApp Redirect
     document.getElementById('bookingForm').addEventListener('submit', function (e) {
         e.preventDefault();
         if (!this.checkValidity()) { this.reportValidity(); return; }
-        submitToGoogleForms({
+        submitToWhatsApp({
             name:          document.getElementById('name').value.trim(),
             phone:         document.getElementById('phone').value.trim(),
             serviceType:   document.getElementById('serviceType').value,
@@ -616,60 +575,56 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
-// ── Google Forms submission ─────────────────────────────────────────────────────
-function submitToGoogleForms(data) {
-    const GOOGLE_FORM_ACTION_URL =
-      'https://docs.google.com/forms/d/e/1FAIpQLSctSNxP_rtf4ab-QL6UDzbGkvdDyeSFC4pqyh8w3jvsCRlz2g/formResponse';
+// ── WhatsApp submission ─────────────────────────────────────────────────────────
+function submitToWhatsApp(data) {
+    let estDist = '';
+    if (data.pickupLat && data.pickupLng && data.dropLat && data.dropLng) {
+        const straightKm = haversineKm(
+            parseFloat(data.pickupLat), parseFloat(data.pickupLng),
+            parseFloat(data.dropLat),   parseFloat(data.dropLng)
+        );
+        estDist = `${(straightKm * ROAD_FACTOR).toFixed(1)} km`;
+    }
 
-    const extras =
-      `PickupLat: ${data.pickupLat}, PickupLng: ${data.pickupLng}\n` +
-      `DropLat: ${data.dropLat}, DropLng: ${data.dropLng}\n` +
-      `PickupMap: ${data.pickupMapUrl}\n` +
-      `DropMap: ${data.dropMapUrl}\n` +
-      `RouteMap: ${data.routeMapUrl}`;
+    const lines = [
+        '🚖 *Cab Booking Enquiry — MS Cabs Mangalore*',
+        '━━━━━━━━━━━━━━━━━━━━',
+        `👤 *Name:* ${data.name}`,
+        `📱 *Phone:* ${data.phone}`,
+        `🏷 *Service:* ${data.serviceType || 'Not specified'}`,
+        `🚗 *Vehicle:* ${data.vehicleType || 'Any'}`,
+        `📍 *Pickup:* ${data.pickupAddress}`,
+        `🏁 *Drop:* ${data.destination}`,
+        `🗓 *Date:* ${data.date}`,
+        `⏰ *Time:* ${data.time}`
+    ];
 
-    const params = new URLSearchParams({
-      'entry.1731902692': data.name,
-      'entry.970216848': data.phone,
-      'entry.1336383824': data.serviceType,
-      'entry.1115489851': data.vehicleType,
-      'entry.1385388401': data.pickupAddress,
-      'entry.827208412': data.destination,
-      'entry.2102662793': data.date,
-      'entry.506366157': data.time,
-      'entry.1841962630': data.comments,
-      'entry.1173550631': data.pickupLat,
-      'entry.1785285242': data.pickupLng,
-      'entry.425635662': extras
-    });
+    if (estDist) {
+        lines.push(`📏 *Est. Distance:* ~${estDist}`);
+    }
+    if (data.comments) {
+        lines.push(`💬 *Notes / Requests:* ${data.comments}`);
+    }
+    if (data.pickupMapUrl) {
+        lines.push(`📍 *Pickup Location Link:* ${data.pickupMapUrl}`);
+    }
+    if (data.dropMapUrl) {
+        lines.push(`🏁 *Drop Location Link:* ${data.dropMapUrl}`);
+    }
+    if (data.routeMapUrl) {
+        lines.push(`🗺 *Driving Route Link:* ${data.routeMapUrl}`);
+    }
 
-    const iframe = document.createElement('iframe');
-    iframe.style.display = 'none';
-    iframe.name = 'hf';
+    lines.push('━━━━━━━━━━━━━━━━━━━━');
+    lines.push('Please confirm cab availability and share the quotation.');
 
-    const form = document.createElement('form');
-    form.target = 'hf';
-    form.method = 'POST';
-    form.action = GOOGLE_FORM_ACTION_URL;
-
-    params.forEach((v, k) => {
-      const i = document.createElement('input');
-      i.type = 'hidden';
-      i.name = k;
-      i.value = v;
-      form.appendChild(i);
-    });
-
-    document.body.appendChild(iframe);
-    document.body.appendChild(form);
-    form.submit();
+    const text = lines.join('\n');
+    const waUrl = `https://wa.me/916361806210?text=${encodeURIComponent(text)}`;
 
     showSuccessMessage();
 
-    setTimeout(() => {
-      document.body.removeChild(form);
-      document.body.removeChild(iframe);
-    }, 1500);
+    // Open WhatsApp in a new tab/app window
+    window.open(waUrl, '_blank');
 }
 
 // ── Success toast ──────────────────────────────────────────────────────────────
@@ -681,9 +636,8 @@ function showSuccessMessage() {
         const f = document.getElementById('bookingForm');
         f.insertBefore(msg, f.firstChild);
     }
-    msg.innerHTML = '<strong>&#10003; Booking Submitted!</strong><p>Thank you! We will call you shortly to confirm your ride.</p>';
+    msg.innerHTML = '<strong>&#10003; Redirecting to WhatsApp…</strong><p>Your booking request is ready. Please click &ldquo;Send&rdquo; on WhatsApp to connect directly with our 24/7 Mangalore dispatch team.</p>';
     msg.classList.add('show');
-    document.getElementById('bookingForm').reset();
     msg.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-    setTimeout(() => msg.classList.remove('show'), 6000);
+    setTimeout(() => msg.classList.remove('show'), 8000);
 }
