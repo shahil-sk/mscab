@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="MS Cabs – Book reliable outstation, local, and airport taxi services in Mysore & Bangalore. 24/7 cab booking with sedan, SUV, and hatchback. Call +91 63618 06210.">
+    <meta name="keywords" content="MS Cabs, cab booking Mysore, taxi service Mysore, outstation cab Mysore, airport taxi Mysore, Bangalore cab, local taxi, car rental Mysore, sedan taxi, SUV taxi, mscabs">
+    <meta name="author" content="MS Cabs">
+    <meta name="robots" content="index, follow">
+    <meta name="theme-color" content="#FDB913">
+    <meta name="geo.region" content="IN-KA">
+    <meta name="geo.placename" content="Mysore, Karnataka, India">
+    <meta property="og:title" content="MS Cabs – Outstation, Local & Airport Taxi | Mysore & Bangalore">
+    <meta property="og:description" content="Book your ride now! Reliable cab services for outstation, local & airport transfers. Call +91 63618 06210.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://shahil-sk.github.io/mscabs/">
+    <meta property="og:locale" content="en_IN">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="MS Cabs – Taxi Service Mysore & Bangalore">
+    <meta name="twitter:description" content="Book reliable cab for outstation, local & airport transfers. 24/7 service. Call +91 63618 06210.">
+    <link rel="canonical" href="https://shahil-sk.github.io/mscabs/">
+    <title>MS Cabs – Outstation, Local & Airport Taxi | Mysore & Bangalore</title>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "TaxiService",
+      "name": "MS Cabs",
+      "url": "https://shahil-sk.github.io/mscabs/",
+      "telephone": "+916361806210",
+      "description": "Reliable cab service for outstation, local and airport transfers in Mysore and Bangalore.",
+      "areaServed": ["Mysore", "Bangalore", "Karnataka"],
+      "availableLanguage": ["English", "Kannada", "Hindi"],
+      "openingHours": "Mo-Su 00:00-24:00",
+      "priceRange": "$$",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Mysore",
+        "addressRegion": "Karnataka",
+        "addressCountry": "IN"
+      },
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "telephone": "+916361806210",
+        "contactType": "customer support"
+      }
+    }
+    </script>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer">
+</head>
+<body>
+    <a href="#booking" class="skip-link">Skip to booking</a>
+
+    <!-- Header -->
+    <header class="header" role="banner">
+        <div class="container">
+            <nav class="navbar" role="navigation" aria-label="Main navigation">
+                <a href="#" class="logo" aria-label="MS Cabs Home">
+                    <i class="fa-solid fa-taxi logo-icon" aria-hidden="true"></i>
+                    <span class="logo-text">MS Cabs</span>
+                </a>
+                <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation" aria-expanded="false">
+                    <i class="fa-solid fa-bars" aria-hidden="true"></i>
+                </button>
+                <ul class="nav-links" id="navLinks" role="list">
+                    <li><a href="#services"><i class="fa-solid fa-car-side" aria-hidden="true"></i> Services</a></li>
+                    <li><a href="#booking"><i class="fa-solid fa-calendar-check" aria-hidden="true"></i> Book Now</a></li>
+                    <li><a href="#contact"><i class="fa-solid fa-phone" aria-hidden="true"></i> Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero -->
+    <section class="hero" role="main">
+        <div class="container">
+            <div class="hero-content">
+                <h1 class="hero-title">Your Trusted Cab, Anytime, Anywhere</h1>
+                <p class="hero-subtitle">Outstation &nbsp;|&nbsp; Local &nbsp;|&nbsp; Airport Transfers</p>
+                <p class="hero-location"><i class="fa-solid fa-location-dot" aria-hidden="true"></i> Mysore &amp; Bangalore</p>
+                <div class="cta-buttons">
+                    <a href="#booking" class="btn btn-primary">
+                        <i class="fa-solid fa-calendar-plus" aria-hidden="true"></i> Book Your Cab
+                    </a>
+                    <a href="tel:+916361806210" class="btn btn-secondary">
+                        <i class="fa-solid fa-phone" aria-hidden="true"></i> Call Now
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Trust Bar -->
+    <section class="trust-bar" aria-label="Why choose MS Cabs">
+        <div class="container">
+            <div class="trust-grid">
+                <div class="trust-item"><i class="fa-solid fa-shield-halved"></i><span>Safe &amp; Verified Drivers</span></div>
+                <div class="trust-item"><i class="fa-solid fa-clock"></i><span>24/7 Availability</span></div>
+                <div class="trust-item"><i class="fa-solid fa-indian-rupee-sign"></i><span>Transparent Pricing</span></div>
+                <div class="trust-item"><i class="fa-solid fa-location-crosshairs"></i><span>GPS Tracked Rides</span></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services -->
+    <section id="services" class="services" aria-labelledby="services-heading">
+        <div class="container">
+            <h2 class="section-title" id="services-heading">Our Services</h2>
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon"><i class="fa-solid fa-road"></i></div>
+                    <h3>Outstation Cab</h3>
+                    <p>Comfortable long-distance travel with experienced drivers and well-maintained vehicles.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon"><i class="fa-solid fa-city"></i></div>
+                    <h3>Local Taxi</h3>
+                    <p>Quick and affordable rides within the city for all your daily commute needs.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon"><i class="fa-solid fa-plane-departure"></i></div>
+                    <h3>Airport Transfer</h3>
+                    <p>Hassle-free airport pickups and drops with punctual and professional service.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Fleet -->
+    <section class="fleet" aria-labelledby="fleet-heading">
+        <div class="container">
+            <h2 class="section-title" id="fleet-heading">Choose Your Ride</h2>
+            <div class="fleet-grid">
+                <div class="fleet-card">
+                    <div class="fleet-image"><i class="fa-solid fa-car"></i></div>
+                    <h3>Sedan</h3>
+                    <p>Comfortable 4-seater for business and leisure travel</p>
+                    <span class="capacity"><i class="fa-solid fa-users"></i> 4 Passengers &nbsp;|&nbsp; <i class="fa-solid fa-suitcase"></i> 2 Bags</span>
+                </div>
+                <div class="fleet-card">
+                    <div class="fleet-image"><i class="fa-solid fa-truck-pickup"></i></div>
+                    <h3>SUV</h3>
+                    <p>Spacious 6-7 seater for family trips and group travel</p>
+                    <span class="capacity"><i class="fa-solid fa-users"></i> 6-7 Passengers &nbsp;|&nbsp; <i class="fa-solid fa-suitcase"></i> 4 Bags</span>
+                </div>
+                <div class="fleet-card">
+                    <div class="fleet-image"><i class="fa-solid fa-car-side"></i></div>
+                    <h3>Hatchback</h3>
+                    <p>Economic 4-seater for short trips and city rides</p>
+                    <span class="capacity"><i class="fa-solid fa-users"></i> 4 Passengers &nbsp;|&nbsp; <i class="fa-solid fa-suitcase"></i> 1 Bag</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Booking -->
+    <section id="booking" class="booking" aria-labelledby="booking-heading">
+        <div class="container">
+            <h2 class="section-title" id="booking-heading">Book Your Cab</h2>
+            <div class="booking-container">
+                <form id="bookingForm" class="booking-form" novalidate>
+
+                    <div class="form-group">
+                        <label for="name"><i class="fa-solid fa-user"></i> Full Name *</label>
+                        <input type="text" id="name" name="name" required placeholder="Enter your name" autocomplete="name">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="phone"><i class="fa-solid fa-phone"></i> Phone Number *</label>
+                        <input type="tel" id="phone" name="phone" required placeholder="Enter 10-digit number" pattern="[0-9]{10}" autocomplete="tel">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="serviceType"><i class="fa-solid fa-list"></i> Service Type *</label>
+                        <select id="serviceType" name="serviceType" required>
+                            <option value="">Select service type</option>
+                            <option value="Outstation">Outstation Cab</option>
+                            <option value="Local">Local Taxi</option>
+                            <option value="Airport">Airport Transfer</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="vehicleType"><i class="fa-solid fa-car"></i> Vehicle Type *</label>
+                        <select id="vehicleType" name="vehicleType" required>
+                            <option value="">Select vehicle type</option>
+                            <option value="Sedan">Sedan (4 Seater)</option>
+                            <option value="SUV">SUV (6-7 Seater)</option>
+                            <option value="Hatchback">Hatchback (4 Seater)</option>
+                        </select>
+                    </div>
+
+                    <!-- PICKUP location -->
+                    <div class="form-group full-width">
+                        <label for="pickupAddress"><i class="fa-solid fa-map-marker-alt"></i> Pickup Location *</label>
+                        <div class="location-input-row">
+                            <div class="autocomplete-wrap" id="pickupWrap">
+                                <input type="text" id="pickupAddress" name="pickupAddress" required
+                                    placeholder="Type to search pickup address…"
+                                    autocomplete="off" spellcheck="false">
+                                <ul class="suggestions-list" id="pickupSuggestions" hidden></ul>
+                            </div>
+                            <div class="location-btn-group">
+                                <button type="button" class="loc-btn loc-gps" id="useMyLocation" title="Use my current location">
+                                    <i class="fa-solid fa-crosshairs"></i> My Location
+                                </button>
+                            </div>
+                        </div>
+                        <div class="coord-badge" id="pickupCoordBadge" hidden>
+                            <i class="fa-solid fa-circle-check"></i>
+                            <span id="pickupCoordText"></span>
+                            <a id="pickupMapLink" href="#" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-map"></i> View</a>
+                        </div>
+                    </div>
+
+                    <!-- DROP location -->
+                    <div class="form-group full-width">
+                        <label for="destination"><i class="fa-solid fa-flag-checkered"></i> Drop Location *</label>
+                        <div class="location-input-row">
+                            <div class="autocomplete-wrap" id="dropWrap">
+                                <input type="text" id="destination" name="destination" required
+                                    placeholder="Type to search drop address…"
+                                    autocomplete="off" spellcheck="false">
+                                <ul class="suggestions-list" id="dropSuggestions" hidden></ul>
+                            </div>
+                        </div>
+                        <div class="coord-badge" id="dropCoordBadge" hidden>
+                            <i class="fa-solid fa-circle-check"></i>
+                            <span id="dropCoordText"></span>
+                            <a id="dropMapLink" href="#" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-map"></i> View</a>
+                        </div>
+                    </div>
+
+                    <!-- MAP PANEL -->
+                    <div class="form-group full-width">
+                        <div class="map-panel">
+                            <div class="map-panel-header">
+                                <i class="fa-solid fa-map-location-dot"></i>
+                                <span>Pin locations on map</span>
+                                <div class="map-mode-toggle">
+                                    <button type="button" class="map-mode-btn active" id="modePickup">
+                                        <i class="fa-solid fa-circle" style="color:#22c55e"></i> Set Pickup
+                                    </button>
+                                    <button type="button" class="map-mode-btn" id="modeDrop">
+                                        <i class="fa-solid fa-circle" style="color:#ef4444"></i> Set Drop
+                                    </button>
+                                </div>
+                            </div>
+                            <div id="map"></div>
+                            <div class="map-hint" id="mapHint">Click on the map to set <strong>Pickup</strong> location</div>
+                        </div>
+                    </div>
+
+                    <!-- Route link row -->
+                    <div class="form-group full-width" id="routeLinkRow" hidden>
+                        <a id="routeLink" href="#" target="_blank" rel="noopener noreferrer" class="route-link-btn">
+                            <i class="fa-solid fa-route"></i> View Full Route on OpenStreetMap
+                        </a>
+                    </div>
+
+                    <!-- PRICE ESTIMATE CARD -->
+                    <div class="form-group full-width" id="priceEstimateCard" hidden>
+                        <div class="price-card">
+                            <div class="price-card-header">
+                                <i class="fa-solid fa-indian-rupee-sign"></i>
+                                <span>Estimated Fare</span>
+                                <span class="price-disclaimer">Approximate only &bull; Final fare confirmed at booking</span>
+                            </div>
+                            <div class="price-card-body">
+                                <div class="price-main">
+                                    <span class="price-range" id="priceLow"></span>
+                                    <span class="price-dash">–</span>
+                                    <span class="price-range" id="priceHigh"></span>
+                                </div>
+                                <div class="price-meta">
+                                    <span><i class="fa-solid fa-road"></i> ~<span id="priceDistance"></span> km</span>
+                                    <span><i class="fa-solid fa-car"></i> <span id="priceVehicle"></span></span>
+                                    <span><i class="fa-solid fa-list"></i> <span id="priceService"></span></span>
+                                    <span><i class="fa-solid fa-tag"></i> <span id="priceRate"></span></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="date"><i class="fa-solid fa-calendar"></i> Pickup Date *</label>
+                        <input type="date" id="date" name="date" required autocomplete="off">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="time"><i class="fa-solid fa-clock"></i> Pickup Time *</label>
+                        <input type="time" id="time" name="time" required autocomplete="off">
+                    </div>
+
+                    <div class="form-group full-width">
+                        <label for="comments"><i class="fa-solid fa-comment"></i> Additional Comments</label>
+                        <textarea id="comments" name="comments" placeholder="Any special requirements or instructions" rows="3"></textarea>
+                    </div>
+
+                    <!-- Hidden coordinate fields -->
+                    <input type="hidden" id="pickupLat" name="pickupLat">
+                    <input type="hidden" id="pickupLng" name="pickupLng">
+                    <input type="hidden" id="dropLat" name="dropLat">
+                    <input type="hidden" id="dropLng" name="dropLng">
+                    <input type="hidden" id="pickupMapUrl" name="pickupMapUrl">
+                    <input type="hidden" id="dropMapUrl" name="dropMapUrl">
+                    <input type="hidden" id="routeMapUrl" name="routeMapUrl">
+
+                    <button type="submit" class="btn btn-primary btn-submit">
+                        <i class="fa-solid fa-paper-plane"></i> Submit Booking Request
+                    </button>
+                </form>
+
+                <div class="contact-sidebar">
+                    <div class="contact-card">
+                        <h3><i class="fa-solid fa-headset"></i> Need Immediate Assistance?</h3>
+                        <p>Our team is available 24/7 to help you</p>
+                        <a href="tel:+916361806210" class="contact-btn">
+                            <i class="fa-solid fa-phone"></i>
+                            <div>
+                                <span class="contact-label">Call Us</span>
+                                <span class="contact-value">+91 63618 06210</span>
+                            </div>
+                        </a>
+                        <a href="https://wa.me/916361806210?text=Hi,%20I%20would%20like%20to%20book%20a%20cab" target="_blank" rel="noopener noreferrer" class="contact-btn">
+                            <i class="fa-brands fa-whatsapp"></i>
+                            <div>
+                                <span class="contact-label">WhatsApp</span>
+                                <span class="contact-value">Chat with us</span>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="info-card">
+                        <h4><i class="fa-solid fa-star"></i> Why Choose Us?</h4>
+                        <ul>
+                            <li><i class="fa-solid fa-check"></i> Professional drivers</li>
+                            <li><i class="fa-solid fa-check"></i> Clean &amp; sanitized vehicles</li>
+                            <li><i class="fa-solid fa-check"></i> Transparent pricing</li>
+                            <li><i class="fa-solid fa-check"></i> 24/7 availability</li>
+                            <li><i class="fa-solid fa-check"></i> GPS tracked rides</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact -->
+    <section id="contact" class="contact" aria-labelledby="contact-heading">
+        <div class="container">
+            <h2 class="section-title" id="contact-heading">Get In Touch</h2>
+            <div class="contact-grid">
+                <div class="contact-info">
+                    <h3>Contact Information</h3>
+                    <p>We're here to help you 24/7. Reach out to us through any of these channels.</p>
+                    <div class="info-items">
+                        <div class="info-item">
+                            <i class="fa-solid fa-phone"></i>
+                            <div><strong>Phone:</strong><a href="tel:+916361806210">+91 63618 06210</a></div>
+                        </div>
+                        <div class="info-item">
+                            <i class="fa-solid fa-envelope"></i>
+                            <div><strong>Email:</strong><a href="mailto:bookings@mscabs.in">bookings@mscabs.in</a></div>
+                        </div>
+                        <div class="info-item">
+                            <i class="fa-brands fa-whatsapp"></i>
+                            <div><strong>WhatsApp:</strong><a href="https://wa.me/916361806210" target="_blank" rel="noopener noreferrer">+91 63618 06210</a></div>
+                        </div>
+                        <div class="info-item">
+                            <i class="fa-solid fa-map-location-dot"></i>
+                            <div><strong>Based In:</strong><span>Mysore, Karnataka, India</span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer" role="contentinfo">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <a href="#" class="logo"><i class="fa-solid fa-taxi logo-icon"></i><span class="logo-text">MS Cabs</span></a>
+                    <p>Your trusted partner for safe and comfortable rides across Mysore, Bangalore and beyond.</p>
+                    <div class="social-links">
+                        <a href="https://wa.me/916361806210" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
+                        <a href="tel:+916361806210" aria-label="Call"><i class="fa-solid fa-phone"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="#services"><i class="fa-solid fa-chevron-right"></i> Services</a></li>
+                        <li><a href="#booking"><i class="fa-solid fa-chevron-right"></i> Book Now</a></li>
+                        <li><a href="#contact"><i class="fa-solid fa-chevron-right"></i> Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Our Services</h4>
+                    <ul>
+                        <li><i class="fa-solid fa-road"></i> Outstation Cab</li>
+                        <li><i class="fa-solid fa-city"></i> Local Taxi</li>
+                        <li><i class="fa-solid fa-plane-departure"></i> Airport Transfer</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 MS Cabs. All rights reserved. | Mysore &amp; Bangalore Cab Service</p>
+            </div>
+        </div>
+    </footer>
+
+    <a href="https://wa.me/916361806210?text=Hi,%20I%20would%20like%20to%20book%20a%20cab" class="whatsapp-float" target="_blank" rel="noopener noreferrer" aria-label="Chat on WhatsApp">
+        <i class="fa-brands fa-whatsapp"></i>
+    </a>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
