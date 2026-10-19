@@ -834,6 +834,7 @@ p {
     cursor: pointer;
     border-bottom: 1px solid var(--surface-subtle);
     line-height: 1.4;
+    word-break: break-word;
 }
 
 .suggestion-item:last-child {
@@ -860,6 +861,8 @@ p {
     color: var(--ink-muted);
     margin-top: 6px;
     width: fit-content;
+    max-width: 100%;
+    word-break: break-word;
 }
 
 .coord-badge[hidden] {
@@ -1458,8 +1461,8 @@ p {
 /* ── 15. FLOATING WHATSAPP ───────────────────────────────────────────────── */
 .whatsapp-float {
     position: fixed;
-    bottom: 24px;
-    right: 24px;
+    bottom: calc(24px + env(safe-area-inset-bottom, 0px));
+    right: calc(24px + env(safe-area-inset-right, 0px));
     width: 52px;
     height: 52px;
     background-color: #25D366;
@@ -1492,7 +1495,10 @@ p {
         grid-template-columns: 1fr;
     }
     .fleet-matrix {
-        grid-template-columns: 1fr;
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .fleet-matrix > :last-child:nth-child(odd) {
+        grid-column: 1 / -1;
     }
     .commitments-grid {
         grid-template-columns: repeat(2, 1fr);
@@ -1509,6 +1515,19 @@ p {
 @media (max-width: 768px) {
     .packages-grid {
         grid-template-columns: 1fr;
+    }
+    .corridors-grid {
+        grid-template-columns: 1fr;
+    }
+    .fleet-matrix {
+        grid-template-columns: 1fr;
+    }
+    .commitments-grid {
+        grid-template-columns: 1fr;
+    }
+    .footer-grid {
+        grid-template-columns: 1fr;
+        gap: 32px;
     }
     .section {
         padding: 56px 0;
@@ -1530,6 +1549,11 @@ p {
         flex-direction: column;
         align-items: flex-start;
         gap: 20px;
+        max-height: calc(100vh - 64px);
+        max-height: calc(100dvh - 64px);
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
+        box-shadow: 0 16px 32px rgba(0, 0, 0, 0.45);
     }
     .nav.nav-open,
     .nav.open {
@@ -1558,26 +1582,248 @@ p {
     .hero {
         padding: 48px 0 40px;
     }
-    .corridors-grid {
+    .hero-stats {
         grid-template-columns: 1fr;
+        gap: 12px;
     }
     .form-grid-two {
         grid-template-columns: 1fr;
     }
     .booking-form-pane {
-        padding: 20px;
+        padding: 24px 20px;
     }
-    .commitments-grid {
-        grid-template-columns: 1fr;
-    }
-    .footer-grid {
-        grid-template-columns: 1fr;
-    }
-    .hero-stats {
-        grid-template-columns: 1fr;
-        gap: 12px;
+    /* Prevent iOS Safari auto-zoom on field focus */
+    .form-field input,
+    .form-field select,
+    .form-field textarea {
+        font-size: 16px;
     }
     .input-with-action {
         flex-direction: column;
+        gap: 8px;
+    }
+    .input-with-action .btn {
+        width: 100%;
+        justify-content: center;
+        min-height: 44px;
+    }
+    .map-workspace-toolbar {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 10px;
+        padding: 10px 12px;
+    }
+    .map-toolbar-group {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 8px;
+    }
+    .map-mode-toggle {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 6px;
+        width: 100%;
+    }
+    .map-mode-btn,
+    .map-toggle-btn {
+        justify-content: center;
+        min-height: 40px;
+    }
+    .map-toolbar-actions {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 6px;
+        width: 100%;
+    }
+    .map-action-btn {
+        justify-content: center;
+        min-height: 38px;
+    }
+    .map-canvas {
+        height: 280px;
+    }
+    .contact-box {
+        padding: 32px 24px;
+        gap: 32px;
+    }
+}
+
+@media (max-width: 580px) {
+    .contact-detail-row {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 4px;
+        padding-bottom: 10px;
+        border-bottom: 1px solid var(--border);
+    }
+    .contact-detail-row:last-child {
+        border-bottom: none;
+        padding-bottom: 0;
+    }
+    .detail-name {
+        min-width: auto;
+        font-size: 0.82rem;
+        color: var(--ink-muted);
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+}
+
+@media (max-width: 480px) {
+    .container {
+        padding-left: 16px;
+        padding-right: 16px;
+    }
+    .brand-sub {
+        display: none;
+    }
+    .section {
+        padding: 40px 0;
+    }
+    .section-intro {
+        margin-bottom: 28px;
+    }
+    .section-heading {
+        font-size: clamp(1.45rem, 6.4vw, 1.85rem);
+    }
+    .section-sub {
+        font-size: 0.95rem;
+    }
+    .hero {
+        padding: 36px 0 28px;
+    }
+    .hero-heading {
+        font-size: clamp(1.75rem, 7.8vw, 2.15rem);
+        margin-bottom: 14px;
+    }
+    .hero-summary {
+        font-size: 0.95rem;
+        margin-bottom: 20px;
+    }
+    .hero-actions {
+        flex-direction: column;
+        width: 100%;
+        gap: 10px;
+        margin-bottom: 24px;
+    }
+    .hero-actions .btn {
+        width: 100%;
+    }
+    .hero-stats {
+        padding-top: 20px;
+        gap: 10px;
+    }
+    .stat-cell {
+        padding-bottom: 10px;
+        border-bottom: 1px solid var(--border);
+    }
+    .stat-cell:last-child {
+        border-bottom: none;
+        padding-bottom: 0;
+    }
+    .stat-figure {
+        font-size: 1.25rem;
+    }
+    .corridor-board {
+        padding: 18px 14px;
+    }
+    .board-row {
+        padding: 8px 0;
+    }
+    .board-tag-sm {
+        font-size: 0.78rem;
+    }
+    .package-card,
+    .corridor-card,
+    .fleet-spec-card,
+    .commitment-item,
+    .standards-card,
+    .dispatch-card {
+        padding: 20px 16px;
+    }
+    .package-card .btn,
+    .fleet-spec-card .btn {
+        width: 100%;
+    }
+    .booking-form-pane {
+        padding: 18px 14px;
+    }
+    .map-canvas {
+        height: 250px;
+    }
+    .preset-chips {
+        gap: 6px;
+    }
+    .chips-label {
+        font-size: 0.72rem;
+    }
+    .chip-btn {
+        min-height: 36px;
+        padding: 6px 10px;
+        font-size: 0.76rem;
+    }
+    .coord-badge {
+        font-size: 0.78rem;
+        padding: 5px 8px;
+    }
+    .faq-question {
+        padding: 14px 16px;
+        font-size: 0.94rem;
+    }
+    .faq-answer {
+        padding: 0 16px 14px;
+        font-size: 0.88rem;
+    }
+    .faq-icon {
+        width: 24px;
+        height: 24px;
+        margin-left: 8px;
+    }
+    .contact-box {
+        padding: 20px 14px;
+        gap: 20px;
+    }
+    .quick-callout {
+        padding: 20px 14px;
+    }
+    .callout-main {
+        font-size: 1.05rem;
+    }
+    .footer {
+        padding: 40px 0 24px;
+    }
+    .footer-grid {
+        gap: 24px;
+        padding-bottom: 28px;
+    }
+    .footer-contact-link {
+        min-height: 44px;
+    }
+    .whatsapp-float {
+        bottom: calc(16px + env(safe-area-inset-bottom, 0px));
+        right: calc(16px + env(safe-area-inset-right, 0px));
+        width: 48px;
+        height: 48px;
+        font-size: 22px;
+    }
+}
+
+@media (max-width: 360px) {
+    .container {
+        padding-left: 12px;
+        padding-right: 12px;
+    }
+    .header-inner {
+        gap: 12px;
+    }
+    .brand-name {
+        font-size: 1.05rem;
+    }
+    .hero-heading {
+        font-size: 1.6rem;
+    }
+    .btn {
+        padding: 10px 16px;
+        font-size: 0.9rem;
     }
 }

@@ -590,16 +590,30 @@ document.addEventListener('DOMContentLoaded', async () => {
     // Mobile nav
     const navToggle = document.getElementById('navToggle');
     const navLinks  = document.getElementById('navLinks');
+    function closeMobileNav() {
+        navLinks.classList.remove('open');
+        navToggle.setAttribute('aria-expanded', 'false');
+        const icon = navToggle.querySelector('i');
+        if (icon) icon.className = 'fa-solid fa-bars';
+    }
     navToggle.addEventListener('click', () => {
         const open = navLinks.classList.toggle('open');
         navToggle.setAttribute('aria-expanded', String(open));
-        navToggle.querySelector('i').className = open ? 'fa-solid fa-xmark' : 'fa-solid fa-bars';
+        const icon = navToggle.querySelector('i');
+        if (icon) icon.className = open ? 'fa-solid fa-xmark' : 'fa-solid fa-bars';
     });
-    navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
-        navLinks.classList.remove('open');
-        navToggle.setAttribute('aria-expanded', 'false');
-        navToggle.querySelector('i').className = 'fa-solid fa-bars';
-    }));
+    navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', closeMobileNav));
+    document.addEventListener('click', (e) => {
+        if (navLinks.classList.contains('open') && !navLinks.contains(e.target) && !navToggle.contains(e.target)) {
+            closeMobileNav();
+        }
+    });
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && navLinks.classList.contains('open')) {
+            closeMobileNav();
+            navToggle.focus();
+        }
+    });
 
     // Phone digits only
     document.getElementById('phone').addEventListener('input', function () {
