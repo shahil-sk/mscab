@@ -21,8 +21,8 @@
     --accent-contrast: #121316;
     --status-pickup: #167940;
     --status-drop: #C62828;
-    --radius: 4px;
-    --radius-sm: 2px;
+    --radius: 6px;
+    --radius-sm: 4px;
     --font: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
     --max-width: 1200px;
     --transition: 0.15s ease-out;
@@ -242,6 +242,17 @@ p {
     font-size: 1.15rem;
     font-weight: 700;
     letter-spacing: -0.01em;
+}
+
+.brand-sub {
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    font-weight: 700;
+    letter-spacing: 0.6px;
+    color: var(--ink-inverted-muted);
+    border-left: 1px solid var(--border-dark);
+    padding-left: 8px;
+    margin-left: 2px;
 }
 
 .brand-inverted {
@@ -465,7 +476,116 @@ p {
     max-width: 600px;
 }
 
-/* ── 8. CORRIDORS (SERVICES) GRID ────────────────────────────────────────── */
+/* ── 8. PACKAGES GRID ────────────────────────────────────────────────────── */
+.packages-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+}
+
+.package-card {
+    background-color: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 28px 24px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 20px;
+    transition: border-color var(--transition);
+}
+
+.package-card:hover {
+    border-color: var(--ink);
+}
+
+.package-featured {
+    border: 2px solid var(--ink);
+    background-color: #FAF9F6;
+}
+
+.package-header {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.package-badge {
+    background-color: var(--surface-subtle);
+    border: 1px solid var(--border);
+    color: var(--ink);
+    font-size: 0.72rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    padding: 3px 8px;
+    border-radius: var(--radius-sm);
+    width: fit-content;
+}
+
+.package-title {
+    font-size: 1.2rem;
+    line-height: 1.25;
+}
+
+.package-route {
+    font-size: 0.85rem;
+    color: var(--ink-muted);
+    line-height: 1.45;
+}
+
+.package-specs {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 14px 0;
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+}
+
+.package-spec-item {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    font-size: 0.84rem;
+}
+
+.package-spec-item .spec-label {
+    color: var(--ink-muted);
+}
+
+.package-spec-item .spec-value {
+    color: var(--ink);
+    font-weight: 600;
+    text-align: right;
+}
+
+.package-pricing {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    background-color: var(--ground);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    padding: 10px 14px;
+}
+
+.pkg-rate {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.82rem;
+}
+
+.pkg-type {
+    color: var(--ink-muted);
+}
+
+.pkg-cost {
+    font-weight: 700;
+    color: var(--ink);
+}
+
+/* ── 9. CORRIDORS (SERVICES) GRID ────────────────────────────────────────── */
 .corridors-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -785,6 +905,43 @@ p {
     margin-left: 4px;
 }
 
+/* ── Preset Chips ─────────────────────────────────────────────────────────── */
+.preset-chips {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 6px;
+    margin-top: 8px;
+}
+
+.chips-label {
+    font-size: 0.74rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: var(--ink-muted);
+    letter-spacing: 0.5px;
+    margin-right: 4px;
+}
+
+.chip-btn {
+    background-color: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    padding: 4px 10px;
+    font-size: 0.78rem;
+    font-weight: 500;
+    color: var(--ink);
+    cursor: pointer;
+    line-height: 1.3;
+    transition: all var(--transition);
+}
+
+.chip-btn:hover {
+    background-color: var(--surface-contrast);
+    color: var(--ink-inverted);
+    border-color: var(--surface-contrast);
+}
+
 /* ── Map Workspace ───────────────────────────────────────────────────────── */
 .map-workspace {
     border: 1px solid var(--border);
@@ -797,9 +954,17 @@ p {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 10px;
     padding: 10px 14px;
     background-color: var(--surface-subtle);
     border-bottom: 1px solid var(--border);
+}
+
+.map-toolbar-group {
+    display: flex;
+    align-items: center;
+    gap: 10px;
 }
 
 .map-toolbar-label {
@@ -814,6 +979,33 @@ p {
 .map-mode-toggle {
     display: flex;
     gap: 4px;
+}
+
+.map-toolbar-actions {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.map-action-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 4px 8px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--border);
+    background-color: var(--surface);
+    color: var(--ink-muted);
+    cursor: pointer;
+    transition: all var(--transition);
+}
+
+.map-action-btn:hover {
+    background-color: var(--surface-subtle);
+    border-color: var(--ink);
+    color: var(--ink);
 }
 
 .map-toggle-btn,
@@ -1272,6 +1464,9 @@ p {
 
 /* ── 16. RESPONSIVE BREAKPOINTS ──────────────────────────────────────────── */
 @media (max-width: 1024px) {
+    .packages-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
     .hero-grid {
         grid-template-columns: 1fr;
         gap: 36px;
@@ -1295,6 +1490,9 @@ p {
 }
 
 @media (max-width: 768px) {
+    .packages-grid {
+        grid-template-columns: 1fr;
+    }
     .section {
         padding: 56px 0;
     }

@@ -101,6 +101,7 @@ const state = {
     dropMarker:   null,
     pickupCoords: null,
     dropCoords:   null,
+    routeLine:    null,
     mode: 'pickup'
 };
 
@@ -139,7 +140,7 @@ function initMap() {
         scrollWheelZoom: false,
         // Prevent Leaflet from applying its own tap handler that can misfire on mobile
         tap: false
-    }).setView([12.2958, 76.6394], 12);
+    }).setView([12.9141, 74.8560], 12);
 
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         maxZoom: 19,
@@ -195,6 +196,9 @@ async function setPickupCoords(lat, lng, doReverse) {
     updateRouteLink();
     updatePriceEstimate();
     map.panTo([lat, lng]);
+    if (window.setMode && !state.dropCoords) {
+        window.setMode('drop');
+    }
 }
 
 // ── Place / move Drop marker ──────────────────────────────────────────────────
@@ -218,7 +222,7 @@ async function setDropCoords(lat, lng, doReverse) {
             document.getElementById('destination').value = addr;
             hideSuggestions('drop');
             setCoordBadge('drop', lat, lng, addr.split(',').slice(0, 3).join(','));
-        } catch { setCoordBadge('drop', lat, lng, `${lat.toFixed(5)}, ${lng.toFixed(5)}`); }
+        } catch { setCoordBadge('drop', lat, lng, `${lat.toFixed(6)}, ${lng.toFixed(6)}`); }
     }
     updateHiddenFields();
     updateRouteLink();
@@ -231,8 +235,9 @@ function setCoordBadge(type, lat, lng, label) {
     const badge  = document.getElementById(`${type}CoordBadge`);
     const text   = document.getElementById(`${type}CoordText`);
     const link   = document.getElementById(`${type}MapLink`);
+    if (!badge || !text || !link) return;
     badge.hidden = false;
-    text.textContent = `${label} (${lat.toFixed(5)}, ${lng.toFixed(5)})`;
+    text.textContent = `${label} (${lat.toFixed(6)}, ${lng.toFixed(6)})`;
     link.href = osmPinUrl(lat, lng);
 }
 
@@ -259,15 +264,62 @@ function updateRouteLink() {
             state.dropCoords.lat,   state.dropCoords.lng
         );
         document.getElementById('routeMapUrl').value = url;
-        link.href  = url;
-        row.hidden = false;
-        if (map) map.fitBounds([
-            [state.pickupCoords.lat, state.pickupCoords.lng],
-            [state.dropCoords.lat,   state.dropCoords.lng]
-        ], { padding: [40, 40] });
+        if (link) link.href = url;
+        if (row) row.hidden = false;
+
+        // Draw live route line on map
+        if (map) {
+            if (state.routeLine) {
+                map.removeLayer(state.routeLine);
+                state.routeLine = null;
+            }
+            state.routeLine = L.polyline([
+                [state.pickupCoords.lat, state.pickupCoords.lng],
+                [state.dropCoords.lat,   state.dropCoords.lng]
+            ], {
+                color: '#121316',
+                weight: 4,
+                dashArray: '8, 8',
+                opacity: 0.85
+            }).addTo(map);
+
+            map.fitBounds([
+                [state.pickupCoords.lat, state.pickupCoords.lng],
+                [state.dropCoords.lat,   state.dropCoords.lng]
+            ], { padding: [40, 40], maxZoom: 14 });
+        }
     } else {
-        row.hidden = true;
+        if (row) row.hidden = true;
+        if (state.routeLine && map) {
+            map.removeLayer(state.routeLine);
+            state.routeLine = null;
+        }
     }
+}
+
+// ── Clear pins helper ─────────────────────────────────────────────────────────────
+function clearMapPins() {
+    if (state.pickupMarker && map) { map.removeLayer(state.pickupMarker); state.pickupMarker = null; }
+    if (state.dropMarker && map)   { map.removeLayer(state.dropMarker);   state.dropMarker = null; }
+    if (state.routeLine && map)    { map.removeLayer(state.routeLine);    state.routeLine = null; }
+    state.pickupCoords = null;
+    state.dropCoords = null;
+    const pBadge = document.getElementById('pickupCoordBadge');
+    const dBadge = document.getElementById('dropCoordBadge');
+    if (pBadge) pBadge.hidden = true;
+    if (dBadge) dBadge.hidden = true;
+    const rRow = document.getElementById('routeLinkRow');
+    if (rRow) rRow.hidden = true;
+    const pCard = document.getElementById('priceEstimateCard');
+    if (pCard) pCard.hidden = true;
+    document.getElementById('pickupAddress').value = '';
+    document.getElementById('destination').value = '';
+    document.getElementById('pickupLat').value = '';
+    document.getElementById('pickupLng').value = '';
+    document.getElementById('dropLat').value = '';
+    document.getElementById('dropLng').value = '';
+    if (map) map.setView([12.9141, 74.8560], 12);
+    if (window.setMode) window.setMode('pickup');
 }
 
 // ── Autocomplete suggestions ─────────────────────────────────────────────────────
@@ -397,14 +449,101 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function setMode(mode) {
         state.mode = mode;
-        modePickupBtn.classList.toggle('active', mode === 'pickup');
-        modeDropBtn.classList.toggle('active',   mode === 'drop');
-        mapHint.innerHTML = mode === 'pickup'
-            ? 'Click on the map to set <strong>Pickup</strong> location'
-            : 'Click on the map to set <strong>Drop</strong> location';
+        if (modePickupBtn) modePickupBtn.classList.toggle('active', mode === 'pickup');
+        if (modeDropBtn)   modeDropBtn.classList.toggle('active',   mode === 'drop');
+        if (mapHint) {
+            mapHint.innerHTML = mode === 'pickup'
+                ? 'Click on the map to set <strong>Pickup</strong> location in Mangalore'
+                : 'Click on the map to set <strong>Drop</strong> destination';
+        }
     }
-    modePickupBtn.addEventListener('click', () => setMode('pickup'));
-    modeDropBtn.addEventListener('click',   () => setMode('drop'));
+    window.setMode = setMode;
+
+    if (modePickupBtn) modePickupBtn.addEventListener('click', () => setMode('pickup'));
+    if (modeDropBtn)   modeDropBtn.addEventListener('click',   () => setMode('drop'));
+
+    // Clear pins & Recenter
+    const clearBtn = document.getElementById('clearMapPins');
+    if (clearBtn) clearBtn.addEventListener('click', clearMapPins);
+
+    const recenterBtn = document.getElementById('recenterMap');
+    if (recenterBtn) recenterBtn.addEventListener('click', () => {
+        if (map) {
+            if (state.pickupCoords && state.dropCoords) {
+                map.fitBounds([
+                    [state.pickupCoords.lat, state.pickupCoords.lng],
+                    [state.dropCoords.lat,   state.dropCoords.lng]
+                ], { padding: [40, 40] });
+            } else if (state.pickupCoords) {
+                map.setView([state.pickupCoords.lat, state.pickupCoords.lng], 14);
+            } else {
+                map.setView([12.9141, 74.8560], 12);
+            }
+        }
+    });
+
+    // Preset location chips for Pickup
+    document.querySelectorAll('[data-preset-pickup]').forEach(chip => {
+        chip.addEventListener('click', async () => {
+            const lat = parseFloat(chip.dataset.lat);
+            const lng = parseFloat(chip.dataset.lng);
+            const name = chip.dataset.presetPickup;
+            document.getElementById('pickupAddress').value = name;
+            await setPickupCoords(lat, lng, false);
+            setCoordBadge('pickup', lat, lng, name);
+            if (!state.dropCoords && window.setMode) window.setMode('drop');
+        });
+    });
+
+    // Preset location chips for Drop
+    document.querySelectorAll('[data-preset-drop]').forEach(chip => {
+        chip.addEventListener('click', async () => {
+            const lat = parseFloat(chip.dataset.lat);
+            const lng = parseFloat(chip.dataset.lng);
+            const name = chip.dataset.presetDrop;
+            document.getElementById('destination').value = name;
+            await setDropCoords(lat, lng, false);
+            setCoordBadge('drop', lat, lng, name);
+        });
+    });
+
+    // Package cards selection
+    document.querySelectorAll('.btn-package-select').forEach(btn => {
+        btn.addEventListener('click', async (e) => {
+            e.preventDefault();
+            const dest = btn.dataset.dest || '';
+            const lat = parseFloat(btn.dataset.lat);
+            const lng = parseFloat(btn.dataset.lng);
+            const pkg = btn.dataset.pkg || '';
+            const service = btn.dataset.service || 'Outstation';
+            const vehicle = btn.dataset.vehicle || '';
+
+            document.getElementById('destination').value = dest;
+            document.getElementById('serviceType').value = service;
+            if (vehicle) document.getElementById('vehicleType').value = vehicle;
+            if (pkg) {
+                document.getElementById('comments').value = `Booking package: ${pkg} from Mangalore.`;
+            }
+
+            // Default pickup if not set
+            if (!state.pickupCoords) {
+                document.getElementById('pickupAddress').value = 'Mangalore City Center, Karnataka';
+                await setPickupCoords(12.9141, 74.8560, false);
+                setCoordBadge('pickup', 12.9141, 74.8560, 'Mangalore City');
+            }
+
+            if (!isNaN(lat) && !isNaN(lng)) {
+                await setDropCoords(lat, lng, false);
+                setCoordBadge('drop', lat, lng, dest);
+            }
+
+            const bookingEl = document.getElementById('booking');
+            if (bookingEl) {
+                window.scrollTo({ top: bookingEl.getBoundingClientRect().top + window.pageYOffset - 70, behavior: 'smooth' });
+                if (map) setTimeout(() => map.invalidateSize(), 400);
+            }
+        });
+    });
 
     // GPS: My Location
     document.getElementById('useMyLocation').addEventListener('click', function () {
