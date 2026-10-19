@@ -10,6 +10,8 @@
     <meta name="theme-color" content="#121316">
     <meta name="geo.region" content="IN-KA">
     <meta name="geo.placename" content="Mangalore, Karnataka, India">
+    <meta name="geo.position" content="12.9141;74.8560">
+    <meta name="ICBM" content="12.9141, 74.8560">
     <meta property="og:title" content="MS Cabs Mangalore – Outstation, Pilgrimage & Airport Taxi">
     <meta property="og:description" content="24/7 cab services from Mangalore. Kollur Mookambika, Madikeri, Chikmagalur packages, airport transfers, and direct WhatsApp booking. Call +91 63618 06210.">
     <meta property="og:type" content="website">
@@ -22,36 +24,94 @@
     <title>MS Cabs Mangalore – Outstation, Tour Packages &amp; Airport Taxi</title>
 
     <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "TaxiService",
-      "name": "MS Cabs Mangalore",
-      "url": "https://shahil-sk.github.io/mscabs/",
-      "telephone": "+916361806210",
-      "description": "Reliable cab service and curated tour packages originating from Mangalore across Kollur Mookambika, Madikeri Coorg, Chikmagalur, Dharmasthala, and Mangalore Airport (IXE).",
-      "areaServed": ["Mangalore", "Udupi", "Manipal", "Kollur", "Madikeri", "Chikkamagaluru", "Dharmasthala", "Kukke Subrahmanya", "Bangalore", "Karnataka"],
-      "availableLanguage": ["English", "Kannada", "Tulu", "Hindi"],
-      "openingHours": "Mo-Su 00:00-24:00",
-      "priceRange": "₹₹",
-      "address": {
-        "@type": "PostalAddress",
-        "addressLocality": "Mangalore",
-        "addressRegion": "Karnataka",
-        "addressCountry": "IN"
-      },
-      "contactPoint": {
-        "@type": "ContactPoint",
+    [
+      {
+        "@context": "https://schema.org",
+        "@type": "TaxiService",
+        "name": "MS Cabs Mangalore",
+        "url": "https://shahil-sk.github.io/mscabs/",
         "telephone": "+916361806210",
-        "contactType": "customer support"
+        "description": "Reliable cab service and curated tour packages originating from Mangalore across Kollur Mookambika, Madikeri Coorg, Chikmagalur, Dharmasthala, and Mangalore Airport (IXE).",
+        "areaServed": ["Mangalore", "Udupi", "Manipal", "Kollur", "Madikeri", "Chikkamagaluru", "Dharmasthala", "Kukke Subrahmanya", "Bangalore", "Karnataka"],
+        "availableLanguage": ["English", "Kannada", "Tulu", "Hindi"],
+        "openingHours": "Mo-Su 00:00-24:00",
+        "priceRange": "₹₹",
+        "geo": {
+          "@type": "GeoCoordinates",
+          "latitude": 12.9141,
+          "longitude": 74.8560
+        },
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Mangalore",
+          "addressRegion": "Karnataka",
+          "addressCountry": "IN"
+        },
+        "contactPoint": {
+          "@type": "ContactPoint",
+          "telephone": "+916361806210",
+          "contactType": "customer support"
+        }
+      },
+      {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "How do I book a cab in Mangalore with MS Cabs?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "You can book directly via WhatsApp or call our 24/7 dispatch desk at +91 63618 06210. Choose your vehicle (Sedan, SUV, or Hatchback), enter your pickup location in Mangalore and destination, and our team immediately confirms chauffeur assignment and transparent pricing."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Does MS Cabs provide 24/7 airport taxi service for Mangalore Airport (IXE Bajpe)?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Yes, we provide round-the-clock airport taxi pickups and drops for Mangalore International Airport (IXE, Bajpe) with flight arrival tracking to ensure zero waiting time."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What popular outstation and pilgrimage tour packages are available from Mangalore?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "We offer curated outstation tour packages originating from Mangalore: Kollur Mookambika Temple, Dharmasthala & Kukke Subrahmanya pilgrimage, Madikeri (Coorg) hill station, and Chikmagalur coffee country."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Are your chauffeurs experienced in Western Ghats mountain roads?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Yes. All our drivers are commercially licensed, local multilingual chauffeurs with extensive experience navigating Western Ghats routes including Charmadi Ghat, Sampaje Ghat, and Agumbe passes."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How are highway tolls, driver allowances (bata), and parking charges handled?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "We provide 100% transparent quotations upfront via WhatsApp with zero surge multipliers during monsoon or festival rushes. All driver allowances and toll estimations are clearly explained."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Can I customize my coastal Karnataka itinerary or book an Innova for a family trip?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Yes. We offer 6–7 seater Toyota Innova and Ertiga SUVs ideal for families and pilgrimage groups, with flexible stops for temple darshans and coastal sightseeing."
+            }
+          }
+        ]
       }
-    }
+    ]
     </script>
 
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
     <link rel="stylesheet" href="styles.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer">
 </head>
 <body>
@@ -77,6 +137,7 @@
                     <li><a href="#fleet" class="nav-link">Our Fleet</a></li>
                     <li><a href="#booking" class="nav-link">Book on WhatsApp</a></li>
                     <li><a href="#commitments" class="nav-link">Standards</a></li>
+                    <li><a href="#faq" class="nav-link">FAQ</a></li>
                     <li><a href="#contact" class="nav-link">Contact</a></li>
                 </ul>
                 <div class="nav-actions">
@@ -402,7 +463,6 @@
 
                 <div class="corridors-grid">
                     <article class="corridor-card">
-                        <div class="card-indicator"></div>
                         <div class="card-content">
                             <span class="corridor-route">Interstate Highway</span>
                             <h3 class="corridor-name">Mangalore &harr; Bangalore (NH 75)</h3>
@@ -418,7 +478,6 @@
                     </article>
 
                     <article class="corridor-card">
-                        <div class="card-indicator"></div>
                         <div class="card-content">
                             <span class="corridor-route">Coastal Express</span>
                             <h3 class="corridor-name">Mangalore &harr; Udupi &amp; Manipal</h3>
@@ -434,7 +493,6 @@
                     </article>
 
                     <article class="corridor-card">
-                        <div class="card-indicator"></div>
                         <div class="card-content">
                             <span class="corridor-route">North Coastal Circuit</span>
                             <h3 class="corridor-name">Mangalore &harr; Murudeshwar &amp; Gokarna</h3>
@@ -450,7 +508,6 @@
                     </article>
 
                     <article class="corridor-card">
-                        <div class="card-indicator"></div>
                         <div class="card-content">
                             <span class="corridor-route">Kerala Border Run</span>
                             <h3 class="corridor-name">Mangalore &harr; Kasaragod &amp; Bekal Fort</h3>
@@ -578,7 +635,7 @@
                 <div class="booking-layout">
                     <!-- Main Booking Form -->
                     <div class="booking-form-pane">
-                        <form id="bookingForm" class="booking-form" novalidate>
+                        <form id="bookingForm" class="booking-form" action="javascript:void(0);" method="POST" autocomplete="on">
                             <div class="form-grid-two">
                                 <div class="form-field">
                                     <label for="name">Full Name *</label>
@@ -813,25 +870,105 @@
 
                 <div class="commitments-grid">
                     <div class="commitment-item">
-                        <span class="commitment-index">01</span>
-                        <h3 class="commitment-title">Ghat-Experienced Chauffeurs</h3>
+                        <h3 class="commitment-title">
+                            <i class="fa-solid fa-mountain" aria-hidden="true"></i>
+                            <span>Ghat-Experienced Chauffeurs</span>
+                        </h3>
                         <p class="commitment-body">Charmadi Ghat, Sampaje Ghat, and Agumbe passes demand special mountain handling. Our drivers bring years of Western Ghats experience.</p>
                     </div>
                     <div class="commitment-item">
-                        <span class="commitment-index">02</span>
-                        <h3 class="commitment-title">Zero Surge Multipliers</h3>
+                        <h3 class="commitment-title">
+                            <i class="fa-solid fa-handshake" aria-hidden="true"></i>
+                            <span>Zero Surge Multipliers</span>
+                        </h3>
                         <p class="commitment-body">Direct, honest quotations provided upfront via WhatsApp with zero surge spikes during monsoons, holidays, or festival travel rushes.</p>
                     </div>
                     <div class="commitment-item">
-                        <span class="commitment-index">03</span>
-                        <h3 class="commitment-title">24/7 Airport Punctuality</h3>
+                        <h3 class="commitment-title">
+                            <i class="fa-solid fa-plane-arrival" aria-hidden="true"></i>
+                            <span>24/7 Airport Punctuality</span>
+                        </h3>
                         <p class="commitment-body">Mangalore Airport (IXE Bajpe) pickups and drops feature flight schedule tracking so you never arrive late or wait stranded after late-night landings.</p>
                     </div>
                     <div class="commitment-item">
-                        <span class="commitment-index">04</span>
-                        <h3 class="commitment-title">Immaculate AC Vehicles</h3>
+                        <h3 class="commitment-title">
+                            <i class="fa-solid fa-shield-halved" aria-hidden="true"></i>
+                            <span>Immaculate AC Vehicles</span>
+                        </h3>
                         <p class="commitment-body">Every vehicle undergoes mechanical safety checks, air conditioning servicing, and complete sanitization before every hill station and outstation run.</p>
                     </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Frequently Asked Questions (SEO & Intent) -->
+        <section id="faq" class="section section-bordered" aria-labelledby="faq-heading">
+            <div class="container">
+                <div class="section-intro">
+                    <h2 class="section-heading" id="faq-heading">Frequently Asked Questions</h2>
+                    <p class="section-sub">Direct answers regarding Mangalore cab bookings, airport transfers, pilgrimage tours, and Western Ghats travel.</p>
+                </div>
+
+                <div class="faq-grid">
+                    <details class="faq-item" open>
+                        <summary class="faq-question">
+                            <span>How do I book a cab in Mangalore with MS Cabs?</span>
+                            <span class="faq-icon"><i class="fa-solid fa-chevron-down" aria-hidden="true"></i></span>
+                        </summary>
+                        <div class="faq-answer">
+                            <p>You can book directly via WhatsApp or by calling our 24/7 dispatch desk at <a href="tel:+916361806210" class="inline-link">+91 63618 06210</a>. Choose your vehicle (Sedan, SUV, or Hatchback), enter your pickup location in Mangalore and destination, and our controllers immediately confirm chauffeur assignment and transparent pricing.</p>
+                        </div>
+                    </details>
+
+                    <details class="faq-item">
+                        <summary class="faq-question">
+                            <span>Does MS Cabs provide 24/7 airport taxi service for Mangalore Airport (IXE Bajpe)?</span>
+                            <span class="faq-icon"><i class="fa-solid fa-chevron-down" aria-hidden="true"></i></span>
+                        </summary>
+                        <div class="faq-answer">
+                            <p>Yes. We provide round-the-clock airport taxi pickups and drops for Mangalore International Airport (IXE, Bajpe). We track real-time flight arrival timings so your chauffeur is stationed outside arrival terminals on time even during delayed flights.</p>
+                        </div>
+                    </details>
+
+                    <details class="faq-item">
+                        <summary class="faq-question">
+                            <span>What popular outstation and pilgrimage tour packages are available from Mangalore?</span>
+                            <span class="faq-icon"><i class="fa-solid fa-chevron-down" aria-hidden="true"></i></span>
+                        </summary>
+                        <div class="faq-answer">
+                            <p>We specialize in coastal Karnataka pilgrimage circuits and hill station tours originating from Mangalore: Kollur Mookambika Temple, Dharmasthala &amp; Kukke Subrahmanya, Udupi Sri Krishna Mutt &amp; Murudeshwar, Madikeri (Coorg), and Chikmagalur coffee plantations. Both same-day and multi-day packages are supported.</p>
+                        </div>
+                    </details>
+
+                    <details class="faq-item">
+                        <summary class="faq-question">
+                            <span>Are your chauffeurs experienced in Western Ghats mountain roads?</span>
+                            <span class="faq-icon"><i class="fa-solid fa-chevron-down" aria-hidden="true"></i></span>
+                        </summary>
+                        <div class="faq-answer">
+                            <p>Yes. All our chauffeurs are commercially licensed, local Kannada/Tulu/English/Hindi speaking professionals with extensive experience navigating Western Ghats hairpin bends including Charmadi Ghat, Sampaje Ghat, and Agumbe passes.</p>
+                        </div>
+                    </details>
+
+                    <details class="faq-item">
+                        <summary class="faq-question">
+                            <span>How are highway tolls, driver allowances (bata), and parking charges handled?</span>
+                            <span class="faq-icon"><i class="fa-solid fa-chevron-down" aria-hidden="true"></i></span>
+                        </summary>
+                        <div class="faq-answer">
+                            <p>We provide 100% upfront pricing transparency with zero surge multipliers during monsoon or festival travel rushes. In our package quotations, all driver allowances (bata) and interstate permit details are clearly itemized so you know the exact final fare before departure.</p>
+                        </div>
+                    </details>
+
+                    <details class="faq-item">
+                        <summary class="faq-question">
+                            <span>Can I customize my coastal Karnataka itinerary or book an Innova for a family trip?</span>
+                            <span class="faq-icon"><i class="fa-solid fa-chevron-down" aria-hidden="true"></i></span>
+                        </summary>
+                        <div class="faq-answer">
+                            <p>Absolutely. We have 6–7 seater Toyota Innova and Ertiga SUVs ideal for large families and temple groups with luggage. You can customize intermediate stops, temple darshan timings, and sightseeing spots across Udupi, Sringeri, or Bekal Fort.</p>
+                        </div>
+                    </details>
                 </div>
             </div>
         </section>

@@ -195,6 +195,65 @@ function setCoordBadge(type, lat, lng, label) {
     link.href = osmPinUrl(lat, lng);
 }
 
+// ── Form State Persistence (prevents accidental resets) ──────────────────────
+const DRAFT_STORAGE_KEY = 'mscabs_booking_draft_v1';
+
+function saveFormDraft() {
+    try {
+        const draft = {
+            name:          document.getElementById('name')?.value || '',
+            phone:         document.getElementById('phone')?.value || '',
+            serviceType:   document.getElementById('serviceType')?.value || '',
+            vehicleType:   document.getElementById('vehicleType')?.value || '',
+            pickupAddress: document.getElementById('pickupAddress')?.value || '',
+            destination:   document.getElementById('destination')?.value || '',
+            date:          document.getElementById('date')?.value || '',
+            time:          document.getElementById('time')?.value || '',
+            comments:      document.getElementById('comments')?.value || '',
+            pickupLat:     document.getElementById('pickupLat')?.value || '',
+            pickupLng:     document.getElementById('pickupLng')?.value || '',
+            dropLat:       document.getElementById('dropLat')?.value || '',
+            dropLng:       document.getElementById('dropLng')?.value || '',
+            pickupMapUrl:  document.getElementById('pickupMapUrl')?.value || '',
+            dropMapUrl:    document.getElementById('dropMapUrl')?.value || '',
+            routeMapUrl:   document.getElementById('routeMapUrl')?.value || ''
+        };
+        sessionStorage.setItem(DRAFT_STORAGE_KEY, JSON.stringify(draft));
+    } catch (_) {}
+}
+
+async function restoreFormDraft() {
+    try {
+        const raw = sessionStorage.getItem(DRAFT_STORAGE_KEY);
+        if (!raw) return;
+        const draft = JSON.parse(raw);
+        if (!draft || typeof draft !== 'object') return;
+
+        ['name', 'phone', 'serviceType', 'vehicleType', 'pickupAddress', 'destination', 'date', 'time', 'comments'].forEach(id => {
+            const el = document.getElementById(id);
+            if (el && draft[id]) el.value = draft[id];
+        });
+
+        // Restore map coordinates & badges if present
+        if (draft.pickupLat && draft.pickupLng && map) {
+            const lat = parseFloat(draft.pickupLat);
+            const lng = parseFloat(draft.pickupLng);
+            if (!isNaN(lat) && !isNaN(lng)) {
+                await setPickupCoords(lat, lng, false);
+                setCoordBadge('pickup', lat, lng, draft.pickupAddress || 'Saved Pickup');
+            }
+        }
+        if (draft.dropLat && draft.dropLng && map) {
+            const lat = parseFloat(draft.dropLat);
+            const lng = parseFloat(draft.dropLng);
+            if (!isNaN(lat) && !isNaN(lng)) {
+                await setDropCoords(lat, lng, false);
+                setCoordBadge('drop', lat, lng, draft.destination || 'Saved Destination');
+            }
+        }
+    } catch (_) {}
+}
+
 // ── Hidden fields + route link ─────────────────────────────────────────────────────
 function updateHiddenFields() {
     if (state.pickupCoords) {
@@ -207,6 +266,7 @@ function updateHiddenFields() {
         document.getElementById('dropLng').value    = state.dropCoords.lng.toFixed(7);
         document.getElementById('dropMapUrl').value = osmPinUrl(state.dropCoords.lat, state.dropCoords.lng);
     }
+    saveFormDraft();
 }
 
 function updateRouteLink() {
@@ -272,6 +332,7 @@ function clearMapPins() {
     document.getElementById('dropLng').value = '';
     if (map) map.setView([12.9141, 74.8560], 12);
     if (window.setMode) window.setMode('pickup');
+    saveFormDraft();
 }
 
 // ── Autocomplete suggestions ─────────────────────────────────────────────────────
@@ -382,13 +443,14 @@ function btnLoading(btn, on) {
 }
 
 // ── DOMContentLoaded ───────────────────────────────────────────────────────────
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', async () => {
 
     document.getElementById('date').setAttribute('min', new Date().toISOString().split('T')[0]);
 
     initMap();
     setupAutocomplete('pickup', 'pickupAddress');
     setupAutocomplete('drop',   'destination');
+    await restoreFormDraft();
 
     // Select vehicle type from fleet cards
     document.querySelectorAll('.fleet-spec-card a[href="#booking"]').forEach(btn => {
@@ -398,6 +460,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if (txt.includes('suv')) sel.value = 'SUV';
             else if (txt.includes('hatchback')) sel.value = 'Hatchback';
             else if (txt.includes('sedan')) sel.value = 'Sedan';
+            saveFormDraft();
         });
     });
 
@@ -451,6 +514,7 @@ document.addEventListener('DOMContentLoaded', () => {
             await setPickupCoords(lat, lng, false);
             setCoordBadge('pickup', lat, lng, name);
             if (!state.dropCoords && window.setMode) window.setMode('drop');
+            saveFormDraft();
         });
     });
 
@@ -463,6 +527,7 @@ document.addEventListener('DOMContentLoaded', () => {
             document.getElementById('destination').value = name;
             await setDropCoords(lat, lng, false);
             setCoordBadge('drop', lat, lng, name);
+            saveFormDraft();
         });
     });
 
@@ -495,6 +560,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 await setDropCoords(lat, lng, false);
                 setCoordBadge('drop', lat, lng, dest);
             }
+
+            saveFormDraft();
 
             const bookingEl = document.getElementById('booking');
             if (bookingEl) {
@@ -550,29 +617,47 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // Form submit – WhatsApp Redirect
-    document.getElementById('bookingForm').addEventListener('submit', function (e) {
-        e.preventDefault();
-        if (!this.checkValidity()) { this.reportValidity(); return; }
-        submitToWhatsApp({
-            name:          document.getElementById('name').value.trim(),
-            phone:         document.getElementById('phone').value.trim(),
-            serviceType:   document.getElementById('serviceType').value,
-            vehicleType:   document.getElementById('vehicleType').value,
-            pickupAddress: document.getElementById('pickupAddress').value.trim(),
-            destination:   document.getElementById('destination').value.trim(),
-            date:          document.getElementById('date').value,
-            time:          document.getElementById('time').value,
-            comments:      document.getElementById('comments').value.trim(),
-            pickupLat:     document.getElementById('pickupLat').value,
-            pickupLng:     document.getElementById('pickupLng').value,
-            dropLat:       document.getElementById('dropLat').value,
-            dropLng:       document.getElementById('dropLng').value,
-            pickupMapUrl:  document.getElementById('pickupMapUrl').value,
-            dropMapUrl:    document.getElementById('dropMapUrl').value,
-            routeMapUrl:   document.getElementById('routeMapUrl').value
+    // Form submit – WhatsApp Redirect & Draft Auto-save
+    const bookingForm = document.getElementById('bookingForm');
+    if (bookingForm) {
+        bookingForm.addEventListener('input', debounce(saveFormDraft, 250));
+        bookingForm.addEventListener('change', saveFormDraft);
+
+        bookingForm.addEventListener('submit', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            if (!this.checkValidity()) {
+                this.reportValidity();
+                return false;
+            }
+
+            try {
+                submitToWhatsApp({
+                    name:          document.getElementById('name').value.trim(),
+                    phone:         document.getElementById('phone').value.trim(),
+                    serviceType:   document.getElementById('serviceType').value,
+                    vehicleType:   document.getElementById('vehicleType').value,
+                    pickupAddress: document.getElementById('pickupAddress').value.trim(),
+                    destination:   document.getElementById('destination').value.trim(),
+                    date:          document.getElementById('date').value,
+                    time:          document.getElementById('time').value,
+                    comments:      document.getElementById('comments').value.trim(),
+                    pickupLat:     document.getElementById('pickupLat').value,
+                    pickupLng:     document.getElementById('pickupLng').value,
+                    dropLat:       document.getElementById('dropLat').value,
+                    dropLng:       document.getElementById('dropLng').value,
+                    pickupMapUrl:  document.getElementById('pickupMapUrl').value,
+                    dropMapUrl:    document.getElementById('dropMapUrl').value,
+                    routeMapUrl:   document.getElementById('routeMapUrl').value
+                });
+            } catch (err) {
+                console.error('Submission error:', err);
+                alert('Could not prepare WhatsApp message. Please contact us directly at +91 63618 06210.');
+            }
+            return false;
         });
-    });
+    }
 });
 
 // ── WhatsApp submission ─────────────────────────────────────────────────────────
@@ -621,14 +706,22 @@ function submitToWhatsApp(data) {
     const text = lines.join('\n');
     const waUrl = `https://wa.me/916361806210?text=${encodeURIComponent(text)}`;
 
-    showSuccessMessage();
+    let popupBlocked = false;
+    try {
+        const win = window.open(waUrl, '_blank');
+        if (!win || win.closed || typeof win.closed === 'undefined') {
+            popupBlocked = true;
+        }
+    } catch (_) {
+        popupBlocked = true;
+    }
 
-    // Open WhatsApp in a new tab/app window
-    window.open(waUrl, '_blank');
+    showSuccessMessage(waUrl, popupBlocked);
+    saveFormDraft();
 }
 
 // ── Success toast ──────────────────────────────────────────────────────────────
-function showSuccessMessage() {
+function showSuccessMessage(waUrl, popupBlocked) {
     let msg = document.querySelector('.success-message');
     if (!msg) {
         msg = document.createElement('div');
@@ -636,8 +729,22 @@ function showSuccessMessage() {
         const f = document.getElementById('bookingForm');
         f.insertBefore(msg, f.firstChild);
     }
-    msg.innerHTML = '<strong>&#10003; Redirecting to WhatsApp…</strong><p>Your booking request is ready. Please click &ldquo;Send&rdquo; on WhatsApp to connect directly with our 24/7 Mangalore dispatch team.</p>';
+    msg.innerHTML = `
+        <div class="success-status">
+            <i class="fa-solid fa-circle-check" aria-hidden="true"></i>
+            <span>${popupBlocked ? 'Action Required: Open WhatsApp' : 'Connecting to WhatsApp Dispatch'}</span>
+        </div>
+        <p>${popupBlocked
+            ? 'Your browser prevented opening a new tab automatically. Click the button below to send your booking directly on WhatsApp:'
+            : 'Your booking enquiry is formatted. If WhatsApp did not launch automatically, click the button below to confirm with our Mangalore team:'
+        }</p>
+        <div class="success-actions">
+            <a href="${waUrl}" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-block">
+                <i class="fa-brands fa-whatsapp" aria-hidden="true"></i>
+                <span>Open in WhatsApp</span>
+            </a>
+        </div>
+    `;
     msg.classList.add('show');
     msg.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-    setTimeout(() => msg.classList.remove('show'), 8000);
 }

@@ -13,7 +13,7 @@
     --ink: #121316;
     --ink-muted: #575962;
     --ink-inverted: #F6F5F1;
-    --ink-inverted-muted: #9DA1AD;
+    --ink-inverted-muted: #A8ACB8;
     --border: #DDD9CF;
     --border-dark: #282A31;
     --accent: #F5B301;
@@ -23,7 +23,7 @@
     --status-drop: #C62828;
     --radius: 6px;
     --radius-sm: 4px;
-    --font: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    --font: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", sans-serif;
     --max-width: 1200px;
     --transition: 0.15s ease-out;
 }
@@ -35,6 +35,11 @@
     padding: 0;
 }
 
+::selection {
+    background-color: var(--accent);
+    color: var(--accent-contrast);
+}
+
 html {
     scroll-behavior: smooth;
     font-size: 16px;
@@ -42,6 +47,26 @@ html {
     color: var(--ink);
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
+    scrollbar-color: var(--border) var(--ground);
+    scrollbar-width: thin;
+}
+
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--ground);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--border);
+    border-radius: var(--radius-sm);
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--ink-muted);
 }
 
 body {
@@ -72,6 +97,10 @@ ul {
 button, input, select, textarea {
     font: inherit;
     color: inherit;
+}
+
+input, textarea {
+    caret-color: var(--ink);
 }
 
 .skip-link {
@@ -116,6 +145,11 @@ h1, h2, h3, h4 {
 
 p {
     color: var(--ink-muted);
+    max-width: 72ch;
+}
+
+.stat-figure, .meta-value, .spec-value, .coord-badge, .board-tag-sm {
+    font-variant-numeric: tabular-nums;
 }
 
 /* ── 4. BUTTONS & CONTROLS ───────────────────────────────────────────────── */
@@ -586,13 +620,6 @@ p {
     border-color: var(--ink);
 }
 
-.card-indicator {
-    width: 4px;
-    background-color: var(--accent);
-    border-radius: 2px;
-    flex-shrink: 0;
-}
-
 .card-content {
     display: flex;
     flex-direction: column;
@@ -1013,22 +1040,38 @@ p {
 
 /* Form success message */
 .success-message {
-    padding: 16px 20px;
-    background-color: #E6F4EA;
+    padding: 18px 20px;
+    background-color: var(--ground-alt);
     border: 1px solid var(--status-pickup);
     border-radius: var(--radius);
-    color: #137333;
+    color: var(--ink);
     display: none;
+    margin-bottom: 20px;
 }
 
 .success-message.show {
     display: block;
 }
 
-.success-message strong {
-    display: block;
+.success-status {
+    display: flex;
+    align-items: center;
+    gap: 8px;
     font-size: 1.05rem;
-    margin-bottom: 4px;
+    font-weight: 700;
+    color: var(--status-pickup);
+    margin-bottom: 6px;
+}
+
+.success-message p {
+    font-size: 0.9rem;
+    color: var(--ink);
+    margin-bottom: 12px;
+}
+
+.success-actions {
+    display: flex;
+    gap: 10px;
 }
 
 /* ── 11. BOOKING SIDEBAR ─────────────────────────────────────────────────── */
@@ -1140,25 +1183,108 @@ p {
     gap: 12px;
 }
 
-.commitment-index {
-    font-size: 0.85rem;
-    font-weight: 800;
-    color: var(--accent-contrast);
-    background-color: var(--accent);
-    width: fit-content;
-    padding: 2px 6px;
-    border-radius: var(--radius-sm);
+.commitment-title {
+    font-size: 1.12rem;
+    color: var(--ink);
+    display: flex;
+    align-items: center;
+    gap: 10px;
 }
 
-.commitment-title {
-    font-size: 1.15rem;
-    color: var(--ink);
+.commitment-title i {
+    color: var(--accent-contrast);
+    font-size: 1.05rem;
+    flex-shrink: 0;
 }
 
 .commitment-body {
     font-size: 0.88rem;
     line-height: 1.6;
     color: var(--ink-muted);
+}
+
+/* ── 12. FAQ SECTION ─────────────────────────────────────────────────────── */
+.faq-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    max-width: 860px;
+    margin: 0 auto;
+}
+
+.faq-item {
+    background-color: var(--ground);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    overflow: hidden;
+    transition: border-color var(--transition);
+}
+
+.faq-item[open] {
+    border-color: var(--ink);
+}
+
+.faq-question {
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 18px 22px;
+    font-size: 1.02rem;
+    font-weight: 600;
+    color: var(--ink);
+    cursor: pointer;
+    user-select: none;
+}
+
+.faq-question::-webkit-details-marker {
+    display: none;
+}
+
+.faq-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    border-radius: var(--radius-sm);
+    background-color: var(--ground-alt);
+    color: var(--ink-muted);
+    font-size: 0.8rem;
+    transition: transform var(--transition), background-color var(--transition), color var(--transition);
+    flex-shrink: 0;
+    margin-left: 16px;
+}
+
+.faq-item[open] .faq-icon {
+    transform: rotate(180deg);
+    background-color: var(--accent);
+    color: var(--accent-contrast);
+}
+
+.faq-answer {
+    padding: 0 22px 20px;
+    font-size: 0.92rem;
+    line-height: 1.65;
+    color: var(--ink-muted);
+    border-top: 1px solid var(--ground-alt);
+    margin-top: 2px;
+    padding-top: 14px;
+}
+
+.faq-answer p {
+    margin: 0;
+}
+
+.inline-link {
+    color: var(--ink);
+    font-weight: 600;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+}
+
+.inline-link:hover {
+    color: var(--accent-contrast);
 }
 
 /* ── 13. CONTACT SECTION ─────────────────────────────────────────────────── */
@@ -1246,6 +1372,13 @@ p {
     border-top: 1px solid var(--border-dark);
     color: var(--ink-inverted);
     padding: 72px 0 36px;
+}
+
+.footer p,
+.footer-summary,
+.footer-note,
+.footer-bottom p {
+    color: var(--ink-inverted-muted);
 }
 
 .footer-grid {
