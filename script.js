@@ -231,7 +231,17 @@ async function restoreFormDraft() {
 
         ['name', 'phone', 'serviceType', 'vehicleType', 'pickupAddress', 'destination', 'date', 'time', 'comments'].forEach(id => {
             const el = document.getElementById(id);
-            if (el && draft[id]) el.value = draft[id];
+            if (!el || !draft[id]) return;
+            if (id === 'time') {
+                const formattedTime = formatTime12Hour(draft[id]);
+                if (el.querySelector(`option[value="${formattedTime}"]`)) {
+                    el.value = formattedTime;
+                } else {
+                    el.value = draft[id];
+                }
+            } else {
+                el.value = draft[id];
+            }
         });
 
         // Restore map coordinates & badges if present
@@ -699,6 +709,26 @@ document.addEventListener('DOMContentLoaded', async () => {
     });
 });
 
+// ── Format time string to 12-hour AM/PM format ───────────────────────────────
+function formatTime12Hour(t) {
+    if (!t) return 'Not specified';
+    const s = String(t).trim();
+    // If already in 12-hour format with AM/PM (e.g. "02:30 PM", "2:30 pm")
+    if (/\b(am|pm)\b/i.test(s)) {
+        return s.toUpperCase();
+    }
+    // Match HH:mm or HH:mm:ss (24-hour military format e.g. "14:30")
+    const match = s.match(/^(\d{1,2}):(\d{2})/);
+    if (!match) return s;
+    let h = parseInt(match[1], 10);
+    const m = match[2];
+    const ampm = h >= 12 ? 'PM' : 'AM';
+    h = h % 12;
+    if (h === 0) h = 12;
+    const hStr = h < 10 ? `0${h}` : `${h}`;
+    return `${hStr}:${m} ${ampm}`;
+}
+
 // ── WhatsApp submission ─────────────────────────────────────────────────────────
 function submitToWhatsApp(data) {
     let estDist = '';
@@ -720,7 +750,7 @@ function submitToWhatsApp(data) {
         `📍 *Pickup:* ${data.pickupAddress}`,
         `🏁 *Drop:* ${data.destination}`,
         `🗓 *Date:* ${data.date}`,
-        `⏰ *Time:* ${data.time}`
+        `⏰ *Time:* ${formatTime12Hour(data.time)}`
     ];
 
     if (estDist) {

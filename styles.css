@@ -793,6 +793,18 @@ p {
     outline: none;
 }
 
+.form-field select {
+    cursor: pointer;
+}
+
+.form-field select optgroup {
+    font-weight: 700;
+}
+
+.form-field select option {
+    font-weight: 400;
+}
+
 .input-with-action {
     display: flex;
     gap: 8px;
