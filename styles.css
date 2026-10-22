@@ -722,6 +722,61 @@ p {
     gap: 10px;
 }
 
+.badge-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.bento-metric-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.76rem;
+    font-weight: 600;
+    color: var(--ink-secondary);
+    font-variant-numeric: tabular-nums;
+}
+
+.bento-metric-pill i {
+    color: var(--accent);
+    font-size: 0.72rem;
+}
+
+.route-waypoints {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin: 8px 0 4px;
+}
+
+.waypoint {
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: var(--ink);
+    background-color: var(--surface-subtle);
+    padding: 3px 9px;
+    border-radius: 6px;
+    border: 1px solid var(--border);
+    white-space: nowrap;
+}
+
+.waypoint.highlight {
+    background-color: var(--accent-subtle);
+    color: #0056B3;
+    font-weight: 600;
+    border-color: rgba(0, 113, 227, 0.25);
+}
+
+.waypoint-arrow {
+    font-size: 0.62rem;
+    color: var(--ink-tertiary);
+    flex-shrink: 0;
+}
+
 /* Disciplined Apple Badge System */
 .bento-badge {
     display: inline-flex;
@@ -749,6 +804,30 @@ p {
     background-color: var(--accent-subtle);
     color: #0056B3;
     border-color: rgba(0, 113, 227, 0.25);
+}
+
+/* Panoramic Full-Width Airport Banner */
+.bento-card-banner {
+    grid-column: 1 / -1;
+}
+
+.banner-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 40px;
+}
+
+.banner-main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.banner-action {
+    width: 320px;
+    flex-shrink: 0;
 }
 
 .bento-title {
@@ -1817,6 +1896,17 @@ p {
     .bento-card-large {
         grid-column: span 2;
     }
+    .bento-card-banner {
+        grid-column: span 2;
+    }
+    .banner-inner {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 24px;
+    }
+    .banner-action {
+        width: 100%;
+    }
     .hero-showcase {
         grid-template-columns: repeat(2, 1fr);
     }
@@ -1906,6 +1996,9 @@ p {
         grid-template-columns: 1fr;
     }
     .bento-card-large {
+        grid-column: span 1;
+    }
+    .bento-card-banner {
         grid-column: span 1;
     }
     .hero-showcase {
@@ -2194,5 +2287,21 @@ p {
     .faq-item {
         background-color: #1C1C1E;
         border-color: rgba(255, 255, 255, 0.12);
+    }
+    .waypoint {
+        background-color: #242426;
+        border-color: rgba(255, 255, 255, 0.1);
+        color: #F5F5F7;
+    }
+    .waypoint.highlight {
+        background-color: rgba(41, 151, 255, 0.18);
+        color: #70B8FF;
+        border-color: rgba(41, 151, 255, 0.35);
+    }
+    .bento-metric-pill {
+        color: #AEAEB2;
+    }
+    .bento-metric-pill i {
+        color: #70B8FF;
     }
 }
