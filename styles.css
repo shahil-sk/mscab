@@ -1,16 +1,16 @@
 /* ==========================================================================
    MS CABS — APPLE HUMAN INTERFACE DESIGN SYSTEM
    Grounded in Apple HIG: Liquid Glass, Dynamic SF Pro Typography,
-   Continuous Squircle Curvature, Segmented Controls & Native Dark Mode.
+   Continuous Squircle Curvature, Bento Grids, Segmented Controls & Dark Mode.
    ========================================================================== */
 
 /* ── 1. APPLE HIG TOKENS (LIGHT DEFAULT) ─────────────────────────────────── */
 :root {
     /* Apple System Canvas & Backgrounds */
     --ground: #F5F5F7;                       /* Apple System Grouped Background */
-    --surface: #FFFFFF;                      /* Apple Secondary Grouped Background (Cards) */
+    --surface: #FFFFFF;                      /* Apple Elevated Card Surface */
     --surface-elevated: #FFFFFF;             /* Elevated Popover / Modal Surface */
-    --surface-subtle: #ECECF0;               /* Apple Tertiary Grouped Fill */
+    --surface-subtle: #F2F2F7;               /* Apple Tertiary Grouped Fill */
     --surface-recessed: rgba(0, 0, 0, 0.04); /* Inset Input / Segment Track Fill */
     --surface-hover: rgba(0, 0, 0, 0.05);    /* Control Hover Fill */
 
@@ -25,7 +25,7 @@
     --ink-tertiary: #86868B;                 /* System Tertiary Label */
     --ink-quaternary: #AEAEC2;               /* System Quaternary Label */
 
-    /* Inverted (for high-contrast contrast elements) */
+    /* Inverted (for high-contrast elements) */
     --ink-inverted: #F5F5F7;
     --ink-inverted-secondary: #A1A1A6;
 
@@ -34,21 +34,21 @@
     --border-strong: rgba(0, 0, 0, 0.16);   /* Emphasized Border */
 
     /* Accent & Brand Colors */
-    --accent: #0071E3;                       /* Apple System Blue (4.54:1 on white) */
+    --accent: #0071E3;                       /* Apple System Blue */
     --accent-hover: #0077ED;
     --accent-contrast: #FFFFFF;
     --accent-subtle: rgba(0, 113, 227, 0.12);
     
-    /* Brand Golden Cab Accent (used for badges and highlights) */
-    --brand-taxi: #D97706;                   /* Warm Amber Taxi Tint (4.7:1 AA on white) */
-    --brand-taxi-bg: rgba(217, 119, 6, 0.12);
+    /* Brand Accent */
+    --brand-taxi: #B45309;                   /* Warm Amber Taxi Tint (4.8:1 AA on white) */
+    --brand-taxi-bg: rgba(180, 83, 9, 0.12);
 
     /* System Status Signals */
     --status-pickup: #34C759;                /* Apple System Green */
     --status-drop: #FF3B30;                  /* Apple System Red */
 
     /* Apple Radius Scale (Continuous Curvature) */
-    --radius-card: 20px;
+    --radius-card: 24px;
     --radius-control: 12px;
     --radius-inner: 8px;
     --radius-pill: 9999px;
@@ -220,7 +220,7 @@ input, textarea {
     padding-right: 24px;
 }
 
-/* ── 4. TYPOGRAPHY ───────────────────────────────────────────────────────── */
+/* ── 4. TYPOGRAPHY & EYEBROWS ────────────────────────────────────────────── */
 h1, h2, h3, h4 {
     color: var(--ink);
     letter-spacing: -0.025em;
@@ -233,7 +233,18 @@ p {
     max-width: 72ch;
 }
 
-.stat-figure, .meta-value, .spec-value, .coord-badge, .board-tag-sm {
+.hero-eyebrow,
+.section-eyebrow {
+    display: inline-block;
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--accent);
+    margin-bottom: 12px;
+}
+
+.stat-figure, .meta-value, .spec-value, .coord-badge, .fleet-capacity-num, .showcase-distance {
     font-variant-numeric: tabular-nums;
 }
 
@@ -243,7 +254,7 @@ p {
     align-items: center;
     justify-content: center;
     gap: 10px;
-    padding: 12px 22px;
+    padding: 12px 24px;
     font-size: 0.95rem;
     font-weight: 600;
     border-radius: var(--radius-control);
@@ -257,6 +268,10 @@ p {
 
 .btn:active {
     transform: scale(0.97);
+}
+
+.btn-pill {
+    border-radius: var(--radius-pill);
 }
 
 .btn-primary {
@@ -298,7 +313,7 @@ p {
 .btn-compact {
     padding: 8px 14px;
     font-size: 0.85rem;
-    min-height: 38px;
+    min-height: 44px;
     background-color: var(--surface-subtle);
     border-color: var(--border);
     border-radius: var(--radius-inner);
@@ -318,9 +333,9 @@ p {
     background-color: var(--surface-recessed);
     color: var(--ink);
     border: 1px solid var(--border);
-    padding: 8px 16px;
+    padding: 8px 18px;
     font-size: 0.88rem;
-    min-height: 38px;
+    min-height: 40px;
     border-radius: var(--radius-pill);
     font-weight: 600;
 }
@@ -407,7 +422,7 @@ p {
     color: var(--ink-secondary);
     font-size: 0.9rem;
     font-weight: 500;
-    padding: 6px 12px;
+    padding: 8px 14px;
     border-radius: var(--radius-pill);
     position: relative;
     transition: all var(--transition);
@@ -437,157 +452,145 @@ p {
     background-color: var(--surface-hover);
 }
 
-/* ── 7. HERO SECTION ─────────────────────────────────────────────────────── */
+/* ── 7. HERO SECTION (SPACIOUS, CONFIDENT APPLE PRODUCT HERO) ─────────────── */
 .hero {
     background-color: var(--ground);
     border-bottom: 1px solid var(--border);
-    padding: 72px 0 64px;
+    padding: 96px 0 72px;
 }
 
-.hero-grid {
-    display: grid;
-    grid-template-columns: 1.25fr 0.95fr;
-    gap: 48px;
+.hero-container {
+    display: flex;
+    flex-direction: column;
     align-items: center;
+    text-align: center;
+}
+
+.hero-content {
+    max-width: 820px;
+    margin: 0 auto;
 }
 
 .hero-heading {
-    font-size: clamp(2.2rem, 4.4vw, 3.4rem);
-    line-height: 1.08;
+    font-size: clamp(2.4rem, 5.5vw, 4.2rem);
+    line-height: 1.06;
     font-weight: 700;
-    letter-spacing: -0.028em;
+    letter-spacing: -0.035em;
     color: var(--ink);
-    margin-bottom: 20px;
+    margin-bottom: 22px;
 }
 
 .hero-summary {
-    font-size: clamp(1.05rem, 1.4vw, 1.2rem);
+    font-size: clamp(1.15rem, 1.8vw, 1.35rem);
     color: var(--ink-secondary);
-    line-height: 1.55;
-    margin-bottom: 32px;
-    max-width: 640px;
+    line-height: 1.5;
+    margin: 0 auto 36px;
+    max-width: 680px;
 }
 
 .hero-actions {
     display: flex;
-    gap: 12px;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
     flex-wrap: wrap;
-    margin-bottom: 40px;
+    margin-bottom: 56px;
 }
 
-.hero-stats {
+.hero-secondary-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 1.05rem;
+    font-weight: 500;
+    color: var(--accent);
+    padding: 10px 14px;
+    border-radius: var(--radius-pill);
+    transition: gap 0.2s ease, opacity 0.2s ease;
+}
+
+.hero-secondary-link:hover {
+    gap: 10px;
+    opacity: 0.85;
+}
+
+/* Apple Floating Route Showcase Strip */
+.hero-showcase {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(4, 1fr);
     gap: 16px;
-    padding-top: 28px;
-    border-top: 1px solid var(--border);
+    width: 100%;
+    max-width: 1080px;
+    margin: 0 auto;
 }
 
-.stat-cell {
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
-}
-
-.stat-figure {
-    font-size: 1.5rem;
-    font-weight: 700;
-    color: var(--ink);
-    letter-spacing: -0.02em;
-}
-
-.stat-label {
-    font-size: 0.82rem;
-    color: var(--ink-secondary);
-    line-height: 1.35;
-}
-
-/* ── Corridor Board (Aside Card) ─────────────────────────────────────────── */
-.corridor-board {
+.showcase-card {
     background-color: var(--surface);
     border: 1px solid var(--border);
-    border-radius: var(--radius-card);
-    padding: 28px 24px;
+    border-radius: 20px;
+    padding: 20px 18px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    text-align: left;
+    box-shadow: var(--shadow-sm);
+    transition: transform var(--spring), box-shadow var(--transition), border-color var(--transition);
+}
+
+.showcase-card:hover {
+    transform: translateY(-2px);
     box-shadow: var(--shadow-md);
-    display: flex;
-    flex-direction: column;
-    gap: 18px;
+    border-color: var(--border-strong);
 }
 
-.board-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 12px;
-    padding-bottom: 14px;
-    border-bottom: 1px solid var(--border);
-}
-
-.board-title {
-    font-size: 1.05rem;
-    font-weight: 600;
-    color: var(--ink);
-}
-
-.board-rows {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-}
-
-.board-row {
+.showcase-icon {
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
+    background-color: var(--surface-subtle);
+    color: var(--accent);
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    gap: 12px;
-    padding: 10px 0;
-    border-bottom: 1px solid var(--border);
+    justify-content: center;
+    font-size: 1.15rem;
+    flex-shrink: 0;
 }
 
-.board-row:last-child {
-    border-bottom: none;
-    padding-bottom: 0;
-}
-
-.board-meta {
+.showcase-info {
     display: flex;
     flex-direction: column;
     gap: 2px;
+    overflow: hidden;
 }
 
-.board-meta strong {
-    font-size: 0.92rem;
+.showcase-distance {
+    font-size: 1.15rem;
+    font-weight: 700;
     color: var(--ink);
-    font-weight: 600;
+    letter-spacing: -0.02em;
+    line-height: 1.1;
 }
 
-.board-meta span {
-    font-size: 0.8rem;
-    color: var(--ink-secondary);
-}
-
-.board-tag-sm {
-    font-size: 0.8rem;
+.showcase-route {
+    font-size: 0.85rem;
     font-weight: 600;
     color: var(--ink);
     white-space: nowrap;
-    background-color: var(--surface-subtle);
-    padding: 4px 10px;
-    border-radius: var(--radius-pill);
-    border: 1px solid var(--border);
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
-.board-footer {
-    font-size: 0.8rem;
+.showcase-detail {
+    font-size: 0.76rem;
     color: var(--ink-secondary);
-    text-align: center;
-    padding-top: 8px;
-    border-top: 1px solid var(--border);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 /* ── 8. SECTIONS GENERAL ─────────────────────────────────────────────────── */
 .section {
-    padding: 80px 0;
+    padding: 96px 0;
 }
 
 .section-ground {
@@ -600,48 +603,61 @@ p {
 }
 
 .section-intro {
-    margin-bottom: 48px;
+    margin-bottom: 56px;
+}
+
+.section-intro.text-center {
+    text-align: center;
+}
+
+.section-intro.text-center .section-sub {
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .section-heading {
-    font-size: clamp(1.8rem, 3vw, 2.5rem);
-    letter-spacing: -0.025em;
+    font-size: clamp(2rem, 3.4vw, 2.75rem);
+    letter-spacing: -0.028em;
     font-weight: 700;
     color: var(--ink);
-    margin-bottom: 10px;
+    margin-bottom: 12px;
 }
 
 .section-sub {
-    font-size: 1.08rem;
+    font-size: 1.12rem;
     color: var(--ink-secondary);
-    max-width: 600px;
+    max-width: 640px;
     line-height: 1.5;
 }
 
-/* ── 9. PACKAGES GRID ────────────────────────────────────────────────────── */
-.packages-grid {
+/* ── 9. APPLE BENTO GRID (TOUR PACKAGES) ─────────────────────────────────── */
+.bento-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 24px;
 }
 
-.package-card {
+.bento-card {
     background-color: var(--surface);
     border: 1px solid var(--border);
     border-radius: var(--radius-card);
-    padding: 32px 26px;
+    padding: 36px 32px;
     box-shadow: var(--shadow-sm);
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    gap: 20px;
+    gap: 24px;
     transition: transform var(--spring), box-shadow var(--transition), border-color var(--transition);
 }
 
-.package-card:hover {
+.bento-card:hover {
     transform: translateY(-3px);
     box-shadow: var(--shadow-md);
     border-color: var(--border-strong);
+}
+
+.bento-card-large {
+    grid-column: span 2;
 }
 
 .package-featured {
@@ -649,62 +665,104 @@ p {
     box-shadow: var(--shadow-md);
 }
 
-.package-header {
+.bento-header {
     display: flex;
     flex-direction: column;
-    gap: 8px;
+    gap: 10px;
 }
 
-.package-badge {
-    background-color: rgba(217, 119, 6, 0.12);
-    color: #92400E;
+.bento-badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 4px 12px;
+    border-radius: var(--radius-pill);
     font-size: 0.74rem;
     font-weight: 700;
     text-transform: uppercase;
-    letter-spacing: 0.5px;
-    padding: 4px 10px;
-    border-radius: var(--radius-pill);
+    letter-spacing: 0.06em;
     width: fit-content;
 }
 
-.package-title {
-    font-size: 1.25rem;
-    line-height: 1.25;
+.badge-amber {
+    background-color: rgba(180, 83, 9, 0.12);
+    color: #92400E;
 }
 
-.package-route {
-    font-size: 0.88rem;
+.badge-green {
+    background-color: rgba(52, 199, 89, 0.14);
+    color: #1B6E30;
+}
+
+.badge-blue {
+    background-color: rgba(0, 113, 227, 0.12);
+    color: #0056B3;
+}
+
+.badge-purple {
+    background-color: rgba(175, 82, 222, 0.14);
+    color: #792E9C;
+}
+
+.badge-teal {
+    background-color: rgba(48, 176, 199, 0.14);
+    color: #006680;
+}
+
+.bento-title {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--ink);
+    letter-spacing: -0.02em;
+    line-height: 1.22;
+}
+
+.bento-route {
+    font-size: 0.92rem;
     color: var(--ink-secondary);
     line-height: 1.45;
 }
 
-.package-specs {
+.bento-body {
     display: flex;
     flex-direction: column;
-    gap: 10px;
-    padding: 14px 0;
-    border-top: 1px solid var(--border);
-    border-bottom: 1px solid var(--border);
+    gap: 16px;
 }
 
-.package-spec-item {
-    display: flex;
-    justify-content: space-between;
-    gap: 10px;
-    font-size: 0.86rem;
-}
-
-.package-spec-item .spec-label {
+.bento-desc {
+    font-size: 0.94rem;
     color: var(--ink-secondary);
+    line-height: 1.55;
 }
 
-.package-spec-item .spec-value {
+.bento-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.spec-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 12px;
+    border-radius: var(--radius-pill);
+    background-color: var(--surface-subtle);
+    border: 1px solid var(--border);
+    font-size: 0.82rem;
+    font-weight: 500;
     color: var(--ink);
-    font-weight: 600;
-    text-align: right;
 }
 
-/* ── 10. CORRIDORS (SERVICES) GRID ───────────────────────────────────────── */
+.spec-chip i {
+    color: var(--accent);
+    font-size: 0.78rem;
+}
+
+.bento-footer {
+    padding-top: 4px;
+}
+
+/* ── 10. CORRIDORS (SERVICES) HIGHWAY NETWORK ────────────────────────────── */
 .corridors-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -714,11 +772,13 @@ p {
 .corridor-card {
     background-color: var(--surface);
     border: 1px solid var(--border);
-    border-radius: var(--radius-card);
+    border-radius: 20px;
     padding: 32px 28px;
     box-shadow: var(--shadow-sm);
     display: flex;
-    gap: 16px;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 18px;
     transition: transform var(--spring), box-shadow var(--transition), border-color var(--transition);
 }
 
@@ -731,7 +791,7 @@ p {
 .card-content {
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 8px;
 }
 
 .corridor-route {
@@ -739,36 +799,50 @@ p {
     font-weight: 700;
     text-transform: uppercase;
     color: var(--accent);
-    letter-spacing: 0.5px;
+    letter-spacing: 0.06em;
 }
 
 .corridor-name {
-    font-size: 1.25rem;
+    font-size: 1.35rem;
+    font-weight: 700;
     color: var(--ink);
+    margin-bottom: 4px;
 }
 
 .corridor-desc {
     font-size: 0.94rem;
-    line-height: 1.6;
+    line-height: 1.55;
     color: var(--ink-secondary);
 }
 
-.corridor-specs {
-    margin-top: 8px;
+.corridor-metrics {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 12px;
     padding-top: 14px;
     border-top: 1px solid var(--border);
-    display: flex;
-    flex-direction: column;
+}
+
+.metric-pill {
+    display: inline-flex;
+    align-items: center;
     gap: 6px;
-    font-size: 0.86rem;
-    color: var(--ink-secondary);
-}
-
-.corridor-specs strong {
+    font-size: 0.82rem;
+    font-weight: 600;
     color: var(--ink);
+    background-color: var(--surface-subtle);
+    padding: 5px 12px;
+    border-radius: var(--radius-pill);
+    border: 1px solid var(--border);
 }
 
-/* ── 11. FLEET MATRIX ────────────────────────────────────────────────────── */
+.metric-pill i {
+    color: var(--accent);
+    font-size: 0.78rem;
+}
+
+/* ── 11. APPLE FLEET LINEUP COMPARISON ───────────────────────────────────── */
 .fleet-matrix {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -779,7 +853,7 @@ p {
     background-color: var(--surface);
     border: 1px solid var(--border);
     border-radius: var(--radius-card);
-    padding: 32px 26px;
+    padding: 36px 28px;
     box-shadow: var(--shadow-sm);
     display: flex;
     flex-direction: column;
@@ -794,57 +868,88 @@ p {
     border-color: var(--border-strong);
 }
 
-.fleet-featured {
-    border: 2px solid var(--accent);
-    box-shadow: var(--shadow-md);
-}
-
 .fleet-header {
     display: flex;
-    align-items: flex-start;
-    justify-content: space-between;
-    gap: 12px;
-    padding-bottom: 18px;
-    border-bottom: 1px solid var(--border);
+    flex-direction: column;
+    gap: 6px;
 }
 
-.fleet-title {
-    font-size: 1.25rem;
+.fleet-badge {
+    display: inline-flex;
+    font-size: 0.74rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    padding: 3px 10px;
+    border-radius: var(--radius-pill);
+    background-color: var(--surface-subtle);
+    color: var(--ink-secondary);
+    width: fit-content;
     margin-bottom: 4px;
 }
 
+.fleet-badge.badge-blue {
+    background-color: rgba(0, 113, 227, 0.12);
+    color: var(--accent);
+}
+
+.fleet-title {
+    font-size: 1.35rem;
+    font-weight: 700;
+    color: var(--ink);
+}
+
 .fleet-models {
-    font-size: 0.86rem;
+    font-size: 0.88rem;
     color: var(--ink-secondary);
 }
 
-.fleet-details {
+.fleet-capacity-display {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+    padding: 16px 0;
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+}
+
+.fleet-capacity-num {
+    font-size: 2.4rem;
+    font-weight: 800;
+    color: var(--ink);
+    letter-spacing: -0.03em;
+    line-height: 1;
+}
+
+.fleet-capacity-label {
+    font-size: 0.88rem;
+    color: var(--ink-secondary);
+    font-weight: 500;
+}
+
+.fleet-features {
     display: flex;
     flex-direction: column;
     gap: 12px;
 }
 
-.detail-row {
+.fleet-feature-row {
     display: flex;
-    justify-content: space-between;
-    gap: 12px;
+    align-items: center;
+    gap: 10px;
     font-size: 0.88rem;
-    padding-bottom: 8px;
-    border-bottom: 1px solid var(--border);
-}
-
-.detail-label {
-    color: var(--ink-secondary);
-    font-weight: 500;
-}
-
-.detail-val {
     color: var(--ink);
-    font-weight: 600;
-    text-align: right;
 }
 
-/* ── 12. BOOKING ENGINE & WORKSPACE ──────────────────────────────────────── */
+.fleet-feature-row i {
+    color: var(--accent);
+    font-size: 0.85rem;
+    width: 16px;
+    text-align: center;
+    flex-shrink: 0;
+}
+
+/* ── 12. BOOKING COMMAND CENTER & MAP WORKSPACE ──────────────────────────── */
 .booking-layout {
     display: grid;
     grid-template-columns: 1.55fr 1fr;
@@ -889,18 +994,19 @@ p {
 .form-field select,
 .form-field textarea {
     width: 100%;
-    padding: 12px 14px;
-    background-color: var(--surface);
+    padding: 13px 16px;
+    background-color: var(--surface-recessed);
     border: 1px solid var(--border-strong);
     border-radius: var(--radius-control);
     color: var(--ink);
     font-size: 0.95rem;
-    transition: border-color var(--transition), box-shadow var(--transition);
+    transition: border-color var(--transition), box-shadow var(--transition), background-color var(--transition);
 }
 
 .form-field input:focus,
 .form-field select:focus,
 .form-field textarea:focus {
+    background-color: var(--surface);
     border-color: var(--accent);
     box-shadow: 0 0 0 3.5px var(--accent-subtle);
     outline: none;
@@ -932,7 +1038,7 @@ p {
     width: 100%;
 }
 
-/* Autocomplete suggestions dropdown */
+/* Autocomplete suggestions dropdown (Spotlight style) */
 .suggestions-list {
     position: absolute;
     top: calc(100% + 4px);
@@ -954,7 +1060,7 @@ p {
 }
 
 .suggestion-item {
-    padding: 10px 14px;
+    padding: 11px 16px;
     font-size: 0.88rem;
     color: var(--ink);
     cursor: pointer;
@@ -1026,7 +1132,7 @@ p {
     margin-left: 4px;
 }
 
-/* ── Preset Chips ─────────────────────────────────────────────────────────── */
+/* ── Preset Chips (Apple Search Filters) ─────────────────────────────────── */
 .preset-chips {
     display: flex;
     flex-wrap: wrap;
@@ -1047,7 +1153,7 @@ p {
     background-color: var(--surface-recessed);
     border: 1px solid var(--border);
     border-radius: var(--radius-pill);
-    padding: 6px 12px;
+    padding: 6px 14px;
     font-size: 0.8rem;
     font-weight: 500;
     color: var(--ink);
@@ -1069,7 +1175,7 @@ p {
 /* ── Map Workspace & Apple Segmented Control ─────────────────────────────── */
 .map-workspace {
     border: 1px solid var(--border);
-    border-radius: var(--radius-control);
+    border-radius: 16px;
     background-color: var(--surface);
     overflow: hidden;
 }
@@ -1100,12 +1206,12 @@ p {
     color: var(--ink);
 }
 
-/* Apple Segmented Control */
+/* Native Apple iOS Segmented Control */
 .map-mode-toggle {
     display: inline-flex;
     background-color: var(--surface-recessed);
     padding: 3px;
-    border-radius: var(--radius-inner);
+    border-radius: var(--radius-pill);
     gap: 2px;
     border: 1px solid var(--border);
 }
@@ -1114,10 +1220,10 @@ p {
     display: inline-flex;
     align-items: center;
     gap: 6px;
-    padding: 6px 14px;
+    padding: 6px 16px;
     font-size: 0.82rem;
     font-weight: 500;
-    border-radius: 6px;
+    border-radius: var(--radius-pill);
     border: none;
     background-color: transparent;
     color: var(--ink-secondary);
@@ -1143,10 +1249,10 @@ p {
     display: inline-flex;
     align-items: center;
     gap: 5px;
-    padding: 5px 10px;
+    padding: 6px 12px;
     font-size: 0.78rem;
     font-weight: 500;
-    border-radius: var(--radius-inner);
+    border-radius: var(--radius-pill);
     border: 1px solid var(--border);
     background-color: var(--surface);
     color: var(--ink-secondary);
@@ -1212,7 +1318,7 @@ p {
     gap: 10px;
 }
 
-/* ── 13. BOOKING SIDEBAR ─────────────────────────────────────────────────── */
+/* ── 13. BOOKING SIDEBAR (APPLE SUPPORT DESK CARD) ───────────────────────── */
 .booking-sidebar {
     display: flex;
     flex-direction: column;
@@ -1227,12 +1333,25 @@ p {
     box-shadow: var(--shadow-sm);
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 18px;
+}
+
+.sidebar-badge {
+    font-size: 0.74rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    padding: 3px 10px;
+    border-radius: var(--radius-pill);
+    background-color: rgba(52, 199, 89, 0.14);
+    color: #1B6E30;
+    width: fit-content;
 }
 
 .sidebar-heading {
-    font-size: 1.25rem;
+    font-size: 1.3rem;
     font-weight: 700;
+    color: var(--ink);
 }
 
 .sidebar-text {
@@ -1273,7 +1392,7 @@ p {
 .standards-card {
     background-color: var(--surface-subtle);
     border: 1px solid var(--border);
-    border-radius: var(--radius-card);
+    border-radius: 20px;
     padding: 26px;
 }
 
@@ -1284,29 +1403,29 @@ p {
     margin-bottom: 12px;
 }
 
-.standards-list {
+.standards-guarantee-list {
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 12px;
 }
 
-.standards-list li {
+.guarantee-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
     font-size: 0.86rem;
     color: var(--ink-secondary);
     line-height: 1.45;
-    position: relative;
-    padding-left: 14px;
 }
 
-.standards-list li::before {
-    content: "•";
-    position: absolute;
-    left: 0;
+.guarantee-row i {
     color: var(--accent);
-    font-weight: bold;
+    font-size: 0.9rem;
+    margin-top: 3px;
+    flex-shrink: 0;
 }
 
-/* ── 14. SERVICE STANDARDS (COMMITMENTS) ─────────────────────────────────── */
+/* ── 14. SERVICE STANDARDS (APPLE ICON GRID) ─────────────────────────────── */
 .commitments-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
@@ -1316,12 +1435,12 @@ p {
 .commitment-item {
     background-color: var(--surface);
     border: 1px solid var(--border);
-    border-radius: var(--radius-card);
-    padding: 28px 24px;
+    border-radius: 20px;
+    padding: 32px 24px;
     box-shadow: var(--shadow-sm);
     display: flex;
     flex-direction: column;
-    gap: 12px;
+    gap: 14px;
     transition: transform var(--spring), box-shadow var(--transition);
 }
 
@@ -1330,28 +1449,32 @@ p {
     box-shadow: var(--shadow-md);
 }
 
-.commitment-title {
-    font-size: 1.12rem;
-    font-weight: 600;
-    color: var(--ink);
+.commitment-icon-wrap {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background-color: var(--accent-subtle);
+    color: var(--accent);
     display: flex;
     align-items: center;
-    gap: 10px;
+    justify-content: center;
+    font-size: 1.25rem;
 }
 
-.commitment-title i {
-    color: var(--accent);
-    font-size: 1.05rem;
-    flex-shrink: 0;
+.commitment-title {
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--ink);
+    letter-spacing: -0.015em;
 }
 
 .commitment-body {
-    font-size: 0.88rem;
-    line-height: 1.6;
+    font-size: 0.9rem;
+    line-height: 1.55;
     color: var(--ink-secondary);
 }
 
-/* ── 15. FAQ SECTION ─────────────────────────────────────────────────────── */
+/* ── 15. FAQ SECTION (APPLE IOS GROUPED TABLE STYLE) ─────────────────────── */
 .faq-grid {
     display: flex;
     flex-direction: column;
@@ -1363,10 +1486,10 @@ p {
 .faq-item {
     background-color: var(--surface);
     border: 1px solid var(--border);
-    border-radius: var(--radius-control);
-    box-shadow: var(--shadow-sm);
+    border-radius: 18px;
     overflow: hidden;
-    transition: all var(--transition);
+    box-shadow: var(--shadow-sm);
+    transition: transform var(--spring), box-shadow var(--transition), border-color var(--transition);
 }
 
 .faq-item[open] {
@@ -1379,8 +1502,8 @@ p {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 18px 22px;
-    font-size: 1.02rem;
+    padding: 20px 24px;
+    font-size: 1.05rem;
     font-weight: 600;
     color: var(--ink);
     cursor: pointer;
@@ -1397,10 +1520,10 @@ p {
     justify-content: center;
     width: 28px;
     height: 28px;
-    border-radius: var(--radius-inner);
+    border-radius: 50%;
     background-color: var(--surface-subtle);
     color: var(--ink-secondary);
-    font-size: 0.8rem;
+    font-size: 0.78rem;
     transition: transform var(--transition), background-color var(--transition), color var(--transition);
     flex-shrink: 0;
     margin-left: 16px;
@@ -1413,11 +1536,10 @@ p {
 }
 
 .faq-answer {
-    padding: 16px 22px 20px;
-    font-size: 0.94rem;
+    padding: 0 24px 22px;
+    font-size: 0.95rem;
     line-height: 1.65;
     color: var(--ink-secondary);
-    border-top: 1px solid var(--border);
 }
 
 .faq-answer p {
@@ -1440,19 +1562,18 @@ p {
     background-color: var(--surface);
     border: 1px solid var(--border);
     border-radius: var(--radius-card);
-    padding: 44px;
+    padding: 48px;
     box-shadow: var(--shadow-sm);
     display: grid;
     grid-template-columns: 1.5fr 1fr;
     gap: 48px;
-    align-items: stretch;
+    align-items: center;
 }
 
 .contact-box-left {
     display: flex;
     flex-direction: column;
-    gap: 20px;
-    justify-content: center;
+    gap: 16px;
 }
 
 .contact-box-text {
@@ -1498,7 +1619,6 @@ p {
     background-color: transparent;
     border: none;
     border-left: 1px solid var(--border);
-    border-radius: 0;
     padding: 12px 0 12px 48px;
     display: flex;
     flex-direction: column;
@@ -1645,12 +1765,14 @@ p {
 
 /* ── 19. RESPONSIVE BREAKPOINTS ──────────────────────────────────────────── */
 @media (max-width: 1024px) {
-    .packages-grid {
+    .bento-grid {
         grid-template-columns: repeat(2, 1fr);
     }
-    .hero-grid {
-        grid-template-columns: 1fr;
-        gap: 36px;
+    .bento-card-large {
+        grid-column: span 2;
+    }
+    .hero-showcase {
+        grid-template-columns: repeat(2, 1fr);
     }
     .booking-layout {
         grid-template-columns: 1fr;
@@ -1674,7 +1796,13 @@ p {
 }
 
 @media (max-width: 768px) {
-    .packages-grid {
+    .bento-grid {
+        grid-template-columns: 1fr;
+    }
+    .bento-card-large {
+        grid-column: span 1;
+    }
+    .hero-showcase {
         grid-template-columns: 1fr;
     }
     .corridors-grid {
@@ -1691,7 +1819,7 @@ p {
         gap: 32px;
     }
     .section {
-        padding: 56px 0;
+        padding: 64px 0;
     }
     .nav-toggle {
         display: inline-flex;
@@ -1743,11 +1871,7 @@ p {
         justify-content: center;
     }
     .hero {
-        padding: 48px 0 40px;
-    }
-    .hero-stats {
-        grid-template-columns: 1fr;
-        gap: 12px;
+        padding: 64px 0 48px;
     }
     .form-grid-two {
         grid-template-columns: 1fr;
@@ -1846,70 +1970,46 @@ p {
         display: none;
     }
     .section {
-        padding: 44px 0;
+        padding: 48px 0;
     }
     .section-intro {
-        margin-bottom: 28px;
+        margin-bottom: 32px;
     }
     .section-heading {
-        font-size: clamp(1.45rem, 6.4vw, 1.85rem);
+        font-size: clamp(1.65rem, 6.8vw, 2rem);
     }
     .section-sub {
-        font-size: 0.95rem;
+        font-size: 0.98rem;
     }
     .hero {
-        padding: 36px 0 28px;
+        padding: 48px 0 36px;
     }
     .hero-heading {
-        font-size: clamp(1.75rem, 7.8vw, 2.15rem);
-        margin-bottom: 14px;
+        font-size: clamp(1.9rem, 8vw, 2.35rem);
+        margin-bottom: 16px;
     }
     .hero-summary {
-        font-size: 0.95rem;
-        margin-bottom: 20px;
+        font-size: 1rem;
+        margin-bottom: 24px;
     }
     .hero-actions {
         flex-direction: column;
         width: 100%;
-        gap: 10px;
-        margin-bottom: 24px;
+        gap: 12px;
+        margin-bottom: 36px;
     }
     .hero-actions .btn {
         width: 100%;
     }
-    .hero-stats {
-        padding-top: 20px;
-        gap: 10px;
-    }
-    .stat-cell {
-        padding-bottom: 10px;
-        border-bottom: 1px solid var(--border);
-    }
-    .stat-cell:last-child {
-        border-bottom: none;
-        padding-bottom: 0;
-    }
-    .stat-figure {
-        font-size: 1.25rem;
-    }
-    .corridor-board {
-        padding: 20px 16px;
-    }
-    .board-row {
-        padding: 8px 0;
-    }
-    .board-tag-sm {
-        font-size: 0.78rem;
-    }
-    .package-card,
+    .bento-card,
     .corridor-card,
     .fleet-spec-card,
     .commitment-item,
     .standards-card,
     .dispatch-card {
-        padding: 22px 18px;
+        padding: 24px 20px;
     }
-    .package-card .btn,
+    .bento-card .btn,
     .fleet-spec-card .btn {
         width: 100%;
     }
@@ -1926,20 +2026,20 @@ p {
         font-size: 0.72rem;
     }
     .chip-btn {
-        min-height: 36px;
-        padding: 6px 10px;
-        font-size: 0.76rem;
+        min-height: 38px;
+        padding: 6px 12px;
+        font-size: 0.78rem;
     }
     .coord-badge {
         font-size: 0.78rem;
         padding: 5px 8px;
     }
     .faq-question {
-        padding: 14px 16px;
-        font-size: 0.94rem;
+        padding: 16px 18px;
+        font-size: 0.96rem;
     }
     .faq-answer {
-        padding: 14px 16px 16px;
+        padding: 0 18px 18px;
         font-size: 0.88rem;
     }
     .faq-icon {
@@ -1948,7 +2048,7 @@ p {
         margin-left: 8px;
     }
     .contact-box {
-        padding: 22px 16px;
+        padding: 24px 18px;
         gap: 20px;
     }
     .quick-callout {
@@ -1958,7 +2058,7 @@ p {
         font-size: 1.05rem;
     }
     .footer {
-        padding: 44px 0 24px;
+        padding: 48px 0 24px;
     }
     .footer-grid {
         gap: 24px;
@@ -1988,7 +2088,7 @@ p {
         font-size: 1.05rem;
     }
     .hero-heading {
-        font-size: 1.6rem;
+        font-size: 1.7rem;
     }
     .btn {
         padding: 10px 16px;
@@ -1996,13 +2096,51 @@ p {
     }
 }
 
+/* ── 20. DARK MODE OVERRIDES FOR NEW ELEMENTS ────────────────────────────── */
 @media (prefers-color-scheme: dark) {
     .brand-badge {
         background-color: #FF9F0A;
         color: #000000;
     }
-    .package-badge {
-        background-color: rgba(255, 159, 10, 0.18);
+    .sidebar-badge {
+        background-color: rgba(48, 209, 88, 0.2);
+        color: #55DF78;
+    }
+    .badge-amber {
+        background-color: rgba(255, 159, 10, 0.2);
         color: #FFB340;
+    }
+    .badge-green {
+        background-color: rgba(48, 209, 88, 0.2);
+        color: #55DF78;
+    }
+    .badge-blue,
+    .fleet-badge.badge-blue {
+        background-color: rgba(41, 151, 255, 0.2);
+        color: #70B8FF;
+    }
+    .badge-purple {
+        background-color: rgba(191, 90, 242, 0.2);
+        color: #DDA0FF;
+    }
+    .badge-teal {
+        background-color: rgba(100, 210, 255, 0.2);
+        color: #7FE0FF;
+    }
+    .showcase-icon {
+        background-color: #2C2C2E;
+        color: #70B8FF;
+    }
+    .commitment-icon-wrap {
+        background-color: rgba(41, 151, 255, 0.2);
+        color: #70B8FF;
+    }
+    .standards-card {
+        background-color: #242426;
+        border-color: rgba(255, 255, 255, 0.12);
+    }
+    .faq-item {
+        background-color: #1C1C1E;
+        border-color: rgba(255, 255, 255, 0.12);
     }
 }
