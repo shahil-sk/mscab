@@ -1,7 +1,7 @@
 /* ==========================================================================
    MS CABS — APPLE HUMAN INTERFACE DESIGN SYSTEM
-   Grounded in Apple HIG: Liquid Glass, Dynamic SF Pro Typography,
-   Continuous Squircle Curvature, Bento Grids, Segmented Controls & Dark Mode.
+   Grounded in Apple HIG: Floating Liquid Glass Capsule Island,
+   Titanium Ceramic Palette, SF Pro Typography & Native OLED Dark Mode.
    ========================================================================== */
 
 /* ── 1. APPLE HIG TOKENS (LIGHT DEFAULT) ─────────────────────────────────── */
@@ -10,14 +10,14 @@
     --ground: #F5F5F7;                       /* Apple System Grouped Background */
     --surface: #FFFFFF;                      /* Apple Elevated Card Surface */
     --surface-elevated: #FFFFFF;             /* Elevated Popover / Modal Surface */
-    --surface-subtle: #F2F2F7;               /* Apple Tertiary Grouped Fill */
-    --surface-recessed: rgba(0, 0, 0, 0.04); /* Inset Input / Segment Track Fill */
+    --surface-subtle: #F0F0F4;               /* Apple Tertiary Grouped Fill */
+    --surface-recessed: rgba(0, 0, 0, 0.035);/* Inset Input / Segment Track Fill */
     --surface-hover: rgba(0, 0, 0, 0.05);    /* Control Hover Fill */
 
     /* Liquid Glass Material */
     --glass-bg: rgba(255, 255, 255, 0.82);
     --glass-border: rgba(0, 0, 0, 0.08);
-    --glass-blur: blur(20px) saturate(180%);
+    --glass-blur: blur(24px) saturate(180%);
 
     /* Apple Labels (Typography Hierarchy) */
     --ink: #1D1D1F;                          /* System Primary Label (16:1 contrast) */
@@ -33,15 +33,16 @@
     --border: rgba(0, 0, 0, 0.08);          /* Standard Separator */
     --border-strong: rgba(0, 0, 0, 0.16);   /* Emphasized Border */
 
-    /* Accent & Brand Colors */
+    /* Primary Interactive Accent */
     --accent: #0071E3;                       /* Apple System Blue */
     --accent-hover: #0077ED;
     --accent-contrast: #FFFFFF;
-    --accent-subtle: rgba(0, 113, 227, 0.12);
-    
-    /* Brand Accent */
-    --brand-taxi: #B45309;                   /* Warm Amber Taxi Tint (4.8:1 AA on white) */
-    --brand-taxi-bg: rgba(180, 83, 9, 0.12);
+    --accent-subtle: rgba(0, 113, 227, 0.1);
+
+    /* Signature Warm Accent (Warm Gold / Cab Amber) */
+    --brand-warm: #D97706;
+    --brand-warm-bg: rgba(217, 119, 6, 0.12);
+    --brand-warm-text: #92400E;              /* 5.6:1 contrast on white */
 
     /* System Status Signals */
     --status-pickup: #34C759;                /* Apple System Green */
@@ -72,7 +73,7 @@
 /* ── 2. APPLE HIG DARK MODE TOKENS ───────────────────────────────────────── */
 @media (prefers-color-scheme: dark) {
     :root {
-        --ground: #000000;                       /* Apple Dark Mode Pure Black */
+        --ground: #000000;                       /* Apple OLED Pure Black */
         --surface: #1C1C1E;                      /* Secondary Grouped Background (Cards) */
         --surface-elevated: #2C2C2E;             /* Tertiary Grouped Background (Modals/Popovers) */
         --surface-subtle: #2C2C2E;               /* Inset / Subtle Fill */
@@ -98,8 +99,9 @@
         --accent-contrast: #000000;
         --accent-subtle: rgba(41, 151, 255, 0.18);
 
-        --brand-taxi: #FF9F0A;                   /* Apple Dark System Orange */
-        --brand-taxi-bg: rgba(255, 159, 10, 0.2);
+        --brand-warm: #FF9F0A;                   /* Apple Dark System Orange / Gold */
+        --brand-warm-bg: rgba(255, 159, 10, 0.2);
+        --brand-warm-text: #FFB340;
 
         --status-pickup: #30D158;
         --status-drop: #FF453A;
@@ -329,41 +331,33 @@ p {
     width: 100%;
 }
 
-.btn-nav {
-    background-color: var(--surface-recessed);
-    color: var(--ink);
-    border: 1px solid var(--border);
-    padding: 8px 18px;
-    font-size: 0.88rem;
-    min-height: 40px;
-    border-radius: var(--radius-pill);
-    font-weight: 600;
-}
-
-.btn-nav:hover {
-    border-color: var(--accent);
-    color: var(--accent);
-    background-color: var(--surface-hover);
-}
-
-/* ── 6. HEADER & TOP NAV (LIQUID GLASS) ──────────────────────────────────── */
+/* ── 6. FLOATING DYNAMIC CAPSULE NAV ISLAND (LIQUID GLASS) ───────────────── */
 .header {
+    position: fixed;
+    top: 16px;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    pointer-events: none;
+    padding: 0 16px;
+}
+
+.nav-island {
+    max-width: 1080px;
+    margin: 0 auto;
+    height: 56px;
     background-color: var(--glass-bg);
-    border-bottom: 1px solid var(--glass-border);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-pill);
     backdrop-filter: var(--glass-blur);
     -webkit-backdrop-filter: var(--glass-blur);
-    position: sticky;
-    top: 0;
-    z-index: 1000;
-    transition: background-color var(--transition), border-color var(--transition);
-}
-
-.header-inner {
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08), 0 1px 3px rgba(0, 0, 0, 0.04);
     display: flex;
     align-items: center;
     justify-content: space-between;
-    height: 64px;
-    gap: 24px;
+    padding: 0 10px 0 18px;
+    pointer-events: auto;
+    transition: background-color var(--transition), border-color var(--transition), box-shadow var(--transition);
 }
 
 .brand {
@@ -371,23 +365,37 @@ p {
     align-items: center;
     gap: 10px;
     color: var(--ink);
+    user-select: none;
 }
 
-.brand-badge {
-    background-color: #B45309;
+.brand-symbol {
+    width: 32px;
+    height: 32px;
+    border-radius: 9px;
+    background-color: var(--accent);
     color: #FFFFFF;
-    font-weight: 700;
-    font-size: 0.8rem;
-    padding: 3px 8px;
-    border-radius: 6px;
-    letter-spacing: 0.5px;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.95rem;
+    box-shadow: 0 2px 6px var(--accent-subtle);
+    transition: transform var(--spring);
+}
+
+.brand:hover .brand-symbol {
+    transform: scale(1.06);
+}
+
+.brand-text {
+    display: flex;
+    align-items: baseline;
+    gap: 6px;
 }
 
 .brand-name {
-    font-size: 1.15rem;
+    font-size: 1.1rem;
     font-weight: 700;
-    letter-spacing: -0.015em;
+    letter-spacing: -0.02em;
     color: var(--ink);
 }
 
@@ -398,8 +406,7 @@ p {
     letter-spacing: 0.6px;
     color: var(--ink-secondary);
     border-left: 1px solid var(--border);
-    padding-left: 8px;
-    margin-left: 2px;
+    padding-left: 7px;
 }
 
 .brand-inverted {
@@ -409,23 +416,22 @@ p {
 .nav {
     display: flex;
     align-items: center;
-    gap: 28px;
 }
 
 .nav-menu {
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: 2px;
 }
 
 .nav-link {
     color: var(--ink-secondary);
-    font-size: 0.9rem;
+    font-size: 0.88rem;
     font-weight: 500;
-    padding: 8px 14px;
+    padding: 7px 13px;
     border-radius: var(--radius-pill);
     position: relative;
-    transition: all var(--transition);
+    transition: color var(--transition), background-color var(--transition);
 }
 
 .nav-link:hover,
@@ -434,17 +440,56 @@ p {
     background-color: var(--surface-hover);
 }
 
+.nav-mobile-action {
+    display: none;
+}
+
+.nav-actions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.btn-nav-phone {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    padding: 7px 14px;
+    border-radius: var(--radius-pill);
+    font-size: 0.84rem;
+    font-weight: 600;
+    color: var(--ink);
+    background-color: var(--surface-subtle);
+    border: 1px solid var(--border);
+    transition: all var(--transition);
+    min-height: 38px;
+}
+
+.btn-nav-phone:hover {
+    color: var(--accent);
+    border-color: var(--accent);
+    background-color: var(--surface-hover);
+}
+
+.btn-nav-cta {
+    padding: 7px 18px;
+    font-size: 0.86rem;
+    min-height: 38px;
+    font-weight: 600;
+}
+
 .nav-toggle {
     display: none;
-    background: var(--surface-recessed);
+    background: var(--surface-subtle);
     border: 1px solid var(--border);
     color: var(--ink);
-    padding: 8px 12px;
-    border-radius: var(--radius-inner);
+    border-radius: var(--radius-pill);
     cursor: pointer;
-    font-size: 1.1rem;
-    min-height: 44px;
-    min-width: 44px;
+    font-size: 1rem;
+    min-height: 38px;
+    min-width: 38px;
+    align-items: center;
+    justify-content: center;
     transition: background-color var(--transition);
 }
 
@@ -452,11 +497,17 @@ p {
     background-color: var(--surface-hover);
 }
 
-/* ── 7. HERO SECTION (SPACIOUS, CONFIDENT APPLE PRODUCT HERO) ─────────────── */
+/* ── 7. HERO SECTION (SPACIOUS, AMBIENT RADIAL GLOW) ─────────────────────── */
 .hero {
-    background-color: var(--ground);
+    background: radial-gradient(circle at 50% 18%, rgba(0, 113, 227, 0.04) 0%, transparent 65%), var(--ground);
     border-bottom: 1px solid var(--border);
-    padding: 96px 0 72px;
+    padding: 120px 0 76px;
+}
+
+@media (prefers-color-scheme: dark) {
+    .hero {
+        background: radial-gradient(circle at 50% 18%, rgba(41, 151, 255, 0.07) 0%, transparent 70%), var(--ground);
+    }
 }
 
 .hero-container {
@@ -671,9 +722,11 @@ p {
     gap: 10px;
 }
 
+/* Disciplined Apple Badge System */
 .bento-badge {
     display: inline-flex;
     align-items: center;
+    gap: 6px;
     padding: 4px 12px;
     border-radius: var(--radius-pill);
     font-size: 0.74rem;
@@ -681,31 +734,21 @@ p {
     text-transform: uppercase;
     letter-spacing: 0.06em;
     width: fit-content;
+    background-color: var(--surface-subtle);
+    color: var(--ink);
+    border: 1px solid var(--border);
 }
 
-.badge-amber {
-    background-color: rgba(180, 83, 9, 0.12);
-    color: #92400E;
+.bento-badge.badge-signature {
+    background-color: var(--brand-warm-bg);
+    color: var(--brand-warm-text);
+    border-color: rgba(217, 119, 6, 0.25);
 }
 
-.badge-green {
-    background-color: rgba(52, 199, 89, 0.14);
-    color: #1B6E30;
-}
-
-.badge-blue {
-    background-color: rgba(0, 113, 227, 0.12);
+.bento-badge.badge-accent {
+    background-color: var(--accent-subtle);
     color: #0056B3;
-}
-
-.badge-purple {
-    background-color: rgba(175, 82, 222, 0.14);
-    color: #792E9C;
-}
-
-.badge-teal {
-    background-color: rgba(48, 176, 199, 0.14);
-    color: #006680;
+    border-color: rgba(0, 113, 227, 0.25);
 }
 
 .bento-title {
@@ -884,13 +927,15 @@ p {
     border-radius: var(--radius-pill);
     background-color: var(--surface-subtle);
     color: var(--ink-secondary);
+    border: 1px solid var(--border);
     width: fit-content;
     margin-bottom: 4px;
 }
 
-.fleet-badge.badge-blue {
-    background-color: rgba(0, 113, 227, 0.12);
-    color: var(--accent);
+.fleet-badge.badge-accent {
+    background-color: var(--accent-subtle);
+    color: #0056B3;
+    border-color: rgba(0, 113, 227, 0.25);
 }
 
 .fleet-title {
@@ -1345,6 +1390,7 @@ p {
     border-radius: var(--radius-pill);
     background-color: rgba(52, 199, 89, 0.14);
     color: #1B6E30;
+    border: 1px solid rgba(52, 199, 89, 0.25);
     width: fit-content;
 }
 
@@ -1474,7 +1520,7 @@ p {
     color: var(--ink-secondary);
 }
 
-/* ── 15. FAQ SECTION (APPLE IOS GROUPED TABLE STYLE) ─────────────────────── */
+/* ── 15. FAQ SECTION (APPLE SETTINGS GROUPED CARDS) ──────────────────────── */
 .faq-grid {
     display: flex;
     flex-direction: column;
@@ -1796,6 +1842,66 @@ p {
 }
 
 @media (max-width: 768px) {
+    .header {
+        top: 10px;
+        padding: 0 12px;
+    }
+    .nav-island {
+        height: 52px;
+        padding: 0 8px 0 14px;
+    }
+    .btn-nav-phone {
+        display: none;
+    }
+    .btn-nav-cta {
+        padding: 6px 14px;
+        font-size: 0.82rem;
+        min-height: 36px;
+    }
+    .nav-toggle {
+        display: inline-flex;
+    }
+    .nav {
+        display: none;
+        position: absolute;
+        top: calc(100% + 8px);
+        left: 12px;
+        right: 12px;
+        background-color: var(--glass-bg);
+        backdrop-filter: var(--glass-blur);
+        -webkit-backdrop-filter: var(--glass-blur);
+        border: 1px solid var(--glass-border);
+        border-radius: 24px;
+        padding: 20px;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 16px;
+        box-shadow: 0 16px 40px rgba(0, 0, 0, 0.16);
+        pointer-events: auto;
+    }
+    .nav.nav-open,
+    .nav.open {
+        display: flex;
+    }
+    .nav-menu {
+        flex-direction: column;
+        align-items: stretch;
+        width: 100%;
+        gap: 4px;
+    }
+    .nav-link {
+        font-size: 1rem;
+        padding: 11px 16px;
+        width: 100%;
+        border-radius: 12px;
+    }
+    .nav-mobile-action {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        padding-top: 14px;
+        border-top: 1px solid var(--border);
+    }
     .bento-grid {
         grid-template-columns: 1fr;
     }
@@ -1821,57 +1927,8 @@ p {
     .section {
         padding: 64px 0;
     }
-    .nav-toggle {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-    }
-    .nav {
-        display: none;
-        position: absolute;
-        top: 64px;
-        left: 0;
-        right: 0;
-        background-color: var(--glass-bg);
-        backdrop-filter: var(--glass-blur);
-        -webkit-backdrop-filter: var(--glass-blur);
-        border-bottom: 1px solid var(--glass-border);
-        padding: 24px;
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 20px;
-        max-height: calc(100vh - 64px);
-        max-height: calc(100dvh - 64px);
-        overflow-y: auto;
-        -webkit-overflow-scrolling: touch;
-        box-shadow: var(--shadow-lg);
-    }
-    .nav.nav-open,
-    .nav.open {
-        display: flex;
-    }
-    .nav-menu {
-        flex-direction: column;
-        align-items: flex-start;
-        width: 100%;
-        gap: 8px;
-    }
-    .nav-link {
-        font-size: 1rem;
-        width: 100%;
-        padding: 10px 14px;
-    }
-    .nav-actions {
-        width: 100%;
-        padding-top: 14px;
-        border-top: 1px solid var(--border);
-    }
-    .nav-actions .btn-nav {
-        width: 100%;
-        justify-content: center;
-    }
     .hero {
-        padding: 64px 0 48px;
+        padding: 96px 0 48px;
     }
     .form-grid-two {
         grid-template-columns: 1fr;
@@ -1982,7 +2039,7 @@ p {
         font-size: 0.98rem;
     }
     .hero {
-        padding: 48px 0 36px;
+        padding: 88px 0 36px;
     }
     .hero-heading {
         font-size: clamp(1.9rem, 8vw, 2.35rem);
@@ -2081,11 +2138,11 @@ p {
         padding-left: 12px;
         padding-right: 12px;
     }
-    .header-inner {
-        gap: 12px;
+    .nav-island {
+        padding: 0 6px 0 10px;
     }
     .brand-name {
-        font-size: 1.05rem;
+        font-size: 1.02rem;
     }
     .hero-heading {
         font-size: 1.7rem;
@@ -2098,34 +2155,29 @@ p {
 
 /* ── 20. DARK MODE OVERRIDES FOR NEW ELEMENTS ────────────────────────────── */
 @media (prefers-color-scheme: dark) {
-    .brand-badge {
-        background-color: #FF9F0A;
+    .brand-symbol {
+        background-color: var(--accent);
         color: #000000;
     }
     .sidebar-badge {
         background-color: rgba(48, 209, 88, 0.2);
         color: #55DF78;
+        border-color: rgba(48, 209, 88, 0.35);
     }
-    .badge-amber {
+    .bento-badge.badge-signature {
         background-color: rgba(255, 159, 10, 0.2);
         color: #FFB340;
+        border-color: rgba(255, 159, 10, 0.35);
     }
-    .badge-green {
-        background-color: rgba(48, 209, 88, 0.2);
-        color: #55DF78;
-    }
-    .badge-blue,
-    .fleet-badge.badge-blue {
+    .bento-badge.badge-accent {
         background-color: rgba(41, 151, 255, 0.2);
         color: #70B8FF;
+        border-color: rgba(41, 151, 255, 0.35);
     }
-    .badge-purple {
-        background-color: rgba(191, 90, 242, 0.2);
-        color: #DDA0FF;
-    }
-    .badge-teal {
-        background-color: rgba(100, 210, 255, 0.2);
-        color: #7FE0FF;
+    .fleet-badge.badge-accent {
+        background-color: rgba(41, 151, 255, 0.2);
+        color: #70B8FF;
+        border-color: rgba(41, 151, 255, 0.35);
     }
     .showcase-icon {
         background-color: #2C2C2E;

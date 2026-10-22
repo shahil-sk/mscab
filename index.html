@@ -256,18 +256,18 @@
 <body>
     <a href="#booking" class="skip-link">Skip to booking</a>
 
-    <!-- Top Navigation Bar (Liquid Glass) -->
+    <!-- Floating Liquid Glass Nav Island -->
     <header class="header" role="banner">
-        <div class="container header-inner">
+        <div class="nav-island">
             <a href="#" class="brand" aria-label="MS Cabs Mangalore Home">
-                <span class="brand-badge">MS</span>
-                <span class="brand-name">MS Cabs</span>
-                <span class="brand-sub">Mangalore</span>
+                <span class="brand-symbol" aria-hidden="true">
+                    <i class="fa-solid fa-car"></i>
+                </span>
+                <span class="brand-text">
+                    <span class="brand-name">MS Cabs</span>
+                    <span class="brand-sub">Mangalore</span>
+                </span>
             </a>
-
-            <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation menu" aria-expanded="false">
-                <i class="fa-solid fa-bars" aria-hidden="true"></i>
-            </button>
 
             <nav class="nav" id="navLinks" aria-label="Primary navigation">
                 <ul class="nav-menu" role="list">
@@ -279,13 +279,29 @@
                     <li><a href="#faq" class="nav-link">FAQ</a></li>
                     <li><a href="#contact" class="nav-link">Contact</a></li>
                 </ul>
-                <div class="nav-actions">
-                    <a href="tel:+916361806210" class="btn btn-nav">
+                <div class="nav-mobile-action">
+                    <a href="tel:+916361806210" class="btn btn-secondary btn-block btn-pill">
                         <i class="fa-solid fa-phone" aria-hidden="true"></i>
                         <span>+91 63618 06210</span>
                     </a>
+                    <a href="#booking" class="btn btn-primary btn-block btn-pill">
+                        <span>Book on WhatsApp</span>
+                    </a>
                 </div>
             </nav>
+
+            <div class="nav-actions">
+                <a href="tel:+916361806210" class="btn-nav-phone" aria-label="Call +91 63618 06210">
+                    <i class="fa-solid fa-phone" aria-hidden="true"></i>
+                    <span>+91 63618 06210</span>
+                </a>
+                <a href="#booking" class="btn btn-primary btn-pill btn-nav-cta">
+                    <span>Book Cab</span>
+                </a>
+                <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation menu" aria-expanded="false">
+                    <i class="fa-solid fa-bars" aria-hidden="true"></i>
+                </button>
+            </div>
         </div>
     </header>
 
@@ -362,7 +378,7 @@
                     <!-- Flagship Card (Large Bento Card - Spans 2 Cols) -->
                     <article class="bento-card bento-card-large package-card package-featured">
                         <div class="bento-header">
-                            <span class="bento-badge badge-amber">Flagship Pilgrimage</span>
+                            <span class="bento-badge badge-signature">Flagship Pilgrimage</span>
                             <h3 class="bento-title">Kollur Sri Mookambika Temple Circuit</h3>
                             <p class="bento-route">Mangalore &rarr; Udupi Sri Krishna Matha &rarr; Anegudde Vinayaka &rarr; Kollur Mookambika</p>
                         </div>
@@ -392,7 +408,7 @@
                     <!-- Card 2: Madikeri / Coorg -->
                     <article class="bento-card package-card">
                         <div class="bento-header">
-                            <span class="bento-badge badge-green">Western Ghats</span>
+                            <span class="bento-badge">Western Ghats</span>
                             <h3 class="bento-title">Madikeri &amp; Coorg Tour</h3>
                             <p class="bento-route">Mangalore &rarr; Bantwal &rarr; Puttur &rarr; Sampaje Ghat &rarr; Madikeri (Coorg)</p>
                         </div>
@@ -421,7 +437,7 @@
                     <!-- Card 3: Chikkamagaluru -->
                     <article class="bento-card package-card">
                         <div class="bento-header">
-                            <span class="bento-badge badge-amber">Coffee Highlands</span>
+                            <span class="bento-badge">Coffee Highlands</span>
                             <h3 class="bento-title">Chikkamagaluru &amp; Charmadi Ghat</h3>
                             <p class="bento-route">Mangalore &rarr; Belthangady &rarr; Charmadi Ghat &rarr; Mudigere &rarr; Chikkamagaluru</p>
                         </div>
@@ -450,7 +466,7 @@
                     <!-- Card 4: Dharmasthala & Kukke -->
                     <article class="bento-card package-card">
                         <div class="bento-header">
-                            <span class="bento-badge badge-purple">Sacred Dakshina Kannada</span>
+                            <span class="bento-badge">Sacred Dakshina Kannada</span>
                             <h3 class="bento-title">Dharmasthala &amp; Kukke Circuit</h3>
                             <p class="bento-route">Mangalore &rarr; Kateel &rarr; Dharmasthala &rarr; Southadka &rarr; Kukke Subrahmanya</p>
                         </div>
@@ -479,7 +495,7 @@
                     <!-- Card 5: Airport Express (Large Bento Card - Spans 2 Cols) -->
                     <article class="bento-card bento-card-large package-card">
                         <div class="bento-header">
-                            <span class="bento-badge badge-blue">Airport Transfers</span>
+                            <span class="bento-badge badge-accent">Airport Transfers</span>
                             <h3 class="bento-title">Mangalore Airport Express (IXE Bajpe)</h3>
                             <p class="bento-route">Doorstep pickup &amp; drop across Mangalore City, Surathkal, Ullal, Deralakatte, and Udupi</p>
                         </div>
@@ -509,7 +525,7 @@
                     <!-- Card 6: Mangalore City Heritage -->
                     <article class="bento-card package-card">
                         <div class="bento-header">
-                            <span class="bento-badge badge-teal">Coastal Heritage</span>
+                            <span class="bento-badge">Coastal Heritage</span>
                             <h3 class="bento-title">City Heritage &amp; Beaches Tour</h3>
                             <p class="bento-route">Panambur Beach &bull; Tannirbhavi &bull; Kadri Manjunath &bull; St. Aloysius &bull; Kudroli Temple</p>
                         </div>
@@ -643,7 +659,7 @@
                     <!-- SUV (Featured) -->
                     <div class="fleet-spec-card fleet-featured">
                         <div class="fleet-header">
-                            <span class="fleet-badge badge-blue">Most Popular for Families</span>
+                            <span class="fleet-badge badge-accent">Most Popular for Families</span>
                             <h3 class="fleet-title">Spacious SUV</h3>
                             <span class="fleet-models">Toyota Innova &bull; Maruti Ertiga</span>
                         </div>
@@ -1200,9 +1216,13 @@
         <div class="container footer-grid">
             <div class="footer-col brand-col">
                 <a href="#" class="brand brand-inverted">
-                    <span class="brand-badge">MS</span>
-                    <span class="brand-name">MS Cabs</span>
-                    <span class="brand-sub">Mangalore</span>
+                    <span class="brand-symbol" aria-hidden="true">
+                        <i class="fa-solid fa-car"></i>
+                    </span>
+                    <span class="brand-text">
+                        <span class="brand-name">MS Cabs</span>
+                        <span class="brand-sub">Mangalore</span>
+                    </span>
                 </a>
                 <p class="footer-summary">
                     Reliable, licensed, and transparent cab services originating from Mangalore across coastal Karnataka, Western Ghats hill stations, and Karnataka outstation highways.
